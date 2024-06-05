@@ -1,5 +1,6 @@
+// src/components/SocialComponents/Feed/CreatePublicationCard.tsx
 import React from 'react';
-import Avatar from '../Navbar/Avatar'; // Asegúrate de que este componente esté disponible
+import AvatarImage from '../Navbar/AvatarImage';
 import ImageIcon from '@mui/icons-material/Image';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 
@@ -8,8 +9,9 @@ const styles = {
     backgroundColor: 'rgba(39, 51, 62, 0.5)',
     borderRadius: '10px',
     padding: '20px',
-    display: 'flex' as 'flex',
-    alignItems: 'center' as 'center',
+    display: 'flex',
+    flexDirection: 'column' as 'column',
+    alignItems: 'center',
     marginBottom: '20px',
   },
   avatar: {
@@ -17,12 +19,13 @@ const styles = {
   },
   inputContainer: {
     flexGrow: 1,
-    display: 'flex' as 'flex',
-    alignItems: 'center' as 'center',
+    display: 'flex',
+    alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderRadius: '50px',
     padding: '10px 20px',
     marginRight: '10px',
+    width: '100%',
   },
   input: {
     border: 'none',
@@ -39,48 +42,64 @@ const styles = {
     cursor: 'pointer',
   },
   iconContainer: {
-    display: 'flex' as 'flex',
-    alignItems: 'center' as 'center',
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: '10px',
+    width: '100%',
   },
-  icon: {
-    marginRight: '10px',
+  iconWrapper: {
+    display: 'flex',
+    flexDirection: 'row' as 'row',
+    alignItems: 'center',
     color: '#ffffff',
     cursor: 'pointer',
-  }
+  },
+  icon: {
+    marginRight: '5px',
+  },
 };
 
 const CreatePublicationCard: React.FC = () => {
   return (
     <div style={styles.cardContainer}>
-      <div style={styles.avatar}>
-        <Avatar />
-      </div>
-      <div style={styles.inputContainer}>
-        <input
-          type="text"
-          placeholder="Crear una publicación..."
-          style={styles.input}
-        />
-        <button style={styles.sendButton}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="22" y1="2" x2="11" y2="13" />
-            <polygon points="22 2 15 22 11 13 2 9 22 2" />
-          </svg>
-        </button>
+      <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+        <div style={styles.avatar}>
+          <AvatarImage />
+        </div>
+        <div style={styles.inputContainer}>
+          <input
+            type="text"
+            placeholder="Crear una publicación..."
+            style={styles.input}
+          />
+          <button style={styles.sendButton}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </div>
       </div>
       <div style={styles.iconContainer}>
-        <ImageIcon style={styles.icon} />
-        <AttachFileIcon style={styles.icon} />
+        <div style={styles.iconWrapper}>
+          <ImageIcon style={styles.icon} />
+          <span>Imagen</span>
+        </div>
+        <div style={styles.iconWrapper}>
+          <AttachFileIcon style={styles.icon} />
+          <span>Adjuntar</span>
+        </div>
       </div>
     </div>
   );

@@ -4,64 +4,68 @@ import Sidebar from '../components/SocialComponents/Sidebar/Sidebar';
 import SubNavbar from '../components/SocialComponents/Navbar/SubNavbar';
 import CreatePublicationCard from '../components/SocialComponents/Feed/CreatePublicationCard';
 import { Outlet } from 'react-router-dom';
+import { CSSProperties } from 'react';
 
-const styles = {
+const styles: { [key: string]: CSSProperties } = {
   appContainer: {
-    display: 'flex' as 'flex',
-    flexDirection: 'column' as 'column',
+    display: 'flex',
+    flexDirection: 'column',
     height: '100vh',
-    width: '100vw',  // Aseguramos que ocupe todo el ancho de la ventana
+    width: '100vw',
     backgroundColor: '#1e1e1e',
   },
   mainContainer: {
-    display: 'flex' as 'flex',
-    flexDirection: 'row' as 'row',
+    display: 'flex',
+    flexDirection: 'row',
     flexGrow: 1,
-    marginTop: '60px', 
-    width: '100%',  // Aseguramos que ocupe todo el ancho
-  },
-  mainContent: {
-    display: 'flex' as 'flex',
-    flexDirection: 'column' as 'column',
-    flexGrow: 1,
-    marginTop: '50px',
-    width: '100%',  // Aseguramos que ocupe todo el ancho
+    marginTop: '60px',
+    width: '100%',
   },
   sidebar: {
+    position: 'fixed',
+    top: '60px',
+    left: 0,
     width: '240px',
+    height: 'calc(100vh - 60px)',
+    overflowY: 'hidden',
+    backgroundColor: '#12161C',
+  },
+  mainContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    marginLeft: '240px',
+    width: 'calc(100% - 240px)',
   },
   subNavbar: {
-    position: 'fixed' as 'fixed',
-    top: '60px', 
-    width: 'calc(100% - 240px)',
+    width: '100%',
+    marginTop: '8px',
     zIndex: 999,
     backgroundColor: '#12161C',
     borderBottom: '2px solid #27333E',
   },
   content: {
     flexGrow: 1,
-    padding: '20px',
+    padding: '10px',
     backgroundColor: '#12161C',
-    display: 'flex' as 'flex',
-    flexDirection: 'row' as 'row',
-    justifyContent: 'space-between' as 'space-between',
-    marginTop: '10px',
-    width: '100%',  // Aseguramos que ocupe todo el ancho
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   leftColumn: {
-    flex: '1',
+    flex: 1,
     marginRight: '10px',
     borderRadius: '10px',
     backgroundColor: 'rgba(39, 51, 62, 0.5)',
   },
   centerColumn: {
-    flex: '3',
+    flex: 3,
     marginRight: '10px',
     borderRadius: '10px',
     backgroundColor: '#12161C',
   },
   rightColumn: {
-    flex: '1',
+    flex: 1,
     borderRadius: '10px',
     backgroundColor: 'rgba(39, 51, 62, 0.5)',
   },

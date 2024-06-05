@@ -8,17 +8,19 @@ const styles = {
     padding: '10px 20px',
     color: '#ffffff',
     top: '60px',
-    width: 'calc(100% - 240px)', // Ajuste para que no se solape con el Sidebar
+    width: 'calc(100% - 240px)',
     zIndex: 999,
   },
   searchBox: {
     backgroundColor: '#1B232D',
     border: 'none',
-    padding: '6px 12px', // Ajuste del padding para hacerlo más pequeño
+    padding: '6px 12px', 
     borderRadius: '4px',
     color: '#ffffff',
     marginRight: '20px',
-    width: '200px', // Ajuste del ancho para hacerlo más pequeño
+    width: '200px', 
+    height: '25px', 
+
   },
   tab: {
     padding: '10px 20px',
