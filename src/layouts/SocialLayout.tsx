@@ -1,8 +1,14 @@
+// src/layouts/SocialLayout.tsx
 import React from 'react';
 import Navbar from '../components/SocialComponents/Navbar/Navbar';
 import Sidebar from '../components/SocialComponents/Sidebar/Sidebar';
 import SubNavbar from '../components/SocialComponents/Navbar/SubNavbar';
 import CreatePublicationCard from '../components/SocialComponents/Feed/CreatePublicationCard';
+import PostCard from '../components/SocialComponents/Feed/PostCard';
+import DirectAccess from '../components/SocialComponents/Feed/DirectAccess';
+import NewsSection from '../components/SocialComponents/Feed/NewsSection';
+import AdsSection from '../components/SocialComponents/Feed/AdsSection';
+import ChatBox from '../components/SocialComponents/ChatBox/ChatBox';
 import { Outlet } from 'react-router-dom';
 import { CSSProperties } from 'react';
 
@@ -13,6 +19,7 @@ const styles: { [key: string]: CSSProperties } = {
     height: '100vh',
     width: '100vw',
     backgroundColor: '#1e1e1e',
+    overflow: 'hidden',
   },
   mainContainer: {
     display: 'flex',
@@ -20,6 +27,7 @@ const styles: { [key: string]: CSSProperties } = {
     flexGrow: 1,
     marginTop: '60px',
     width: '100%',
+    overflow: 'auto', 
   },
   sidebar: {
     position: 'fixed',
@@ -27,7 +35,6 @@ const styles: { [key: string]: CSSProperties } = {
     left: 0,
     width: '240px',
     height: 'calc(100vh - 60px)',
-    overflowY: 'hidden',
     backgroundColor: '#12161C',
   },
   mainContent: {
@@ -36,6 +43,7 @@ const styles: { [key: string]: CSSProperties } = {
     flexGrow: 1,
     marginLeft: '240px',
     width: 'calc(100% - 240px)',
+    overflow: 'auto', 
   },
   subNavbar: {
     width: '100%',
@@ -56,22 +64,50 @@ const styles: { [key: string]: CSSProperties } = {
     flex: 1,
     marginRight: '10px',
     borderRadius: '10px',
-    backgroundColor: 'rgba(39, 51, 62, 0.5)',
+    backgroundColor: '#12161C',
+    overflow: 'auto'
   },
   centerColumn: {
     flex: 3,
     marginRight: '10px',
     borderRadius: '10px',
     backgroundColor: '#12161C',
+    overflow: 'auto', 
   },
   rightColumn: {
     flex: 1,
     borderRadius: '10px',
-    backgroundColor: 'rgba(39, 51, 62, 0.5)',
+    backgroundColor: '#12161C',
+    overflow: 'auto',
   },
 };
 
 const SocialLayout = () => {
+  const post1 = {
+    username: 'Uk_nown_User69',
+    time: 'Hace 20 min',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
+    images: [
+      'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
+      'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
+      'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
+    ],
+    likes: 20600,
+    comments: 3400,
+    shares: 100,
+  };
+  const post2 = {
+    username: 'Uk_nown_User69',
+    time: 'Hace 20 min',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
+    images: [
+      'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
+    ],
+    likes: 20600,
+    comments: 3400,
+    shares: 100,
+  };
+
   return (
     <div style={styles.appContainer}>
       <Navbar />
@@ -85,14 +121,18 @@ const SocialLayout = () => {
           </div>
           <div style={styles.content}>
             <div style={styles.leftColumn}>
-              <p>Columna Izquierda</p>
+              <DirectAccess />
+              <NewsSection />
             </div>
             <div style={styles.centerColumn}>
               <CreatePublicationCard />
               <Outlet />
+              <PostCard {...post1} />
+              <PostCard {...post2} />
             </div>
             <div style={styles.rightColumn}>
-              <p>Columna Derecha</p>
+              <AdsSection />
+              <ChatBox />
             </div>
           </div>
         </div>

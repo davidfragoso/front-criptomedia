@@ -1,4 +1,3 @@
-// src/components/SocialComponents/Feed/CreatePublicationCard.tsx
 import React from 'react';
 import AvatarImage from '../Navbar/AvatarImage';
 import ImageIcon from '@mui/icons-material/Image';
@@ -30,7 +29,7 @@ const styles = {
   input: {
     border: 'none',
     backgroundColor: 'transparent',
-    color: '#ffffff',
+    color: '#1d1d1d',
     outline: 'none',
     flexGrow: 1,
     fontSize: '16px',
