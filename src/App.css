@@ -19,19 +19,11 @@ code {
     monospace;
 }
 
-
-.mainContent {
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(39, 51, 62, 0.5);
-}
-
-
+/* Scrollbar personalizado */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
 }
-
 
 *::-webkit-scrollbar {
   width: 12px;
@@ -46,4 +38,52 @@ code {
   background-color: rgba(39, 51, 62, 0.5);
   border-radius: 20px;
   border: 3px solid orange;
+}
+
+/* Ajustes para mainContent */
+.mainContent {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(39, 51, 62, 0.5);
+}
+
+/* Media query para tabletas */
+@media (max-width: 900px) {
+  .mainContainer {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sidebar {
+    display: none;
+    position: absolute;
+    width: 240px;
+    top: 60px;
+    left: 0;
+    height: calc(100vh - 60px);
+    z-index: 1000;
+  }
+
+  .showSidebar .sidebar {
+    display: block;
+  }
+
+  .leftColumn, .rightColumn {
+    display: none;
+  }
+
+  .centerColumn {
+    margin: 0;
+    width: 100%;
+  }
+
+  .subNavbar {
+    margin-top: 0;
+  }
+
+  .chatBox {
+    width: 100%;
+    right: 0;
+    border-radius: 0;
+  }
 }

@@ -1,5 +1,4 @@
-// src/layouts/SocialLayout.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/SocialComponents/Navbar/Navbar';
 import Sidebar from '../components/SocialComponents/Sidebar/Sidebar';
 import SubNavbar from '../components/SocialComponents/Navbar/SubNavbar';
@@ -11,6 +10,7 @@ import AdsSection from '../components/SocialComponents/Feed/AdsSection';
 import ChatBox from '../components/SocialComponents/ChatBox/ChatBox';
 import { Outlet } from 'react-router-dom';
 import { CSSProperties } from 'react';
+import '../App.css'; 
 
 const styles: { [key: string]: CSSProperties } = {
   appContainer: {
@@ -83,6 +83,12 @@ const styles: { [key: string]: CSSProperties } = {
 };
 
 const SocialLayout = () => {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
+
   const post1 = {
     username: 'Uk_nown_User69',
     time: 'Hace 20 min',
@@ -110,27 +116,27 @@ const SocialLayout = () => {
 
   return (
     <div style={styles.appContainer}>
-      <Navbar />
-      <div style={styles.mainContainer}>
-        <div style={styles.sidebar}>
+      <Navbar toggleSidebar={toggleSidebar} />
+      <div className={`mainContainer ${isSidebarVisible ? 'showSidebar' : ''}`} style={styles.mainContainer}>
+        <div className="sidebar" style={styles.sidebar}>
           <Sidebar />
         </div>
-        <div style={styles.mainContent}>
-          <div style={styles.subNavbar}>
+        <div className="mainContent" style={styles.mainContent}>
+          <div className="subNavbar" style={styles.subNavbar}>
             <SubNavbar />
           </div>
-          <div style={styles.content}>
-            <div style={styles.leftColumn}>
+          <div className="content" style={styles.content}>
+            <div className="leftColumn" style={styles.leftColumn}>
               <DirectAccess />
               <NewsSection />
             </div>
-            <div style={styles.centerColumn}>
+            <div className="centerColumn" style={styles.centerColumn}>
               <CreatePublicationCard />
               <Outlet />
               <PostCard {...post1} />
               <PostCard {...post2} />
             </div>
-            <div style={styles.rightColumn}>
+            <div className="rightColumn" style={styles.rightColumn}>
               <AdsSection />
               <ChatBox />
             </div>

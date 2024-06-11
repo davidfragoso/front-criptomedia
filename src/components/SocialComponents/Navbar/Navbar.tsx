@@ -3,9 +3,16 @@ import MenuItem from "@mui/material/MenuItem";
 import InboxIcon from '@mui/icons-material/Inbox';
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import Avatar from "./Avatar";
+import Avatar from './Avatar';
+import MenuIcon from '@mui/icons-material/Menu';
+import { CSSProperties } from "react";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-const styles = {
+interface NavbarProps {
+  toggleSidebar: () => void;
+}
+
+const styles: { [key: string]: CSSProperties } = {
   customAppBar: {
     position: 'fixed' as 'fixed',
     width: '100%',
@@ -17,7 +24,7 @@ const styles = {
     justifyContent: 'space-between',
     top: 0,
     height: '50px',
-    borderBottom: '2px solid #27333E' // Agregar el borde inferior
+    borderBottom: '2px solid #27333E'
   },
   customAppBarBackground: {
     position: 'absolute' as 'absolute',
@@ -122,8 +129,9 @@ const Toolbar: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </div>
 );
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
   const [isCryptoSelected, setIsCryptoSelected] = useState(false);
+  const isTabletOrMobile = useMediaQuery("(max-width: 1180px)");
 
   const handleToggle = () => {
     setIsCryptoSelected(!isCryptoSelected);
@@ -132,6 +140,11 @@ const Navbar: React.FC = () => {
   return (
     <CustomAppBar>
       <Toolbar>
+        {isTabletOrMobile && (
+          <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleSidebar}>
+            <MenuIcon />
+          </IconButton>
+        )}
         <div style={styles.logoContainer}>
           <img src="../images/coinverse2-logo.png" alt="Logo" style={styles.logo} />
         </div>

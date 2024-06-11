@@ -47,7 +47,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 export default function AvatarSplitButton() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement | null>(null);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isTablet = useMediaQuery("(max-width: 900px)");
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -73,11 +73,11 @@ export default function AvatarSplitButton() {
         style={{ display: 'flex', alignItems: 'center' }}
       >
         <img
-          src="../images/yop.jfif"          
+          src="../images/yop.jfif"
           alt="David Fragoso"
-          style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: '8px' }}
+          style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: isTablet ? '0' : '8px' }}
         />
-        {!isMobile && (
+        {!isTablet && (
           <Stack direction="column" alignItems="flex-start" spacing={0}>
             <Typography variant="body2" color="white">
               David Fragoso
