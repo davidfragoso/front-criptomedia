@@ -21,7 +21,7 @@ code {
 
 /* Scrollbar personalizado */
 * {
-  scrollbar-width: thin;
+  scrollbar-width: none;
   scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
 }
 
@@ -31,7 +31,7 @@ code {
 
 *::-webkit-scrollbar-track {
   background: orange;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -43,12 +43,33 @@ code {
 /* Ajustes para mainContent */
 .mainContent {
   overflow-y: auto;
-  scrollbar-width: thin;
+  scrollbar-width: '10px';
   scrollbar-color: rgba(255, 255, 255, 0.5) rgba(39, 51, 62, 0.5);
 }
 
 /* Media query para tabletas */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .rightColumn {
+    display: none;
+  }
+
+  .centerColumn {
+    padding: 0 10px 0 10px;
+    width: 100%;
+  }
+
+  /* Scrollbar transparente en tabletas */
+  * {
+    scrollbar-width: none; /* Firefox */
+  }
+
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari y Opera */
+  }
+}
+
+/* Media query para móviles */
+@media (max-width: 768px) {
   .mainContainer {
     margin-left: 0;
     width: 100%;
@@ -75,6 +96,7 @@ code {
   .centerColumn {
     margin: 0;
     width: 100%;
+    padding: 0;
   }
 
   .subNavbar {
@@ -85,5 +107,82 @@ code {
     width: 100%;
     right: 0;
     border-radius: 0;
+  }
+
+  * {
+    scrollbar-width: none; /* Firefox */
+  }
+
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari y Opera */
+  }
+}
+
+
+
+
+@media (max-width: 768px) {
+  .mainContainer {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sidebar {
+    display: none;
+    position: absolute;
+    width: 240px;
+    top: 60px;
+    left: 0;
+    height: calc(100vh - 60px);
+    z-index: 1000;
+  }
+
+  .showSidebar .sidebar {
+    display: block;
+  }
+
+  .leftColumn, .rightColumn {
+    display: none;
+  }
+
+  .centerColumn {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .subNavbar {
+    margin-top: 0;
+  }
+
+  .chatBox {
+    width: 100%;
+    right: 0;
+    border-radius: 0;
+  }
+
+  * {
+    scrollbar-width: none; /* Firefox */
+  }
+
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari y Opera */
+  }
+}
+
+@media (max-width: 600px) {
+  .avatarContainer {
+    display: none !important;
+  }
+
+  .subNavbar {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .toolbar {
+    justify-content: space-between !important;
   }
 }

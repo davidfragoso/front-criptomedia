@@ -7,14 +7,14 @@ const styles = {
   cardContainer: {
     backgroundColor: 'rgba(39, 51, 62, 0.5)',
     borderRadius: '10px',
-    padding: '20px',
+    padding: '15px',
     display: 'flex',
     flexDirection: 'column' as 'column',
     alignItems: 'center',
-    marginBottom: '20px',
+    margin: '10px 0 10px',
   },
   avatar: {
-    marginRight: '10px',
+    marginRight: '5px',
   },
   inputContainer: {
     flexGrow: 1,
@@ -22,8 +22,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderRadius: '50px',
-    padding: '10px 20px',
-    marginRight: '10px',
+    padding: '10px 1s0px',
     width: '100%',
   },
   input: {

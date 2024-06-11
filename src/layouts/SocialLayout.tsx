@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/SocialComponents/Navbar/Navbar';
-import Sidebar from '../components/SocialComponents/Sidebar/Sidebar';
 import SubNavbar from '../components/SocialComponents/Navbar/SubNavbar';
+import Sidebar from '../components/SocialComponents/Sidebar/Sidebar';
 import CreatePublicationCard from '../components/SocialComponents/Feed/CreatePublicationCard';
 import PostCard from '../components/SocialComponents/Feed/PostCard';
 import DirectAccess from '../components/SocialComponents/Feed/DirectAccess';
@@ -10,7 +10,8 @@ import AdsSection from '../components/SocialComponents/Feed/AdsSection';
 import ChatBox from '../components/SocialComponents/ChatBox/ChatBox';
 import { Outlet } from 'react-router-dom';
 import { CSSProperties } from 'react';
-import '../App.css'; 
+import useMediaQuery from '@mui/material/useMediaQuery';
+import '../App.css';
 
 const styles: { [key: string]: CSSProperties } = {
   appContainer: {
@@ -27,23 +28,14 @@ const styles: { [key: string]: CSSProperties } = {
     flexGrow: 1,
     marginTop: '60px',
     width: '100%',
-    overflow: 'auto', 
-  },
-  sidebar: {
-    position: 'fixed',
-    top: '60px',
-    left: 0,
-    width: '240px',
-    height: 'calc(100vh - 60px)',
-    backgroundColor: '#12161C',
+    overflow: 'hidden', 
   },
   mainContent: {
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    marginLeft: '240px',
     width: 'calc(100% - 240px)',
-    overflow: 'auto', 
+    overflow: 'hidden', 
   },
   subNavbar: {
     width: '100%',
@@ -59,6 +51,7 @@ const styles: { [key: string]: CSSProperties } = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    overflow: 'auto', 
   },
   leftColumn: {
     flex: 1,
@@ -69,7 +62,6 @@ const styles: { [key: string]: CSSProperties } = {
   },
   centerColumn: {
     flex: 3,
-    marginRight: '10px',
     borderRadius: '10px',
     backgroundColor: '#12161C',
     overflow: 'auto', 
@@ -79,10 +71,13 @@ const styles: { [key: string]: CSSProperties } = {
     borderRadius: '10px',
     backgroundColor: '#12161C',
     overflow: 'auto',
+    marginLeft: '10px',
   },
 };
 
 const SocialLayout = () => {
+  const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
+  const isMobile = useMediaQuery("(max-width: 400px)");
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
   const toggleSidebar = () => {
@@ -117,14 +112,18 @@ const SocialLayout = () => {
   return (
     <div style={styles.appContainer}>
       <Navbar toggleSidebar={toggleSidebar} />
-      <div className={`mainContainer ${isSidebarVisible ? 'showSidebar' : ''}`} style={styles.mainContainer}>
-        <div className="sidebar" style={styles.sidebar}>
-          <Sidebar />
-        </div>
-        <div className="mainContent" style={styles.mainContent}>
-          <div className="subNavbar" style={styles.subNavbar}>
-            <SubNavbar />
+      <div className="mainContainer" style={{ ...styles.mainContainer, ...(isTabletOrMobile && { marginLeft: 0, width: '100%' }) }}>
+        {!isTabletOrMobile && (
+          <div className="sidebar" style={styles.sidebar}>
+            <Sidebar />
           </div>
+        )}
+        <div className="mainContent" style={{ ...styles.mainContent, ...(isTabletOrMobile && { marginLeft: 0, width: '100%' }) }}>
+          {!isMobile && (
+            <div className="subNavbar" style={styles.subNavbar}>
+              <SubNavbar />
+            </div>
+          )}
           <div className="content" style={styles.content}>
             <div className="leftColumn" style={styles.leftColumn}>
               <DirectAccess />

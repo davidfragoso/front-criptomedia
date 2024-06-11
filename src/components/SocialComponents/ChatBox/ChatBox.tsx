@@ -9,7 +9,7 @@ const styles: { [key: string]: CSSProperties } = {
     position: 'absolute',
     bottom: 0,
     right: 0,
-    width: "300px",
+    width: "250px",
     backgroundColor: "#1e1e1e",
     borderRadius: "10px 10px 0 0",
     padding: "10px",
@@ -25,7 +25,7 @@ const styles: { [key: string]: CSSProperties } = {
     cursor: 'pointer',
   },
   title: {
-    fontSize: "1.2rem",
+    fontSize: "1.1rem",
     fontWeight: "bold",
   },
   closeButton: {

@@ -9,7 +9,6 @@ const baseStyles: { [key: string]: CSSProperties } = {
   container: {
     backgroundColor: 'rgba(39, 51, 62, 0.5)',
     borderRadius: '10px',
-    padding: '20px',
     color: '#ffffff',
     marginBottom: '20px',
     width: '100%',
@@ -19,6 +18,7 @@ const baseStyles: { [key: string]: CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
     marginBottom: '10px',
+    padding: '10px 10px 0 10px'
   },
   avatar: {
     width: '40px',
@@ -44,11 +44,13 @@ const baseStyles: { [key: string]: CSSProperties } = {
   text: {
     fontSize: '0.9rem',
     color: '#d1d1d1',
+    padding: '0 10px 0 10px'
+
   },
   imagesContainer: {
     display: 'flex',
     flexDirection: 'row' as 'row',
-    gap: '10px',
+    gap: '5px',
   },
   smallImagesContainer: {
     display: 'flex',
@@ -65,11 +67,11 @@ const baseStyles: { [key: string]: CSSProperties } = {
   },
   footer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: '10px',
     borderTop: '1px solid #27333E',
-    paddingTop: '10px',
+    padding: '10px',
   },
   iconButton: {
     display: 'flex',

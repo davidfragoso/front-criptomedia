@@ -17,7 +17,6 @@ const styles = {
     height: '100vh',
     paddingTop: '20px',
     borderRight: '2px solid #27333E'
-
   },
   listItem: {
     display: 'flex',
