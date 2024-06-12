@@ -169,7 +169,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
               checked={isCryptoSelected}
               onChange={handleToggle}
               inputProps={{ 'aria-label': 'controlled' }}
-              color="default"
+              color="warning"
             />
             <span style={{ marginLeft: '0.5rem', color: isCryptoSelected ? '#FF8A00' : 'white' }}>Criptomonedas</span>
           </SliderContainer>

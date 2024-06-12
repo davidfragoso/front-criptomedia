@@ -92,9 +92,11 @@ const SocialLayout = () => {
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
+      'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
+
     ],
-    likes: 20600,
-    comments: 3400,
+    initialLikes: 20615,
+    comments: 3080,
     shares: 100,
   };
   const post2 = {
@@ -104,7 +106,22 @@ const SocialLayout = () => {
     images: [
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
     ],
-    likes: 20600,
+    initialLikes: 600,
+    comments: 3400,
+    shares: 100,
+  };
+
+  const post3 = {
+    username: 'Uk_nown_User69',
+    time: 'Hace 20 min',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
+    images: [
+      'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
+      'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
+      'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
+
+    ],
+    initialLikes: 20600,
     comments: 3400,
     shares: 100,
   };
@@ -134,6 +151,8 @@ const SocialLayout = () => {
               <Outlet />
               <PostCard {...post1} />
               <PostCard {...post2} />
+              <PostCard {...post3} />
+
             </div>
             <div className="rightColumn" style={styles.rightColumn}>
               <AdsSection />

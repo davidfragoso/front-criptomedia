@@ -22,7 +22,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderRadius: '50px',
-    padding: '10px 1s0px',
+    padding: '10px 10px',
     width: '100%',
   },
   input: {

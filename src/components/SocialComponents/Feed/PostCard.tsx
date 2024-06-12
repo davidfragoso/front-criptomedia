@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CommentModal from './CommentModal/CommentModal';
 import { CSSProperties } from 'react';
 
 const baseStyles: { [key: string]: CSSProperties } = {
@@ -42,10 +45,9 @@ const baseStyles: { [key: string]: CSSProperties } = {
     marginBottom: '10px',
   },
   text: {
-    fontSize: '0.9rem',
+    fontSize: '1.2rem',
     color: '#d1d1d1',
     padding: '0 10px 0 10px'
-
   },
   imagesContainer: {
     display: 'flex',
@@ -85,17 +87,85 @@ const baseStyles: { [key: string]: CSSProperties } = {
   },
 };
 
+interface Comment {
+  id: number;
+  username: string;
+  avatar: string;
+  text: string;
+  likes: number;
+  liked: boolean;
+}
+
 interface PostCardProps {
   username: string;
   time: string;
   content: string;
   images: string[];
-  likes: number;
+  initialLikes: number;
   comments: number;
   shares: number;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ username, time, content, images, likes, comments, shares }) => {
+const PostCard: React.FC<PostCardProps> = ({ username, time, content, images, initialLikes, comments, shares }) => {
+  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState(initialLikes);
+  const [open, setOpen] = useState(false);
+  const [commentList, setCommentList] = useState<Comment[]>([
+    {
+      id: 1,
+      username: 'Uk_nown_User69',
+      avatar: '../images/yop.jfif',
+      text: 'Hola mundo, este es mi primer comentario dentro de esta publicación',
+      likes: 2,
+      liked: false,
+    },
+    {
+      id: 2,
+      username: 'Uk_nown_User69',
+      avatar: '../images/yop.jfif',
+      text: 'Hola mundo, este es mi segundo comentario dentro de esta publicación',
+      likes: 6000,
+      liked: false,
+    },
+    {
+      id: 3,
+      username: 'Uk_nown_User69',
+      avatar: '../images/yop.jfif',
+      text: 'Hola mundo, este es mi tercer comentario dentro de esta publicación',
+      likes: 200,
+      liked: false,
+    },
+  ]);
+
+  const handleLikeClick = () => {
+    if (liked) {
+      setLikes(likes - 1);
+    } else {
+      setLikes(likes + 1);
+    }
+    setLiked(!liked);
+  };
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleCommentLike = (commentId: number) => {
+    setCommentList((prevComments) =>
+      prevComments.map((comment) =>
+        comment.id === commentId
+          ? { ...comment, likes: comment.likes + (comment.liked ? -1 : 1), liked: !comment.liked }
+          : comment
+      )
+    );
+  };
+
+  const formatNumber = (num: number) => {
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'mil';
+    }
+    return num.toString();
+  };
+
   const mainImageStyle = images.length > 1 
     ? { ...baseStyles.mainImage, maxWidth: '70%', borderRadius: '10px' } 
     : { ...baseStyles.mainImage, maxWidth: '100%',  borderRadius: '10px' };
@@ -105,7 +175,7 @@ const PostCard: React.FC<PostCardProps> = ({ username, time, content, images, li
       <div style={baseStyles.header}>
         <img
           src="../images/yop.jfif"
-          alt="avatar"
+          alt="User avatar"
           style={baseStyles.avatar}
         />
         <div style={baseStyles.userInfo}>
@@ -117,30 +187,48 @@ const PostCard: React.FC<PostCardProps> = ({ username, time, content, images, li
       <div style={baseStyles.content}>
         <p style={baseStyles.text}>{content} <span style={{color: '#ff8a00'}}>Ver más</span></p>
       </div>
-      <div style={baseStyles.imagesContainer}>
-        <img src={images[0]} alt="post image" style={mainImageStyle} />
-        {images.length > 1 && (
-          <div style={baseStyles.smallImagesContainer}>
-            {images.slice(1).map((image, index) => (
-              <img key={index} src={image} alt={`post image ${index + 1}`} style={baseStyles.smallImage} />
+      {images.length > 3 ? (
+        <div style={{ position: 'relative' }}>
+          <Carousel showArrows={true} showThumbs={false} showStatus={false} infiniteLoop={true} emulateTouch={true}>
+            {images.map((image, index) => (
+              <div key={index}>
+                <img src={image} alt={`Post ${index + 1}`} style={{ width: '100%', height: 'auto', borderRadius: '10px' }} />
+              </div>
             ))}
-          </div>
-        )}
-      </div>
-      <div style={baseStyles.footer}>
-        <div style={baseStyles.iconButton}>
-          <FavoriteIcon />
-          <span style={baseStyles.iconText}>{likes}</span>
+          </Carousel>
         </div>
-        <div style={baseStyles.iconButton}>
+      ) : (
+        <div style={baseStyles.imagesContainer}>
+          <img src={images[0]} alt={`Post ${1}`} style={mainImageStyle} />
+          {images.length > 1 && (
+            <div style={baseStyles.smallImagesContainer}>
+              {images.slice(1).map((image, index) => (
+                <img key={index} src={image} alt={`Post ${index + 2}`} style={baseStyles.smallImage} />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      <div style={baseStyles.footer}>
+        <div style={baseStyles.iconButton} onClick={handleLikeClick}>
+          <FavoriteIcon style={{ color: liked ? 'red' : 'white' }} />
+          <span style={baseStyles.iconText}>{formatNumber(likes)}</span>
+        </div>
+        <div style={baseStyles.iconButton} onClick={handleOpen}>
           <ChatBubbleIcon />
-          <span style={baseStyles.iconText}>{comments}</span>
+          <span style={baseStyles.iconText}>{formatNumber(comments)}</span>
         </div>
         <div style={baseStyles.iconButton}>
           <ShareIcon />
           <span style={baseStyles.iconText}>Compartir</span>
         </div>
       </div>
+      <CommentModal 
+        open={open} 
+        handleClose={handleClose} 
+        commentList={commentList} 
+        handleCommentLike={handleCommentLike} 
+      />
     </div>
   );
 };
