@@ -8,7 +8,8 @@ import DirectAccess from '../components/SocialComponents/Feed/DirectAccess';
 import NewsSection from '../components/SocialComponents/Feed/NewsSection';
 import AdsSection from '../components/SocialComponents/Feed/AdsSection';
 import ChatBox from '../components/SocialComponents/ChatBox/ChatBox';
-import { Outlet } from 'react-router-dom';
+import Profile from '../components/Profile/Profile';
+import { Outlet, useLocation } from 'react-router-dom';
 import { CSSProperties } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import '../App.css';
@@ -28,14 +29,14 @@ const styles: { [key: string]: CSSProperties } = {
     flexGrow: 1,
     marginTop: '60px',
     width: '100%',
-    overflow: 'hidden', 
+    overflow: 'hidden',
   },
   mainContent: {
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
     width: 'calc(100% - 240px)',
-    overflow: 'hidden', 
+    overflow: 'hidden',
   },
   subNavbar: {
     width: '100%',
@@ -51,20 +52,20 @@ const styles: { [key: string]: CSSProperties } = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    overflow: 'auto', 
+    overflow: 'auto',
   },
   leftColumn: {
     flex: 1,
     marginRight: '10px',
     borderRadius: '10px',
     backgroundColor: '#12161C',
-    overflow: 'auto'
+    overflow: 'auto',
   },
   centerColumn: {
     flex: 3,
     borderRadius: '10px',
     backgroundColor: '#12161C',
-    overflow: 'auto', 
+    overflow: 'auto',
   },
   rightColumn: {
     flex: 1,
@@ -76,9 +77,10 @@ const styles: { [key: string]: CSSProperties } = {
 };
 
 const SocialLayout = () => {
-  const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
-  const isMobile = useMediaQuery("(max-width: 400px)");
+  const isTabletOrMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useMediaQuery('(max-width: 400px)');
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const location = useLocation();
 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
@@ -87,13 +89,13 @@ const SocialLayout = () => {
   const post1 = {
     username: 'Uk_nown_User69',
     time: 'Hace 20 min',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
     images: [
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
-
     ],
     initialLikes: 20615,
     comments: 3080,
@@ -102,10 +104,9 @@ const SocialLayout = () => {
   const post2 = {
     username: 'Uk_nown_User69',
     time: 'Hace 20 min',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
-    images: [
-      'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
-    ],
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
+    images: ['https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg'],
     initialLikes: 600,
     comments: 3400,
     shares: 100,
@@ -114,12 +115,12 @@ const SocialLayout = () => {
   const post3 = {
     username: 'Uk_nown_User69',
     time: 'Hace 20 min',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...',
     images: [
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
       'https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg',
-
     ],
     initialLikes: 20600,
     comments: 3400,
@@ -147,12 +148,16 @@ const SocialLayout = () => {
               <NewsSection />
             </div>
             <div className="centerColumn" style={styles.centerColumn}>
-              <CreatePublicationCard />
-              <Outlet />
-              <PostCard {...post1} />
-              <PostCard {...post2} />
-              <PostCard {...post3} />
-
+              {location.pathname === '/profile' ? (
+                <Profile />
+              ) : (
+                <>
+                  <CreatePublicationCard />
+                  <PostCard {...post1} />
+                  <PostCard {...post2} />
+                  <PostCard {...post3} />
+                </>
+              )}
             </div>
             <div className="rightColumn" style={styles.rightColumn}>
               <AdsSection />

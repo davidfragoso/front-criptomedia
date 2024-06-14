@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal, Box, Typography } from '@mui/material';
+import React, { useState, useEffect, useRef } from 'react';
+import { Modal, Box, Typography, TextField, Button } from '@mui/material';
 import { Comment } from './types';
 import CommentItem from './CommentItem';
 import { CSSProperties } from 'react';
@@ -18,19 +18,50 @@ interface CommentModalProps {
   handleClose: () => void;
   commentList: Comment[];
   handleCommentLike: (commentId: number) => void;
+  handleAddComment: (text: string) => void;
+  newCommentId?: number;
 }
 
-const CommentModal: React.FC<CommentModalProps> = ({ open, handleClose, commentList, handleCommentLike }) => {
-  const formatNumber = (num: number) => {
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'mil';
+const CommentModal: React.FC<CommentModalProps> = ({
+  open,
+  handleClose,
+  commentList,
+  handleCommentLike,
+  handleAddComment,
+  newCommentId,
+}) => {
+  const [newComment, setNewComment] = useState('');
+  const newCommentRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (newCommentRef.current) {
+      newCommentRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-    return num.toString();
+  }, [commentList]);
+
+  const handleCommentSubmit = () => {
+    if (newComment.trim()) {
+      handleAddComment(newComment);
+      setNewComment('');
+    }
+  };
+
+  const renderComments = (comments: Comment[]) => {
+    return comments.map((comment) => (
+      <React.Fragment key={comment.id}>
+        <CommentItem
+          comment={comment}
+          handleCommentLike={handleCommentLike}
+          ref={comment.id === newCommentId ? newCommentRef : null}
+        />
+        <Box sx={baseStyles.commentDivider}></Box>
+      </React.Fragment>
+    ));
   };
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Box 
+      <Box
         sx={{
           position: 'absolute',
           top: '50%',
@@ -43,22 +74,31 @@ const CommentModal: React.FC<CommentModalProps> = ({ open, handleClose, commentL
           p: 4,
           color: 'white',
           borderRadius: '10px',
+          display: 'flex',
+          flexDirection: 'column',
+          maxHeight: '80vh',
         }}
       >
         <Typography variant="h6" component="h2">
           Comentarios
         </Typography>
-        <Box>
-          {commentList.map((comment) => (
-            <React.Fragment key={comment.id}>
-              <CommentItem 
-                comment={comment} 
-                handleCommentLike={handleCommentLike} 
-                formatNumber={formatNumber} 
-              />
-              <Box sx={baseStyles.commentDivider}></Box>
-            </React.Fragment>
-          ))}
+        <Box sx={{ flexGrow: 1, overflowY: 'auto' }}>
+          {renderComments(commentList)}
+        </Box>
+        <Box sx={{ display: 'flex', mt: 2, bgcolor: '#1E2730', pt: 2 }}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            size="small"
+            placeholder="Escribe un comentario..."
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleCommentSubmit()}
+            sx={{ bgcolor: 'white', borderRadius: '5px' }}
+          />
+          <Button variant="contained" color="primary" onClick={handleCommentSubmit} sx={{ ml: 1 }}>
+            Enviar
+          </Button>
         </Box>
       </Box>
     </Modal>

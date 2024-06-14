@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Modal, Box, Typography, IconButton, Button } from '@mui/material';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import CommentModal from './CommentModal/CommentModal';
 import { CSSProperties } from 'react';
 
@@ -94,6 +95,8 @@ interface Comment {
   text: string;
   likes: number;
   liked: boolean;
+  parentId: number | null;
+  timestamp: number;
 }
 
 interface PostCardProps {
@@ -118,6 +121,8 @@ const PostCard: React.FC<PostCardProps> = ({ username, time, content, images, in
       text: 'Hola mundo, este es mi primer comentario dentro de esta publicación',
       likes: 2,
       liked: false,
+      parentId: null,
+      timestamp: Date.now(),
     },
     {
       id: 2,
@@ -126,6 +131,8 @@ const PostCard: React.FC<PostCardProps> = ({ username, time, content, images, in
       text: 'Hola mundo, este es mi segundo comentario dentro de esta publicación',
       likes: 6000,
       liked: false,
+      parentId: null,
+      timestamp: Date.now(),
     },
     {
       id: 3,
@@ -134,8 +141,12 @@ const PostCard: React.FC<PostCardProps> = ({ username, time, content, images, in
       text: 'Hola mundo, este es mi tercer comentario dentro de esta publicación',
       likes: 200,
       liked: false,
+      parentId: null,
+      timestamp: Date.now(),
     },
   ]);
+
+  const [newCommentId, setNewCommentId] = useState<number | null>(null);
 
   const handleLikeClick = () => {
     if (liked) {
@@ -150,13 +161,31 @@ const PostCard: React.FC<PostCardProps> = ({ username, time, content, images, in
   const handleClose = () => setOpen(false);
 
   const handleCommentLike = (commentId: number) => {
-    setCommentList((prevComments) =>
-      prevComments.map((comment) =>
-        comment.id === commentId
-          ? { ...comment, likes: comment.likes + (comment.liked ? -1 : 1), liked: !comment.liked }
-          : comment
-      )
-    );
+    const updateLikes = (comments: Comment[]): Comment[] => {
+      return comments.map(comment => {
+        if (comment.id === commentId) {
+          return { ...comment, likes: comment.likes + (comment.liked ? -1 : 1), liked: !comment.liked };
+        }
+        return comment;
+      });
+    };
+
+    setCommentList(prevComments => updateLikes(prevComments));
+  };
+
+  const handleAddComment = (text: string) => {
+    const newComment: Comment = {
+      id: commentList.length + 1,
+      username: 'Nuevo Usuario',
+      avatar: '../images/yop.jfif',
+      text,
+      likes: 0,
+      liked: false,
+      parentId: null,
+      timestamp: Date.now(),
+    };
+    setCommentList([...commentList, newComment]);
+    setNewCommentId(newComment.id);
   };
 
   const formatNumber = (num: number) => {
@@ -227,7 +256,9 @@ const PostCard: React.FC<PostCardProps> = ({ username, time, content, images, in
         open={open} 
         handleClose={handleClose} 
         commentList={commentList} 
-        handleCommentLike={handleCommentLike} 
+        handleCommentLike={handleCommentLike}
+        handleAddComment={handleAddComment}
+        newCommentId={newCommentId || undefined}
       />
     </div>
   );

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -48,6 +49,7 @@ export default function AvatarSplitButton() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement | null>(null);
   const isTablet = useMediaQuery("(max-width: 900px)");
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -57,6 +59,11 @@ export default function AvatarSplitButton() {
     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
       return;
     }
+    setOpen(false);
+  };
+
+  const handleProfileClick = () => {
+    navigate('/profile'); // Navegar a la vista de perfil
     setOpen(false);
   };
 
@@ -115,7 +122,7 @@ export default function AvatarSplitButton() {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <div>
-                  <MenuItem>
+                  <MenuItem onClick={handleProfileClick}>
                     <IconButton size="large" aria-label="show profile" color="inherit">
                       <AccountCircleIcon />
                     </IconButton>
@@ -129,7 +136,6 @@ export default function AvatarSplitButton() {
                     </IconButton>
                     <p>Messages</p>
                   </MenuItem>
-                  
                 </div>
               </ClickAwayListener>
             </Paper>
