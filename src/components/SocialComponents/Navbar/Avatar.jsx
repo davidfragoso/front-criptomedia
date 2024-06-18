@@ -45,9 +45,9 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function AvatarSplitButton() {
+export default function Avatar() {
   const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement | null>(null);
+  const anchorRef = React.useRef(null);
   const isTablet = useMediaQuery("(max-width: 900px)");
   const navigate = useNavigate();
 
@@ -55,8 +55,8 @@ export default function AvatarSplitButton() {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event: MouseEvent | TouchEvent) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
     setOpen(false);

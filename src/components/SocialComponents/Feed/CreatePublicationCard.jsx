@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AvatarImage from '../Navbar/AvatarImage';
 import ImageIcon from '@mui/icons-material/Image';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
@@ -9,9 +9,9 @@ const styles = {
     borderRadius: '10px',
     padding: '15px',
     display: 'flex',
-    flexDirection: 'column' as 'column',
+    flexDirection: 'column',
     alignItems: 'center',
-    margin: '10px 0 10px',
+    margin: '0 0 20px',
   },
   avatar: {
     marginRight: '5px',
@@ -48,7 +48,7 @@ const styles = {
   },
   iconWrapper: {
     display: 'flex',
-    flexDirection: 'row' as 'row',
+    flexDirection: 'row',
     alignItems: 'center',
     color: '#ffffff',
     cursor: 'pointer',
@@ -56,9 +56,41 @@ const styles = {
   icon: {
     marginRight: '5px',
   },
+  previewContainer: {
+    display: 'flex',
+    gap: '10px',
+    marginTop: '10px',
+    flexWrap: 'wrap',
+  },
+  previewImage: {
+    width: '80px',
+    height: '80px',
+    borderRadius: '10px',
+    objectFit: 'cover',
+  },
 };
 
-const CreatePublicationCard: React.FC = () => {
+const CreatePublicationCard = ({ onCreatePost }) => {
+  const [text, setText] = useState('');
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const handleInputChange = (e) => {
+    setText(e.target.value);
+  };
+
+  const handleImageUpload = (e) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files).map(file => URL.createObjectURL(file));
+      setSelectedImages(prevImages => prevImages.concat(filesArray));
+    }
+  };
+
+  const handleSubmit = () => {
+    onCreatePost(text, selectedImages);
+    setText('');
+    setSelectedImages([]);
+  };
+
   return (
     <div style={styles.cardContainer}>
       <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
@@ -69,9 +101,11 @@ const CreatePublicationCard: React.FC = () => {
           <input
             type="text"
             placeholder="Crear una publicación..."
+            value={text}
+            onChange={handleInputChange}
             style={styles.input}
           />
-          <button style={styles.sendButton}>
+          <button style={styles.sendButton} onClick={handleSubmit}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -90,15 +124,23 @@ const CreatePublicationCard: React.FC = () => {
         </div>
       </div>
       <div style={styles.iconContainer}>
-        <div style={styles.iconWrapper}>
+        <label style={styles.iconWrapper}>
           <ImageIcon style={styles.icon} />
           <span>Imagen</span>
-        </div>
+          <input type="file" multiple onChange={handleImageUpload} style={{ display: 'none' }} />
+        </label>
         <div style={styles.iconWrapper}>
           <AttachFileIcon style={styles.icon} />
           <span>Adjuntar</span>
         </div>
       </div>
+      {selectedImages.length > 0 && (
+        <div style={styles.previewContainer}>
+          {selectedImages.map((image, index) => (
+            <img key={index} src={image} alt={`preview ${index}`} style={styles.previewImage} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

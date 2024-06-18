@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Modal, Box, Typography, TextField, Button } from '@mui/material';
-import { Comment } from './types';
 import CommentItem from './CommentItem';
-import { CSSProperties } from 'react';
 
-const baseStyles: { [key: string]: CSSProperties } = {
+const baseStyles = {
   commentDivider: {
     width: '100%',
     height: '1px',
@@ -13,25 +11,16 @@ const baseStyles: { [key: string]: CSSProperties } = {
   },
 };
 
-interface CommentModalProps {
-  open: boolean;
-  handleClose: () => void;
-  commentList: Comment[];
-  handleCommentLike: (commentId: number) => void;
-  handleAddComment: (text: string) => void;
-  newCommentId?: number;
-}
-
-const CommentModal: React.FC<CommentModalProps> = ({
+const CommentModal = ({
   open,
   handleClose,
-  commentList,
+  commentList = [],  // Ensure commentList defaults to an empty array
   handleCommentLike,
   handleAddComment,
   newCommentId,
 }) => {
   const [newComment, setNewComment] = useState('');
-  const newCommentRef = useRef<HTMLDivElement | null>(null);
+  const newCommentRef = useRef(null);
 
   useEffect(() => {
     if (newCommentRef.current) {
@@ -46,8 +35,8 @@ const CommentModal: React.FC<CommentModalProps> = ({
     }
   };
 
-  const renderComments = (comments: Comment[]) => {
-    return comments.map((comment) => (
+  const renderComments = (comments) => {
+    return Array.isArray(comments) ? comments.map((comment) => (
       <React.Fragment key={comment.id}>
         <CommentItem
           comment={comment}
@@ -56,7 +45,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
         />
         <Box sx={baseStyles.commentDivider}></Box>
       </React.Fragment>
-    ));
+    )) : null;
   };
 
   return (

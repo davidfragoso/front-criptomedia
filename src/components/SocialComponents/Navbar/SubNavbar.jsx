@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 const styles = {
   subNavbar: {
-    display: 'flex' as 'flex',
-    alignItems: 'center' as 'center',
+    display: 'flex',
+    alignItems: 'center',
     backgroundColor: '#12161C',
     padding: '10px 20px',
     color: '#ffffff',
@@ -20,13 +20,12 @@ const styles = {
     marginRight: '20px',
     width: '200px', 
     height: '25px', 
-
   },
   tab: {
     padding: '10px 20px',
     cursor: 'pointer',
     color: '#ffffff',
-    position: 'relative' as 'relative'
+    position: 'relative'
   },
   tabSelected: {
     borderBottom: '4px solid #FF8A00',
@@ -34,10 +33,10 @@ const styles = {
   }
 };
 
-const SubNavbar: React.FC = () => {
+const SubNavbar = () => {
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const handleTabClick = (index: number) => {
+  const handleTabClick = (index) => {
     setSelectedTab(index);
   };
 

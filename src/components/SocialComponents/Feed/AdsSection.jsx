@@ -1,7 +1,6 @@
 import React from 'react';
-import { CSSProperties } from 'react';
 
-const styles: { [key: string]: CSSProperties } = {
+const styles = {
   container: {
     backgroundColor: '#1e1e1e',
     borderRadius: '10px',
@@ -12,11 +11,11 @@ const styles: { [key: string]: CSSProperties } = {
   image: {
     width: '100%',
     borderRadius: '10px',
-    objectFit: 'cover' as 'cover',
+    objectFit: 'cover',
   },
 };
 
-const AdsSection: React.FC = () => {
+const AdsSection = () => {
   return (
     <div style={styles.container}>
       <img

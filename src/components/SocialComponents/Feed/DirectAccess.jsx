@@ -9,24 +9,24 @@ const styles = {
     borderRadius: '10px',
     padding: '20px',
     display: 'flex',
-    flexDirection: 'column' as 'column',
-    alignItems: 'center' as 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
     color: '#ffffff',
     marginBottom: '20px',
   },
   title: {
     fontSize: '1.2rem',
-    fontWeight: 'bold' as 'bold',
+    fontWeight: 'bold',
     marginBottom: '10px',
   },
   item: {
     display: 'flex',
-    alignItems: 'center' as 'center',
+    alignItems: 'center',
     width: '100%',
     padding: '10px 0',
     cursor: 'pointer',
     color: '#ffffff',
-    textDecoration: 'none' as 'none',
+    textDecoration: 'none',
   },
   icon: {
     marginRight: '10px',
@@ -37,10 +37,10 @@ const styles = {
     height: '1px',
     backgroundColor: '#27333E',
     margin: '10px 0',
-  }
+  },
 };
 
-const DirectAccess: React.FC = () => {
+const DirectAccess = () => {
   return (
     <div style={styles.container}>
       <div style={styles.title}>Crear</div>

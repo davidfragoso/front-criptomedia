@@ -1,15 +1,11 @@
-import React, { useState, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { IconButton, Typography, Box } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Comment } from './types';
 import { formatTimeAgo, formatNumber } from '../../../../utils/utils';
 
-interface CommentItemProps {
-  comment: Comment;
-  handleCommentLike: (commentId: number) => void;
-}
+const CommentItem = forwardRef((props, ref) => {
+  const { comment, handleCommentLike } = props;
 
-const CommentItem = forwardRef<HTMLDivElement, CommentItemProps>(({ comment, handleCommentLike }, ref) => {
   return (
     <Box ref={ref}>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>

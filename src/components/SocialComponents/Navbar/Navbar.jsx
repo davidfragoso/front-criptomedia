@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, IconButton, Badge, MenuItem, Drawer, useMediaQuery, Box, InputBase, Switch } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Badge,
+  MenuItem,
+  Drawer,
+  useMediaQuery,
+  Box,
+  InputBase,
+  Switch,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
@@ -7,10 +18,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import Avatar from './Avatar';
 import Sidebar from '../Sidebar/Sidebar';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-
-interface NavbarProps {
-  toggleSidebar: () => void;
-}
 
 const theme = createTheme({
   breakpoints: {
@@ -43,7 +50,7 @@ const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  maxWidth: '100%',
+  maxWidth: '95%',
   margin: '0 auto',
   width: '100%',
 }));
@@ -126,7 +133,7 @@ const DesktopOnly = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
+const Navbar = ({ toggleSidebar, onShowProfile }) => {
   const [isCryptoSelected, setIsCryptoSelected] = useState(false);
   const isTabletOrMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -135,11 +142,10 @@ const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
     setIsCryptoSelected(!isCryptoSelected);
   };
 
-  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+  const toggleDrawer = (open) => (event) => {
     if (
       event.type === 'keydown' &&
-      ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
+      (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
@@ -196,9 +202,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
               </IconButton>
             </MenuItemStyled>
           </MobileOnly>
-          <AvatarContainer>
-            <Avatar />
-          </AvatarContainer>
+          <Avatar onShowProfile={onShowProfile} />
         </CustomToolbar>
         <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>
           <Sidebar />

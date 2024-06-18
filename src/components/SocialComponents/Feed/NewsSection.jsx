@@ -10,12 +10,12 @@ const styles = {
   },
   title: {
     fontSize: '1.2rem',
-    fontWeight: 'bold' as 'bold',
+    fontWeight: 'bold',
     marginBottom: '10px',
   },
   post: {
     display: 'flex',
-    flexDirection: 'column' as 'column',
+    flexDirection: 'column',
     alignItems: 'center',
     marginBottom: '20px',
   },
@@ -26,11 +26,11 @@ const styles = {
   },
   text: {
     fontSize: '0.9rem',
-    textAlign: 'center' as 'center',
-  }
+    textAlign: 'center',
+  },
 };
 
-const NewsSection: React.FC = () => {
+const NewsSection = () => {
   return (
     <div style={styles.container}>
       <div style={styles.title}>Posts populares</div>

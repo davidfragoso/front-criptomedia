@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -16,35 +17,39 @@ const styles = {
     color: '#ffffff',
     height: '100vh',
     paddingTop: '20px',
-    borderRight: '2px solid #27333E'
+    borderRight: '2px solid #27333E',
   },
   listItem: {
     display: 'flex',
     alignItems: 'center',
-    paddingLeft: '20px'
+    paddingLeft: '20px',
   },
   listItemSelected: {
     backgroundColor: 'rgba(39, 51, 62, 0.5)',
-    borderLeft: '4px solid #ff8a00'
+    borderLeft: '4px solid #ff8a00',
   },
   listItemIcon: {
-    color: '#ffffff'
+    color: '#ffffff',
   },
   listItemTextPrimary: {
     fontSize: '1rem',
-    fontWeight: 500
+    fontWeight: 500,
   },
   divider: {
     backgroundColor: '#444444',
-    margin: '10px 0'
-  }
+    margin: '10px 0',
+  },
 };
 
-const Sidebar: React.FC = () => {
+const Sidebar = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const navigate = useNavigate();
 
-  const handleListItemClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
+  const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+
+    const paths = ['/', '/followers', '/chats', '/saved', '/settings'];
+    navigate(paths[index]);
   };
 
   return (
