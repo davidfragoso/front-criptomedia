@@ -82,10 +82,14 @@ const CreatePublicationCard = ({ onCreatePost }) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files).map(file => URL.createObjectURL(file));
       setSelectedImages(prevImages => prevImages.concat(filesArray));
+      Array.from(e.target.files).map(file => URL.revokeObjectURL(file)); // free memory
     }
+    console.log('Imágenes seleccionadas:', selectedImages);
   };
 
   const handleSubmit = () => {
+    console.log('Creando post con texto:', text);
+    console.log('Creando post con imágenes:', selectedImages);
     onCreatePost(text, selectedImages);
     setText('');
     setSelectedImages([]);

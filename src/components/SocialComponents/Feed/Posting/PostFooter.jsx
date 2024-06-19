@@ -31,7 +31,7 @@ const formatNumber = (num) => {
   return num.toString();
 };
 
-const PostFooter = ({ likes, liked, handleLikeClick, comments, handleOpen }) => {
+const PostFooter = ({ likes, liked, handleLikeClick, comments, handleOpen, handleShare }) => {
   return (
     <div style={styles.footer}>
       <div style={styles.iconButton} onClick={handleLikeClick}>
@@ -42,7 +42,7 @@ const PostFooter = ({ likes, liked, handleLikeClick, comments, handleOpen }) => 
         <ChatBubbleIcon />
         <span style={styles.iconText}>{formatNumber(comments)}</span>
       </div>
-      <div style={styles.iconButton}>
+      <div style={styles.iconButton} onClick={handleShare}>
         <ShareIcon />
         <span style={styles.iconText}>Compartir</span>
       </div>

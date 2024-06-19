@@ -1,4 +1,4 @@
-// Formatea la diferencia de tiempo en una cadena legible
+// se formatea la diferencia de tiempo en una cadena legible
 export const formatTimeAgo = (timestamp) => {
     const now = Date.now();
     const secondsAgo = Math.floor((now - timestamp) / 1000);
@@ -26,9 +26,8 @@ export const formatTimeAgo = (timestamp) => {
     }
 };
 
-// Formatea números grandes con sufijos (mil, millones)
 export const formatNumber = (num) => {
-    if (num === undefined || num === null) return '0'; // Handle undefined or null values
+    if (num === undefined || num === null) return '0'; 
     if (num >= 1000000) {
         return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
     } else if (num >= 1000) {

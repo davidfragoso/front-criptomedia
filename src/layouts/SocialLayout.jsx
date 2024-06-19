@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "../components/SocialComponents/Navbar/Navbar";
 import SubNavbar from "../components/SocialComponents/Navbar/SubNavbar";
@@ -11,6 +11,7 @@ import AdsSection from "../components/SocialComponents/Feed/AdsSection";
 import ChatBox from "../components/SocialComponents/ChatBox/ChatBox";
 import Profile from "../components/Profile/Profile";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { Backdrop, Box, Button, Modal, TextField } from "@mui/material";
 import "../App.css";
 
 const styles = {
@@ -84,28 +85,99 @@ const SocialLayout = () => {
     navigate("/profile");
   };
 
-  const [posts, setPosts] = React.useState([]);
+  const [posts, setPosts] = useState([]);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [tempContent, setTempContent] = useState("");
+  const [tempImages, setTempImages] = useState([]);
+  const [editingPostId, setEditingPostId] = useState(null);
 
   const handleCreatePost = (text, images) => {
     const newPost = {
-      id: Date.now(), // Usar el tiempo actual en milisegundos como id
+      id: Date.now(), // Asegúrate de que cada post tenga un ID único
       username: "Nuevo Usuario",
-      time: Date.now(),
+      time: Date.now(), // Usar el tiempo actual en milisegundos
       content: text,
-      images: images,
+      images: Array.isArray(images) ? images : [],
       initialLikes: 0,
       comments: [],
       shares: 0,
     };
+    console.log('Creando post con texto:', text);
+    console.log('Creando post con imágenes:', images);
     setPosts([newPost, ...posts]);
   };
 
   const handleDeletePost = (postId) => {
-    setPosts(posts.filter(post => post.id !== postId));
+    setPosts(posts.filter((post) => post.id !== postId));
   };
 
-  const handleUpdatePost = (postId, updatedContent) => {
-    setPosts(posts.map(post => post.id === postId ? { ...post, content: updatedContent } : post));
+  const handleUpdatePost = (postId, updatedContent, updatedImages) => {
+    console.log('Actualizando post con ID:', postId);
+    console.log('Contenido actualizado:', updatedContent);
+    console.log('Imágenes actualizadas:', updatedImages);
+
+    setPosts(
+      posts.map((post) =>
+        post.id === postId
+          ? { ...post, content: updatedContent, images: Array.isArray(updatedImages) ? updatedImages : [] }
+          : post
+      )
+    );
+  };
+
+  const handleRepost = (postId, originalPostTime) => {
+    const postToRepost = posts.find((post) => post.id === postId);
+    if (postToRepost) {
+      const newPost = {
+        ...postToRepost,
+        id: Date.now(), // Usar un nuevo ID
+        username: "Nuevo Usuario",
+        time: originalPostTime,
+        repostedBy: "Nuevo Usuario",
+        repostTime: Date.now(), // Tiempo del repost
+      };
+      setPosts([newPost, ...posts]);
+    }
+  };
+
+  const handleEdit = (postId) => {
+    const postToEdit = posts.find((post) => post.id === postId);
+    if (postToEdit) {
+      setTempContent(postToEdit.content);
+      setTempImages(Array.isArray(postToEdit.images) ? postToEdit.images : []);
+      setEditingPostId(postId);
+      setEditModalOpen(true);
+    }
+  };
+
+  const handleEditSave = () => {
+    if (!tempContent || !Array.isArray(tempImages)) {
+      alert("El contenido o las imágenes no son válidos");
+      return;
+    }
+    console.log('Actualizando post con ID:', editingPostId);
+    console.log('Contenido actualizado:', tempContent);
+    console.log('Imágenes actualizadas:', tempImages);
+
+    handleUpdatePost(editingPostId, tempContent, tempImages);
+    setEditModalOpen(false);
+  };
+
+  const handleEditCancel = () => {
+    setEditModalOpen(false);
+  };
+
+  const handleImageRemove = (index) => {
+    if (Array.isArray(tempImages) && tempImages.length > 0) {
+      const newImages = tempImages.filter((_, i) => i !== index);
+      setTempImages(newImages);
+    }
+  };
+
+  const handleImageUpload = (event) => {
+    const files = Array.from(event.target.files);
+    const newImages = files.map(file => URL.createObjectURL(file));
+    setTempImages([...tempImages, ...newImages]);
   };
 
   return (
@@ -139,6 +211,8 @@ const SocialLayout = () => {
                   handleCreatePost={handleCreatePost}
                   handleDeletePost={handleDeletePost}
                   handleUpdatePost={handleUpdatePost}
+                  handleRepost={handleRepost}
+                  handleEdit={handleEdit}
                 />
               }
             />
@@ -146,11 +220,71 @@ const SocialLayout = () => {
           </Routes>
         </div>
       </div>
+      <Modal
+        open={editModalOpen}
+        onClose={handleEditCancel}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{ timeout: 500 }}
+      >
+        <Box sx={styles.modalContent}>
+          <TextField
+            fullWidth
+            label="Editar contenido"
+            multiline
+            rows={4}
+            value={tempContent}
+            onChange={(e) => setTempContent(e.target.value)}
+            sx={styles.textField}
+          />
+          <Box sx={styles.imagePreview}>
+            {Array.isArray(tempImages) && tempImages.map((image, index) => (
+              <Box key={index} sx={styles.imageContainer}>
+                <img src={image} alt={`edit-${index}`} style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                <button
+                  type="button"
+                  onClick={() => handleImageRemove(index)}
+                  style={styles.removeButton}
+                >
+                  ×
+                </button>
+              </Box>
+            ))}
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+            <Button
+              variant="contained"
+              component="label"
+              sx={{ bgcolor: 'secondary.main', color: '#FFF' }}
+            >
+              Agregar Imágenes
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleImageUpload}
+                style={styles.imageInput}
+              />
+            </Button>
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+            <Button onClick={handleEditCancel} variant="outlined" color="warning">Cancelar</Button>
+            <Button onClick={handleEditSave} variant="contained" color="primary">Guardar</Button>
+          </Box>
+        </Box>
+      </Modal>
     </div>
   );
 };
 
-const MainContent = ({ posts, handleCreatePost, handleDeletePost, handleUpdatePost }) => {
+const MainContent = ({
+  posts,
+  handleCreatePost,
+  handleDeletePost,
+  handleUpdatePost,
+  handleRepost,
+  handleEdit,
+}) => {
   const isMobile = useMediaQuery("(max-width: 400px)");
 
   return (
@@ -167,14 +301,14 @@ const MainContent = ({ posts, handleCreatePost, handleDeletePost, handleUpdatePo
         </div>
         <div className="centerColumn" style={styles.centerColumn}>
           <CreatePublicationCard onCreatePost={handleCreatePost} />
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <PostCard
               key={post.id}
               {...post}
               onDeletePost={() => handleDeletePost(post.id)}
-              onUpdatePost={(updatedContent) =>
-                handleUpdatePost(post.id, updatedContent)
-              }
+              onUpdatePost={handleUpdatePost}
+              onRepost={handleRepost}
+              onEdit={() => handleEdit(post.id)}
             />
           ))}
         </div>

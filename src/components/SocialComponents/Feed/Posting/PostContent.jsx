@@ -14,6 +14,11 @@ const styles = {
 const PostContent = ({ content }) => {
   const [showFullContent, setShowFullContent] = useState(false);
 
+  // Mueve la validación fuera del hook
+  if (typeof content !== 'string') {
+    return null;
+  }
+
   const handleShowFullContent = () => {
     setShowFullContent(!showFullContent);
   };

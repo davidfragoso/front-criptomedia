@@ -27,7 +27,7 @@ const styles = {
     flexDirection: 'column',
     gap: '10px',
     width: '30%',
-    height: '300px',
+    height: '400px',
     borderRadius: '10px',
   },
   smallImage: {
@@ -40,7 +40,7 @@ const styles = {
 };
 
 const PostImages = ({ images, handleImageClick }) => {
-  if (images.length === 0) return null;
+  if (!Array.isArray(images) || images.length === 0) return null;
 
   return (
     <div style={styles.imagesContainer}>
@@ -49,7 +49,7 @@ const PostImages = ({ images, handleImageClick }) => {
           <Carousel showArrows showThumbs={false} showStatus={false} infiniteLoop emulateTouch>
             {images.map((image, index) => (
               <div key={index} onClick={() => handleImageClick(image)}>
-                <img src={image} alt={`Post ${index + 1}`} style={{ width: '100%', height: '450px', objectFit: 'cover', borderRadius: '10px' }} />
+                <img src={image} alt={`Post ${index + 1}`} style={{ width: '100%', height: '500px', objectFit: 'cover', borderRadius: '10px' }} />
               </div>
             ))}
           </Carousel>
