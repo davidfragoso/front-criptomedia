@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { CSSProperties } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const styles: { [key: string]: CSSProperties } = {
+const styles = {
   container: {
     position: 'absolute',
     bottom: 0,
@@ -83,7 +82,7 @@ const styles: { [key: string]: CSSProperties } = {
   },
 };
 
-const ChatBox: React.FC = () => {
+const ChatBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
@@ -139,9 +138,7 @@ const ChatBox: React.FC = () => {
                   <div
                     style={{
                       ...styles.statusIndicator,
-                      ...(msg.status === "online"
-                        ? styles.online
-                        : styles.offline),
+                      ...(msg.status === "online" ? styles.online : styles.offline),
                     }}
                   ></div>
                   {msg.status === "online" ? "En línea" : "Desconectado"}
