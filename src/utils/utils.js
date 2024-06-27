@@ -36,7 +36,6 @@ export const formatNumber = (num) => {
     return num.toString();
 };
 
-
 // Trunca un texto a un límite de caracteres especificado
 export const truncateText = (text, limit) => {
     if (text.length <= limit) {
@@ -66,4 +65,28 @@ export const generateRandomString = (length) => {
         result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return result;
+};
+
+// Nueva función para formatear el tiempo en formato HH:MM
+export const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+};
+
+// Función para formatear el encabezado de fecha en los mensajes
+export const formatDateHeader = (timestamp) => {
+    const messageDate = new Date(timestamp);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+
+    if (messageDate.toDateString() === today.toDateString()) {
+        return 'Hoy';
+    } else if (messageDate.toDateString() === yesterday.toDateString()) {
+        return 'Ayer';
+    } else {
+        return messageDate.toLocaleDateString();
+    }
 };
