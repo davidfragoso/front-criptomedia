@@ -67,13 +67,13 @@ export const generateRandomString = (length) => {
     return result;
 };
 
-// Nueva función para formatear el tiempo en formato HH:MM
 export const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
     const hours = date.getHours();
     const minutes = date.getMinutes();
     return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
 };
+
 
 // Función para formatear el encabezado de fecha en los mensajes
 export const formatDateHeader = (timestamp) => {

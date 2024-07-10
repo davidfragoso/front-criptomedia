@@ -49,12 +49,7 @@ const DirectAccess = () => {
         <span>Publicación</span>
       </div>
       <div style={styles.divider}></div>
-      <div style={styles.item}>
-        <GroupIcon style={styles.icon} />
-        <span>Grupo</span>
-      </div>
-      <div style={styles.divider}></div>
-      <div style={styles.item}>
+           <div style={styles.item}>
         <ChatIcon style={styles.icon} />
         <span>Chat</span>
       </div>

@@ -9,7 +9,7 @@ import DirectAccess from "../components/SocialComponents/Feed/DirectAccess";
 import NewsSection from "../components/SocialComponents/Feed/NewsSection";
 import AdsSection from "../components/SocialComponents/Feed/AdsSection";
 import ChatBox from "../components/SocialComponents/ChatBox/ChatBox";
-import Chat from "../components/SocialComponents/Chat/Chat";  // Asegúrate de que la ruta es correcta
+import Chat from "../components/SocialComponents/Chat/Chat"; 
 
 import Profile from "../components/Profile/Profile";
 import useMediaQuery from "@mui/material/useMediaQuery";

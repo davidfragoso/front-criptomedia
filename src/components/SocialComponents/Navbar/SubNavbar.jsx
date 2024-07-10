@@ -42,11 +42,7 @@ const SubNavbar = () => {
 
   return (
     <div style={styles.subNavbar}>
-      <input
-        type="text"
-        placeholder="Buscar..."
-        style={styles.searchBox}
-      />
+      
       <div
         style={{ ...styles.tab, ...(selectedTab === 0 ? styles.tabSelected : {}) }}
         onClick={() => handleTabClick(0)}
@@ -63,7 +59,7 @@ const SubNavbar = () => {
         style={{ ...styles.tab, ...(selectedTab === 2 ? styles.tabSelected : {}) }}
         onClick={() => handleTabClick(2)}
       >
-        Amigos
+        Seguidores
       </div>
     </div>
   );
