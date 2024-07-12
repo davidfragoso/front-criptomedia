@@ -15,6 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import Avatar from './Avatar';
 import Sidebar from '../Sidebar/Sidebar';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
@@ -65,6 +66,7 @@ const LogoContainer = styled(Box)(({ theme }) => ({
 
 const Logo = styled('img')(({ theme }) => ({
   width: '120px',
+  cursor: 'pointer', // Agregar cursor pointer
 }));
 
 const Spacer = styled(Box)(({ theme }) => ({
@@ -148,6 +150,7 @@ const Navbar = ({ toggleSidebar, onShowProfile }) => {
   const [isCryptoSelected, setIsCryptoSelected] = useState(false);
   const isTabletOrMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const navigate = useNavigate(); // Usar useNavigate para redirección
 
   const handleToggle = () => {
     setIsCryptoSelected(!isCryptoSelected);
@@ -163,6 +166,10 @@ const Navbar = ({ toggleSidebar, onShowProfile }) => {
     setDrawerOpen(open);
   };
 
+  const handleLogoClick = () => {
+    navigate('/'); // Redirigir a la ruta "/"
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CustomAppBar>
@@ -173,7 +180,7 @@ const Navbar = ({ toggleSidebar, onShowProfile }) => {
             </IconButton>
           )}
           <LogoContainer>
-            <Logo src="../images/coinverse2-logo.png" alt="Logo" />
+            <Logo src="../images/coinverse2-logo.png" alt="Logo" onClick={handleLogoClick} />
           </LogoContainer>
           <SearchContainer>
             <SearchIcon />

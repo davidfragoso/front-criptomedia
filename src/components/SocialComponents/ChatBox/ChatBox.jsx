@@ -7,8 +7,8 @@ const styles = {
   container: {
     position: 'absolute',
     bottom: 0,
-    right: 0,
-    width: "250px",
+    right: "20px",
+    width: "300px",
     backgroundColor: "#1e1e1e",
     borderRadius: "10px 10px 0 0",
     padding: "10px",

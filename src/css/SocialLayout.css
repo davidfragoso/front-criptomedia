@@ -1,0 +1,77 @@
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-color: #1e1e1e;
+    overflow: hidden;
+  }
+  
+  .mainContainer {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    margin-top: 60px;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .mainContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: calc(100% - 240px);
+    overflow: hidden;
+  }
+  
+  .subNavbar {
+    width: 100%;
+    margin-top: 8px;
+    z-index: 999;
+    background-color: #12161c;
+    border-bottom: 2px solid #27333e;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 10px;
+    background-color: #12161c;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow-y: auto;
+  }
+  
+  .leftColumn {
+    flex: 1;
+    margin-right: 10px;
+    border-radius: 10px;
+    background-color: #12161c;
+    overflow: auto;
+  }
+  
+  .centerColumn {
+    flex: 3;
+    border-radius: 10px;
+    background-color: #12161c;
+    overflow-y: auto;
+  }
+  
+  .rightColumn {
+    flex: 1;
+    border-radius: 10px;
+    background-color: #12161c;
+    overflow: auto;
+    margin-left: 10px;
+  }
+  
+  .modalContent {
+    width: 80%;
+    background-color: #12161c;
+    box-shadow: 24px;
+    padding: 24px;
+    outline: none;
+    border-radius: 10px;
+    color: #fff;
+  }
+  

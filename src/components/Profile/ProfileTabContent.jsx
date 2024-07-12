@@ -1,13 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-interface ProfileTabContentProps {
-  children?: React.ReactNode;
-  index: any;
-  value: any;
-}
-
-const ProfileTabContent: React.FC<ProfileTabContentProps> = ({ children, value, index, ...other }) => {
+const ProfileTabContent = ({ children, value, index, ...other }) => {
   return (
     <div
       role="tabpanel"

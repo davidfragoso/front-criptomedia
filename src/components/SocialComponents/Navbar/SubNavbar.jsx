@@ -8,7 +8,7 @@ const styles = {
     padding: '10px 20px',
     color: '#ffffff',
     top: '60px',
-    width: 'calc(100% - 240px)',
+    width: '100%',
     zIndex: 999,
   },
   searchBox: {

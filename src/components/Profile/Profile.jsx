@@ -37,9 +37,6 @@ const Profile = () => {
       <ProfileTabContent value={tabIndex} index={2}>
         Multimedia
       </ProfileTabContent>
-      <ProfileTabContent value={tabIndex} index={3}>
-        Me gusta
-      </ProfileTabContent>
     </ProfileContainer>
   );
 };
