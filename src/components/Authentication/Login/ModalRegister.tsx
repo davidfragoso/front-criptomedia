@@ -71,79 +71,87 @@ export default function BasicModal() {
             REGISTRO
           </Typography>
           <Box display="flex" flexDirection="column" gap={2} mt={2}>
-            <TextField
-              id="outlined-basic-usuario"
-              label="USUARIO"
+          <TextField
               variant="outlined"
+              margin="normal"
               fullWidth
+              label="Nombre completo"
+              name="nombre"
+              autoComplete="nombre-completo"
+              autoFocus
+              color="warning"
               sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#8A8888',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'white',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'white',
-                  },
+                '& fieldset': {
+                      borderColor: '#8A8888',
+                    },
+                '& .MuiInputBase-input': {
+                  color: 'white',
                 },
                 '& .MuiInputLabel-root': {
                   color: '#8A8888',
-                },
-                '& .MuiInputBase-input': {
-                  color: 'white',
                 },
               }}
             />
             <TextField
-              id="outlined-basic-correo"
-              label="CORREO ELECTRONICO"
               variant="outlined"
+              margin="normal"
               fullWidth
+              label="Nombre de usuario"
+              name="user-registro"
+              autoComplete="user-registro"
+              autoFocus
+              color="warning"
               sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#8A8888',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'white',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'white',
-                  },
+                '& fieldset': {
+                      borderColor: '#8A8888',
+                    },
+                '& .MuiInputBase-input': {
+                  color: 'white',
                 },
                 '& .MuiInputLabel-root': {
                   color: '#8A8888',
-                },
-                '& .MuiInputBase-input': {
-                  color: 'white',
                 },
               }}
             />
             <TextField
-              id="outlined-basic-contrasena"
-              label="CONTRASEÑA"
               variant="outlined"
-              type="password"
+              margin="normal"
               fullWidth
+              label="Correo electronico"
+              name="email-registro"
+              autoComplete="email-registro"
+              autoFocus
+              color="warning"
               sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#8A8888',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'white',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'white',
-                  },
+                '& fieldset': {
+                      borderColor: '#8A8888',
+                    },
+                '& .MuiInputBase-input': {
+                  color: 'white',
                 },
                 '& .MuiInputLabel-root': {
                   color: '#8A8888',
                 },
+              }}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              label="Contraseña"
+              name="password-registro"
+              autoComplete="password-registro"
+              autoFocus
+              color="warning"
+              sx={{
+                '& fieldset': {
+                      borderColor: '#8A8888',
+                    },
                 '& .MuiInputBase-input': {
                   color: 'white',
+                },
+                '& .MuiInputLabel-root': {
+                  color: '#8A8888',
                 },
               }}
             />
