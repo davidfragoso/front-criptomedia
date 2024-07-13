@@ -1,7 +1,3 @@
-import React from "react";
-
-const Imgorange = () => {
-  return (
     <svg
       width="627"
       height="828"
@@ -14,7 +10,3 @@ const Imgorange = () => {
         fill="#FF8A00"
       />
     </svg>
-  );
-};
-
-export default Imgorange;

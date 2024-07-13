@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -10,7 +10,7 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
-import MailIcon from "@mui/icons-material/Mail";
+import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
@@ -64,6 +64,11 @@ export default function Avatar() {
 
   const handleProfileClick = () => {
     navigate('/profile'); // Navegar a la vista de perfil
+    setOpen(false);
+  };
+
+  const handleLogout = () => {
+    navigate('/login'); // Navegar a la vista de login
     setOpen(false);
   };
 
@@ -126,15 +131,13 @@ export default function Avatar() {
                     <IconButton size="large" aria-label="show profile" color="inherit">
                       <AccountCircleIcon />
                     </IconButton>
-                    <p>Profile</p>
+                    <p>Perfil</p>
                   </MenuItem>
-                  <MenuItem>
-                    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                      <Badge badgeContent={4} color="error">
-                        <MailIcon />
-                      </Badge>
+                  <MenuItem onClick={handleLogout}>
+                    <IconButton size="large" aria-label="logout" color="inherit">
+                      <LogoutIcon />
                     </IconButton>
-                    <p>Messages</p>
+                    <p>Cerrar sesión</p>
                   </MenuItem>
                 </div>
               </ClickAwayListener>

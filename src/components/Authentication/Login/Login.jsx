@@ -1,12 +1,18 @@
 import React from 'react';
 import { Grid, Box, Typography, TextField, Button, Link } from '@mui/material';
-import Imgsvg from '../../../Assets/Login/bgsvg';
-import Imgorange from '../../../Assets/Login/imgorange';
-import CoinverseLogo from '../../../Assets/Login/CoinverseLogo';
-import BasicModal from '../Login/ModalRegister';
-import Logo from '../../../Assets/Login/Logo.png';
+import { useNavigate } from 'react-router-dom';
+import BasicModal from './ModalRegister';
+import images from '../../../imageRoutes';
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // Aquí puedes agregar la lógica de autenticación
+    // Si la autenticación es exitosa, redirige a SocialLayout
+    navigate('/');
+  };
+
   return (
     <Grid container sx={{ minHeight: '100vh' }}>
       {/* IZQ */}
@@ -29,7 +35,7 @@ const Login = () => {
           ÚNETE A LA REVOLUCIÓN
         </Typography>
         <Box sx={{ top: 203 }}>
-          <Imgsvg /> {/* COMPONENTE BACKGROUND IMAGEN SVG */}
+          <img src={images.bgsvg} alt="Background SVG" style={{ width: '100%', height: 'auto' }} />
         </Box>
       </Grid>
 
@@ -53,7 +59,7 @@ const Login = () => {
           xs={false}
           sx={{ position: 'absolute', top: -6, right: 7 }}
         >
-          <Imgorange />
+          <img src={images.imgOrange} alt="Orange Image" style={{ width: '100%', height: 'auto' }} />
         </Grid>
 
         <Box
@@ -69,7 +75,7 @@ const Login = () => {
             right: 100,
           }}
         >
-          <img src={Logo} alt="" style={{ width: 400 }} />
+          <img src={images.coinverseLogo} alt="Logo" style={{ width: 400 }} />
           <br />
           <br />
 
@@ -126,6 +132,7 @@ const Login = () => {
             fullWidth
             variant="contained"
             sx={{ margin: '74px 0px 16px', backgroundColor: 'DarkOrange' }}
+            onClick={handleLogin}
           >
             INICIAR SESIÓN
           </Button>

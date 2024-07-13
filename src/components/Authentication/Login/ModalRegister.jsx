@@ -6,10 +6,9 @@ import Modal from '@mui/material/Modal';
 import { TextField, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from '@mui/material';
-import { Padding } from '@mui/icons-material';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -19,7 +18,6 @@ const style = {
   boxShadow: 24,
   p: 4,
   color: 'black',
-  
 };
 
 export default function BasicModal() {
@@ -34,7 +32,6 @@ export default function BasicModal() {
         variant="body2"
         onClick={handleOpen}
         sx={{ textTransform: 'none', cursor: 'pointer', marginLeft: 2, color: 'DarkOrange', fontSize: 12 }}
-
       >
         REGÍSTRATE
       </Link>
@@ -71,7 +68,7 @@ export default function BasicModal() {
             REGISTRO
           </Typography>
           <Box display="flex" flexDirection="column" gap={2} mt={2}>
-          <TextField
+            <TextField
               variant="outlined"
               margin="normal"
               fullWidth
@@ -82,8 +79,8 @@ export default function BasicModal() {
               color="warning"
               sx={{
                 '& fieldset': {
-                      borderColor: '#8A8888',
-                    },
+                  borderColor: '#8A8888',
+                },
                 '& .MuiInputBase-input': {
                   color: 'white',
                 },
@@ -103,8 +100,8 @@ export default function BasicModal() {
               color="warning"
               sx={{
                 '& fieldset': {
-                      borderColor: '#8A8888',
-                    },
+                  borderColor: '#8A8888',
+                },
                 '& .MuiInputBase-input': {
                   color: 'white',
                 },
@@ -117,15 +114,15 @@ export default function BasicModal() {
               variant="outlined"
               margin="normal"
               fullWidth
-              label="Correo electronico"
+              label="Correo electrónico"
               name="email-registro"
               autoComplete="email-registro"
               autoFocus
               color="warning"
               sx={{
                 '& fieldset': {
-                      borderColor: '#8A8888',
-                    },
+                  borderColor: '#8A8888',
+                },
                 '& .MuiInputBase-input': {
                   color: 'white',
                 },
@@ -145,8 +142,8 @@ export default function BasicModal() {
               color="warning"
               sx={{
                 '& fieldset': {
-                      borderColor: '#8A8888',
-                    },
+                  borderColor: '#8A8888',
+                },
                 '& .MuiInputBase-input': {
                   color: 'white',
                 },

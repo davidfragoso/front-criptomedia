@@ -1,8 +1,4 @@
-import React from 'react';
 
-
-const Imgsvg = () => {
-  return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
@@ -320,7 +316,3 @@ const Imgsvg = () => {
         opacity="0.3"
       />
     </svg>
-  );
-};
-
-export default Imgsvg;

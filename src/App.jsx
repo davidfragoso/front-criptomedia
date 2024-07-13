@@ -1,15 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SocialLayout from "./layouts/SocialLayout";
-import Login from "./components/Authentication/Login/Login";
-
+import routes from "./routes/routes";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/*" element={<SocialLayout />} />
-        <Route path="/login" element={<Login />} />
+        {routes.map((route, index) => (
+          <Route key={index} path={route.path} element={route.element}>
+            {route.children && route.children.map((childRoute, childIndex) => (
+              <Route key={childIndex} path={childRoute.path} element={childRoute.element} />
+            ))}
+          </Route>
+        ))}
       </Routes>
     </Router>
   );
