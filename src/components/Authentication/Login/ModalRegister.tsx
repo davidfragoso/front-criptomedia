@@ -19,7 +19,7 @@ const style = {
   boxShadow: 24,
   p: 4,
   color: 'black',
-  
+
 };
 
 export default function BasicModal() {
@@ -70,88 +70,118 @@ export default function BasicModal() {
           >
             REGISTRO
           </Typography>
-          <Box display="flex" flexDirection="column" gap={2} mt={2}>
-            <TextField
-              id="outlined-basic-usuario"
-              label="USUARIO"
-              variant="outlined"
-              fullWidth
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#8A8888',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'white',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'white',
-                  },
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#8A8888',
-                },
-                '& .MuiInputBase-input': {
-                  color: 'white',
-                },
-              }}
+          <Box display="flex" flexDirection="column" gap={1} mt={1}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="Name"
+            label="Nombre"
+            autoComplete="current-name"
+            color="warning"
+            sx={{
+              '& fieldset': {
+                borderColor: '#8A8888',
+              },
+              '& .MuiInputBase-input': {
+                color: 'white',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#8A8888',
+              },
+            }}
             />
             <TextField
-              id="outlined-basic-correo"
-              label="CORREO ELECTRONICO"
-              variant="outlined"
-              fullWidth
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#8A8888',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'white',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'white',
-                  },
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#8A8888',
-                },
-                '& .MuiInputBase-input': {
-                  color: 'white',
-                },
-              }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="lastname"
+            label="Apellido"
+            autoComplete="current-lastname"
+            color="warning"
+            sx={{
+              '& fieldset': {
+                borderColor: '#8A8888',
+              },
+              '& .MuiInputBase-input': {
+                color: 'white',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#8A8888',
+              },
+            }}
+            />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="User"
+            label="Usuario"
+            autoComplete="current-user"
+            color="warning"
+            sx={{
+              '& fieldset': {
+                borderColor: '#8A8888',
+              },
+              '& .MuiInputBase-input': {
+                color: 'white',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#8A8888',
+              },
+            }}
             />
             <TextField
-              id="outlined-basic-contrasena"
-              label="CONTRASEÑA"
-              variant="outlined"
-              type="password"
-              fullWidth
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#8A8888',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'white',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'white',
-                  },
-                },
-                '& .MuiInputLabel-root': {
-                  color: '#8A8888',
-                },
-                '& .MuiInputBase-input': {
-                  color: 'white',
-                },
-              }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Correo electrónico"
+            autoComplete="current-email"
+            color="warning"
+            sx={{
+              '& fieldset': {
+                borderColor: '#8A8888',
+              },
+              '& .MuiInputBase-input': {
+                color: 'white',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#8A8888',
+              },
+            }}
+            />
+            <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Contraseña"
+            type="password"
+            autoComplete="current-password"
+            color="warning"
+            sx={{
+              '& fieldset': {
+                borderColor: '#8A8888',
+              },
+              '& .MuiInputBase-input': {
+                color: 'white',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#8A8888',
+              },
+            }}
             />
             <Button
               sx={{
                 backgroundColor: '#FF8A00',
                 '&:hover': {
-                  backgroundColor: '#FF8A00', // Color para el estado hover
+                  backgroundColor: '#FF8A00', 
                 },
               }}
               variant="contained"

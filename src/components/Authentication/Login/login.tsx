@@ -5,6 +5,7 @@ import Imgorange from '../../../Assets/Login/imgorange'
 import CoinverseLogo from '../../../Assets/Login/CoinverseLogo'
 import BasicModal from '../Login/ModalRegister'
 import Logo from '../../../Assets/Login/Logo.png'
+import { Margin } from '@mui/icons-material';
 
 
 const styles = {
@@ -37,7 +38,7 @@ const styles = {
     position: 'absolute',
     justifyContent: 'space-between',
     top: 100,
-    right:100,
+    right: 100,
   },
   submitButton: {
     margin: '74px 0px 16px',
@@ -62,11 +63,11 @@ const Login = () => {
         lg={8}
         sx={styles.leftSide}
       >
-        <Typography variant="h3" gutterBottom>
+        <Typography variant="h2" gutterBottom>
           ÚNETE A LA REVOLUCIÓN
         </Typography>
-        <Box sx={{top: 203}}>
-        <Imgsvg/> {/*COMPONENTE BACKGROUND IMAGEN SVG */}
+        <Box sx={{ top: 203 }}>
+          <Imgsvg /> {/*COMPONENTE BACKGROUND IMAGEN SVG */}
         </Box>
       </Grid>
 
@@ -79,14 +80,14 @@ const Login = () => {
         sx={styles.rightSide}
       >
         <Grid item
-        xs={false}
-        sx={{position:'absolute', top:-6, right:7 }}>
+          xs={false}
+          sx={{ position: 'absolute', top: -6, right: 7 }}>
 
-        <Imgorange/>
+          <Imgorange />
         </Grid>
 
         <Box sx={styles.box}>
-          <img src={Logo} alt="" style={{width:400}}/>
+          <img src={Logo} alt="" style={{ width: 400 }} />
           <br />
           <br />
 
@@ -102,8 +103,8 @@ const Login = () => {
             color="warning"
             sx={{
               '& fieldset': {
-                    borderColor: '#8A8888',
-                  },
+                borderColor: '#8A8888',
+              },
               '& .MuiInputBase-input': {
                 color: 'white',
               },
@@ -125,8 +126,8 @@ const Login = () => {
             color="warning"
             sx={{
               '& fieldset': {
-                    borderColor: '#8A8888',
-                  },
+                borderColor: '#8A8888',
+              },
               '& .MuiInputBase-input': {
                 color: 'white',
               },
@@ -147,9 +148,9 @@ const Login = () => {
             INICIAR SESIÓN
           </Button>
           <Grid container >
-            <Grid item sx={{display: 'Flex'}}>
-              <Typography sx={{color: 'white', fontSize: 12, alignContent: 'left'}}>¿NO TIENES CUENTA?  </Typography>
-              <BasicModal/>
+            <Grid item sx={{ display: 'Flex' }}>
+              <Typography sx={{ color: 'white', fontSize: 12, alignContent: 'left' }}>¿NO TIENES CUENTA?  </Typography>
+              <BasicModal />
             </Grid>
           </Grid>
         </Box>
