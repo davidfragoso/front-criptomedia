@@ -9,11 +9,12 @@ import SocialLayout from '../layouts/SocialLayout';
 import Profile from '../components/Profile/Profile';
 import Chat from '../components/SocialComponents/Chat/Chat';
 import Login from '../components/Authentication/Login/Login';
+import UserView from '../components/UserProfile/UserView';
 
 // Rutas para la barra lateral
 export const sidebarRoutes = [
   { path: '/', name: 'Feed', icon: <RssFeedIcon /> },
-  { path: '/profile', name: 'Seguidores', icon: <PeopleIcon /> },
+  { path: '/userprofile', name: 'Seguidores', icon: <PeopleIcon /> },
   { path: '/chats', name: 'Chats', icon: <ChatIcon /> },
   { path: '/saved', name: 'Elementos guardados', icon: <BookmarkIcon /> },
   { path: '/settings', name: 'Configuración', icon: <SettingsIcon /> },
@@ -26,6 +27,7 @@ const routes = [
     element: <SocialLayout />,
     children: [
       { path: 'profile', element: <Profile /> },
+      { path: 'userprofile', element: <UserView /> },
       { path: 'chats', element: <Chat /> },
     ],
   },

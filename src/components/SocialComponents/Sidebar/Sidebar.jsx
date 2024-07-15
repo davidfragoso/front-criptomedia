@@ -48,7 +48,7 @@ const Sidebar = () => {
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
 
-    const paths = ['/', '/', '/chats', '/saved', '/settings'];
+    const paths = ['/', '/userprofile', '/chats', '/saved', '/settings'];
     navigate(paths[index]);
   };
 
