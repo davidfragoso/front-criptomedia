@@ -16,6 +16,7 @@ import Chat from "../components/SocialComponents/Chat/Chat";
 import usePosts from "../js/usePosts";
 import "../css/SocialLayout.css"; // Importa el archivo CSS aquí
 import "../App.css";
+import Configuration from "../components/Configuration/configuration";
 
 const SocialLayout = () => {
   const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
@@ -43,7 +44,7 @@ const SocialLayout = () => {
         {!isTabletOrMobile && <Sidebar />}
         <div className="mainContent">
           <Routes>
-            <Route path="/" element={<MainContent 
+            <Route path="/" element={<MainContent
               posts={posts}
               handleCreatePost={handleCreatePost}
               handleDeletePost={handleDeletePost}
@@ -52,6 +53,7 @@ const SocialLayout = () => {
               handleEdit={handleEdit} />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/chats" element={<Chat />} />
+            <Route path="/settings" element={<Configuration />} />
           </Routes>
         </div>
       </div>

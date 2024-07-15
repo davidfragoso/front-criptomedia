@@ -9,6 +9,7 @@ import SocialLayout from '../layouts/SocialLayout';
 import Profile from '../components/Profile/Profile';
 import Chat from '../components/SocialComponents/Chat/Chat';
 import Login from '../components/Authentication/Login/Login';
+import Configuration from '../components/Configuration/configuration';
 
 // Rutas para la barra lateral
 export const sidebarRoutes = [
@@ -27,6 +28,7 @@ const routes = [
     children: [
       { path: 'profile', element: <Profile /> },
       { path: 'chats', element: <Chat /> },
+      { path: 'settings', element: <Configuration />}
     ],
   },
   {
