@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import { sidebarRoutes } from '../../../routes/routes';
+import RssFeedIcon from '@mui/icons-material/RssFeed';
+import PeopleIcon from '@mui/icons-material/People';
+import ChatIcon from '@mui/icons-material/Chat';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const styles = {
   sidebar: {
@@ -38,36 +42,70 @@ const styles = {
 };
 
 const Sidebar = () => {
-  const location = useLocation();
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
-  const [selectedPath, setSelectedPath] = useState(location.pathname);
 
-  useEffect(() => {
-    setSelectedPath(location.pathname);
-  }, [location.pathname]);
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
 
-  const handleListItemClick = (event, path) => {
-    setSelectedPath(path);
-    navigate(path);
+    const paths = ['/', '/', '/chats', '/saved', '/settings'];
+    navigate(paths[index]);
   };
 
   return (
     <div style={styles.sidebar}>
       <List component="nav">
-        {sidebarRoutes.map((route) => (
-          <ListItem
-            button
-            key={route.path}
-            style={selectedPath === route.path ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
-            onClick={(event) => handleListItemClick(event, route.path)}
-          >
-            <ListItemIcon style={styles.listItemIcon}>
-              {route.icon}
-            </ListItemIcon>
-            <ListItemText primary={route.name} style={styles.listItemTextPrimary} />
-          </ListItem>
-        ))}
+        <ListItem
+          button
+          style={selectedIndex === 0 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
+          onClick={(event) => handleListItemClick(event, 0)}
+        >
+          <ListItemIcon style={styles.listItemIcon}>
+            <RssFeedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Feed" style={styles.listItemTextPrimary} />
+        </ListItem>
+        <ListItem
+          button
+          style={selectedIndex === 1 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
+          onClick={(event) => handleListItemClick(event, 1)}
+        >
+          <ListItemIcon style={styles.listItemIcon}>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Seguidores" style={styles.listItemTextPrimary} />
+        </ListItem>
+        <ListItem
+          button
+          style={selectedIndex === 2 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
+          onClick={(event) => handleListItemClick(event, 2)}
+        >
+          <ListItemIcon style={styles.listItemIcon}>
+            <ChatIcon />
+          </ListItemIcon>
+          <ListItemText primary="Chats" style={styles.listItemTextPrimary} />
+        </ListItem>
         <Divider style={styles.divider} />
+        <ListItem
+          button
+          style={selectedIndex === 3 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
+          onClick={(event) => handleListItemClick(event, 3)}
+        >
+          <ListItemIcon style={styles.listItemIcon}>
+            <BookmarkIcon />
+          </ListItemIcon>
+          <ListItemText primary="Elementos guardados" style={styles.listItemTextPrimary} />
+        </ListItem>
+        <ListItem
+          button
+          style={selectedIndex === 4 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
+          onClick={(event) => handleListItemClick(event, 4)}
+        >
+          <ListItemIcon style={styles.listItemIcon}>
+            <SettingsIcon />
+          </ListItemIcon>
+          <ListItemText primary="Configuración" style={styles.listItemTextPrimary} />
+        </ListItem>
       </List>
     </div>
   );
