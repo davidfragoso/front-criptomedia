@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button, Divider } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
 
 const SectionBox = styled(Box)(({ theme }) => ({

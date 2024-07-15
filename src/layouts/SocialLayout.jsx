@@ -16,7 +16,8 @@ import Chat from "../components/SocialComponents/Chat/Chat";
 import usePosts from "../js/usePosts";
 import "../css/SocialLayout.css"; // Importa el archivo CSS aquí
 import "../App.css";
-import Configuration from "../components/Configuration/configuration";
+import Configuration from "../components/SocialComponents/Configuration/configuration";
+import SavedPosts from "../components/SocialComponents/SavedPost/savedpost";
 
 const SocialLayout = () => {
   const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
@@ -54,6 +55,8 @@ const SocialLayout = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/chats" element={<Chat />} />
             <Route path="/settings" element={<Configuration />} />
+            <Route path="/saved" element={<SavedPosts />} />
+
           </Routes>
         </div>
       </div>
