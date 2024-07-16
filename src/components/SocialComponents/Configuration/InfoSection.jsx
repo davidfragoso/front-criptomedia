@@ -17,53 +17,61 @@ const InfoSection = () => (
   <SectionBox>
     <Grid container spacing={4}>
       <Grid item xs={12} md={6}>
-
         <InfoField>
-          <TextField label="Nombre completo" defaultValue="Joe Doe"  fullWidth sx={{
-        mr: 2,
-        backgroundColor: '#1e2329',
-        borderRadius: 2,
-        '& .MuiInputBase-root': {
-          color: '#7C9EBD',
-        },'& .MuiInputLabel-root': {
-          color: '#ffffff',
-        },
-      }} />
-          <Button variant="contained" color="primary">
-            Actualizar
-          </Button>
+          <TextField
+            label="Nombre completo"
+            defaultValue="Joe Doe"
+            fullWidth
+            sx={{
+              mr: 2,
+              backgroundColor: '#1e2329',
+              borderRadius: 2,
+              '& .MuiInputBase-root': {
+                color: '#7C9EBD',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#ffffff',
+              },
+            }}
+          />
         </InfoField>
         <InfoField>
-          <TextField label="Usuario" defaultValue="Joe Doe" fullWidth sx={{
-        mr: 2,
-        backgroundColor: '#1e2329',
-        borderRadius: 2,
-        '& .MuiInputBase-root': {
-          color: '#7C9EBD',
-        },'& .MuiInputLabel-root': {
-          color: '#ffffff',
-        },
-      }} />
-          <Button variant="contained" color="primary">
-            Actualizar
-          </Button>
+          <TextField
+            label="Usuario"
+            defaultValue="Joe Doe"
+            fullWidth
+            sx={{
+              mr: 2,
+              backgroundColor: '#1e2329',
+              borderRadius: 2,
+              '& .MuiInputBase-root': {
+                color: '#7C9EBD',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#ffffff',
+              },
+            }}
+          />
         </InfoField>
       </Grid>
       <Grid item xs={12} md={6}>
         <InfoField>
-          <TextField label="Sitio web" defaultValue="www.criptocats.com" fullWidth sx={{
-        mr: 2,
-        backgroundColor: '#1e2329',
-        borderRadius: 2,
-        '& .MuiInputBase-root': {
-          color: '#7C9EBD',
-        },'& .MuiInputLabel-root': {
-          color: '#ffffff',
-        },
-      }} />
-          <Button variant="contained" color="primary">
-            Actualizar
-          </Button>
+          <TextField
+            label="Sitio web"
+            defaultValue="www.criptocats.com"
+            fullWidth
+            sx={{
+              mr: 2,
+              backgroundColor: '#1e2329',
+              borderRadius: 2,
+              '& .MuiInputBase-root': {
+                color: '#7C9EBD',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#ffffff',
+              },
+            }}
+          />
         </InfoField>
         <InfoField>
           <TextField
@@ -77,18 +85,15 @@ const InfoSection = () => (
               borderRadius: 2,
               '& .MuiInputBase-root': {
                 color: '#7C9EBD',
-              },'& .MuiInputLabel-root': {
+              },
+              '& .MuiInputLabel-root': {
                 color: '#ffffff',
               },
             }}
             InputLabelProps={{ shrink: true }}
           />
-          <Button variant="contained" color="primary">
-            Actualizar
-          </Button>
         </InfoField>
       </Grid>
-      <Divider component="" sx={{borderColor: '#7C9EBD',}}/>
       <Grid item xs={12}>
         <InfoField>
           <TextField
@@ -103,20 +108,24 @@ const InfoSection = () => (
               borderRadius: 2,
               '& .MuiInputBase-root': {
                 color: '#7C9EBD',
-              },'& .MuiInputLabel-root': {
+              },
+              '& .MuiInputLabel-root': {
                 color: '#ffffff',
               },
             }}
           />
-          <Button variant="contained" color="primary">
-            Actualizar
-          </Button>
         </InfoField>
       </Grid>
+      <Divider sx={{ borderColor: '#7C9EBD' }} />
+      <Grid item xs={12}>
+        <Button variant="contained" color="primary" sx={{ margin: '40px 0px 16px', backgroundColor: 'DarkOrange' }}>
+          Guardar
+        </Button>
+      </Grid>
     </Grid>
-    <Divider component="" sx={{borderColor: '#7C9EBD',}}/>
+    <br />
+    <Divider sx={{ borderColor: '#7C9EBD' }} />
   </SectionBox>
-
 );
 
 export default InfoSection;
