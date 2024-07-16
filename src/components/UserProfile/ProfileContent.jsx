@@ -46,7 +46,6 @@ const baseStyles = {
     fontSize: '1.2rem',
     color: '#d1d1d1',
     padding: '0 10px 0 10px',
-    alignItems: 'start'
   },
   imagesContainer: {
     display: 'flex',
@@ -97,7 +96,10 @@ const ProfileContent = () => {
       comments: 20,
       shares: 5,
     },
+    
   ];
+
+  
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" >

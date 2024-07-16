@@ -11,6 +11,7 @@ import DirectAccess from "../components/SocialComponents/Feed/DirectAccess";
 import NewsSection from "../components/SocialComponents/Feed/NewsSection";
 import AdsSection from "../components/SocialComponents/Feed/AdsSection";
 import ChatBox from "../components/SocialComponents/ChatBox/ChatBox";
+import UserView from "../components/UserProfile/UserView";
 import Profile from "../components/Profile/Profile";
 import Chat from "../components/SocialComponents/Chat/Chat";
 import usePosts from "../js/usePosts";
@@ -52,7 +53,9 @@ const SocialLayout = () => {
               handleUpdatePost={handleUpdatePost}
               handleRepost={handleRepost}
               handleEdit={handleEdit} />} />
-            <Route path="/profile" element={<Profile />} />
+                          <Route path="/profile" element={<Profile />} />
+
+            <Route path="/userprofile" element={<UserView />} />
             <Route path="/chats" element={<Chat />} />
             <Route path="/settings" element={<Configuration />} />
             <Route path="/saved" element={<SavedPosts />} />
