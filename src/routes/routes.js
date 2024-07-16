@@ -13,6 +13,8 @@ import Configuration from '../components/SocialComponents/Configuration/configur
 import SavedPosts from '../components/SocialComponents/SavedPost/savedpost';
 import UserView from '../components/UserProfile/UserView';
 
+import CriptoLayout from '../layouts/CriptoLayout';
+
 // Rutas para la barra lateral
 export const sidebarRoutes = [
   { path: '/', name: 'Feed', icon: <RssFeedIcon /> },
@@ -38,6 +40,17 @@ const routes = [
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/cripto',
+    element: < CriptoLayout/>,
+    children: [
+      { path: 'index', element: <Profile /> },
+      { path: 'news', element: <UserView /> },
+      { path: 'exchanges', element: <Chat /> },
+      { path: 'ntf', element: <Configuration />},
+      {path: 'saved', element: <SavedPosts />}
+    ],
   },
 ];
 

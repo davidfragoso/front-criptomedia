@@ -20,6 +20,7 @@ import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
 import SavedPosts from "../components/SocialComponents/SavedPost/savedpost";
 
+
 const SocialLayout = () => {
   const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
   const {
