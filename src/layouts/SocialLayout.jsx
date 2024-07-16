@@ -19,6 +19,7 @@ import "../css/SocialLayout.css"; // Importa el archivo CSS aquí
 import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
 import SavedPosts from "../components/SocialComponents/SavedPost/savedpost";
+import CryptoTable from "../components/CriptoComponents/Index/CryptoIndex";
 
 
 const SocialLayout = () => {
