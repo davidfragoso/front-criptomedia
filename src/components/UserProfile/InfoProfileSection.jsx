@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Box, Avatar, Typography, IconButton, Modal, Backdrop, Button, TextField, Tooltip } from '@mui/material'; // Asegúrate de importar Tooltip aquí
+import { Box, Avatar, Typography, Modal, Backdrop, Button, TextField } from '@mui/material';
 import { styled } from '@mui/system';
-import EditIcon from '@mui/icons-material/Edit';
-
 
 const ProfileContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#12161C',
@@ -48,35 +46,23 @@ const ProfileAvatar = styled(Avatar)(({ theme }) => ({
   left: '5%',
 }));
 
-const EditProfileIconButton = styled(IconButton)(({ theme }) => ({
-  position: 'absolute',
-  top: '250px',
-  right: '25px',
-  backgroundColor: '#1e1e1e',
-  color: '#ffffff',
-  '&:hover': {
-    backgroundColor: '#ff8a00',
-  },
-}));
-
 const InfoProfileSection = () => {
-  const [avatarSrc, setAvatarSrc] = useState('../images/yop.jfif');
-  const [headerImageSrc, setHeaderImageSrc] = useState('https://blog.bitso.com/wp-content/uploads/2023/03/o-que-e-bitcoin-scaled.jpg');
-  const [tempHeaderImageSrc, setTempHeaderImageSrc] = useState(headerImageSrc);
+  const [headerImageSrc, setHeaderImageSrc] = useState('https://dlcdnrog.asus.com/rog/media/1659631197345.webp');
   const [posX, setPosX] = useState(50); // X position in percentage
   const [posY, setPosY] = useState(50); // Y position in percentage
   const [scale, setScale] = useState(100); // Scale in percentage
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [tempHeaderImageSrc, setTempHeaderImageSrc] = useState(headerImageSrc);
   const [tempPosX, setTempPosX] = useState(posX);
   const [tempPosY, setTempPosY] = useState(posY);
   const [tempScale, setTempScale] = useState(scale);
-  const [name, setName] = useState('Agapito');
+  const [name, setName] = useState('Hermenegildo');
   const [bio, setBio] = useState('Estoy aqui en busqueda de conocimientos y de mejorar mis skills en criptomonedas XD');
-  const [website, setWebsite] = useState('www.criptocats.com');
+  const [website, setWebsite] = useState('www.criptopejecoins.com');
   const [tempName, setTempName] = useState(name);
   const [tempBio, setTempBio] = useState(bio);
   const [tempWebsite, setTempWebsite] = useState(website);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State for edit modal
 
   const imageRef = useRef(null);
   const containerRef = useRef(null);
@@ -94,17 +80,6 @@ const InfoProfileSection = () => {
       document.removeEventListener('mouseup', handleMouseUp);
     };
   }, []);
-
-  const handleAvatarChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setAvatarSrc(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleHeaderImageChange = (event) => {
     const file = event.target.files[0];
@@ -192,15 +167,10 @@ const InfoProfileSection = () => {
       <HeaderImageContainer ref={containerRef}>
         <HeaderImage src={headerImageSrc} posX={posX} posY={posY} scale={scale} ref={imageRef} />
       </HeaderImageContainer>
-      <ProfileAvatar src={avatarSrc} alt="David Fragoso" />
-      <Tooltip title="Editar perfil">
-        <EditProfileIconButton onClick={() => setIsEditModalOpen(true)}>
-          <EditIcon />
-        </EditProfileIconButton>
-      </Tooltip>
+      <ProfileAvatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0BuwRXP_xRINLjut8vnXoMAZI-lo7IA5goA&s" alt="David Fragoso" />
       <Box mt={10}>
         <Typography variant="h5" gutterBottom>{name}</Typography>
-        <Typography variant="body2" color="#27333E">@Plopps45</Typography>
+        <Typography variant="body2" color="#27333E">@ElpepejitoXD</Typography>
         <Box mt={2}>
           <Typography variant="body1">{bio}</Typography>
         </Box>
@@ -209,11 +179,11 @@ const InfoProfileSection = () => {
         </Box>
         <Box display="flex" justifyContent="start" mt={2}>
           <Box mx={2}>
-            <Typography variant="body1">23</Typography>
+            <Typography variant="body1">94</Typography>
             <Typography variant="body2" color="#27333E">Siguiendo</Typography>
           </Box>
           <Box mx={2}>
-            <Typography variant="body1">450</Typography>
+            <Typography variant="body1">145</Typography>
             <Typography variant="body2" color="#27333E">Seguidores</Typography>
           </Box>
         </Box>
