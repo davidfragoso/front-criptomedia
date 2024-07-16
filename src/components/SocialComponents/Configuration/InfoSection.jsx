@@ -118,7 +118,7 @@ const InfoSection = () => (
       </Grid>
       <Divider sx={{ borderColor: '#7C9EBD' }} />
       <Grid item xs={12}>
-        <Button variant="contained" color="primary" sx={{ margin: '40px 0px 16px', backgroundColor: 'DarkOrange' }}>
+        <Button variant="contained" color="primary" sx={{ backgroundColor: 'DarkOrange' }}>
           Guardar
         </Button>
       </Grid>
