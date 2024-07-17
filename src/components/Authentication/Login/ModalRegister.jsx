@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import { TextField, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from '@mui/material';
+import axios from 'axios';
 
 const style = {
   position: 'absolute',
@@ -22,8 +23,40 @@ const style = {
 
 export default function BasicModal() {
   const [open, setOpen] = React.useState(false);
+  const [nombre, setNombreValue] = React.useState('');
+  const [usuario, setUsuarioValue] = React.useState('');
+  const [correo, setCorreoValue] = React.useState('');
+  const [clave, setClaveValue] = React.useState('');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleNombreChange = (event) => {
+    setNombreValue(event.target.value);
+  };
+  const handleUsuarioChange = (event) => {
+    setUsuarioValue(event.target.value);
+  };
+  const handleCorreoChange = (event) => {
+    setCorreoValue(event.target.value);
+  };
+  const handleClaveChange = (event) => {
+    setClaveValue(event.target.value);
+  };
+
+  const handleRegister = async () => {
+    try {
+      const response = await axios.post('https://coinversesocialapi.azurewebsites.net/api/Users', {
+          "fullName": nombre,
+          "userName": usuario,
+          "email": correo,
+          "password": clave,
+          "date": "2024-07-16T23:27:07.173Z"
+      });
+      console.log('Respuesta del servidor:', response.data);
+    } catch (error) {
+      console.error('Error al enviar los datos:', error);
+    }
+  };
 
   return (
     <div>
@@ -69,6 +102,8 @@ export default function BasicModal() {
           </Typography>
           <Box display="flex" flexDirection="column" gap={2} mt={2}>
             <TextField
+              value={nombre}
+              onChange={handleNombreChange}
               variant="outlined"
               margin="normal"
               fullWidth
@@ -90,6 +125,8 @@ export default function BasicModal() {
               }}
             />
             <TextField
+              value={usuario}
+              onChange={handleUsuarioChange}
               variant="outlined"
               margin="normal"
               fullWidth
@@ -111,6 +148,8 @@ export default function BasicModal() {
               }}
             />
             <TextField
+              value={correo}
+              onChange={handleCorreoChange}
               variant="outlined"
               margin="normal"
               fullWidth
@@ -132,9 +171,12 @@ export default function BasicModal() {
               }}
             />
             <TextField
+              value={clave}
+              onChange={handleClaveChange}
               variant="outlined"
               margin="normal"
               fullWidth
+              type="password"
               label="Contraseña"
               name="password-registro"
               autoComplete="password-registro"
@@ -153,6 +195,7 @@ export default function BasicModal() {
               }}
             />
             <Button
+              onClick={handleRegister}
               sx={{
                 backgroundColor: '#FF8A00',
                 '&:hover': {

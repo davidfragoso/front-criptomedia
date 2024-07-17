@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Box, Typography, TextField, Button, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import BasicModal from './ModalRegister';
 import images from '../../../imageRoutes';
+import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Aquí puedes agregar la lógica de autenticación
-    // Si la autenticación es exitosa, redirige a SocialLayout
-    navigate('/');
+  const handleLogin = async () => {
+    try {
+      const response = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Users/`);
+      const user = response.data.find(user => user.email === email && user.password === password);
+      if (user) {
+        console.log('Login exitoso:', user);
+        localStorage.setItem('LoggedUser', user.pkUser);
+        navigate('/');
+      } else {
+        console.log('Credenciales incorrectas');
+      }
+    } catch (error) {
+      console.error('Error, el usuario no existe:', error);
+    }
   };
 
   return (
@@ -80,6 +93,8 @@ const Login = () => {
           <br />
 
           <TextField
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             variant="outlined"
             margin="normal"
             required
@@ -103,6 +118,8 @@ const Login = () => {
           />
 
           <TextField
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             variant="outlined"
             margin="normal"
             required

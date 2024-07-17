@@ -25,7 +25,7 @@ export const sidebarRoutes = [
 // Rutas principales
 const routes = [
   {
-    path: '/',
+    path: '*',
     element: <SocialLayout />,
     children: [
       { path: 'profile', element: <Profile /> },
