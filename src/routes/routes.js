@@ -4,9 +4,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import ChatIcon from '@mui/icons-material/Chat';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import SettingsIcon from '@mui/icons-material/Settings';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
-
 import SocialLayout from '../layouts/SocialLayout';
 import Profile from '../components/Profile/Profile';
 import Chat from '../components/SocialComponents/Chat/Chat';
@@ -15,11 +13,10 @@ import Configuration from '../components/SocialComponents/Configuration/configur
 import SavedPosts from '../components/SocialComponents/SavedPost/savedpost';
 import UserView from '../components/UserProfile/UserView';
 import CardsView from '../components/UserProfile/CardsView';
-import NFTGrid from '../components/UserProfile/NFTGrid';
-
 import CriptoLayout from '../layouts/CriptoLayout';
 import CryptoTable from '../components/CriptoComponents/Index/CryptoIndex';
 import NftView from '../components/CriptoComponents/Nft/Nft';
+import News from '../components/CriptoComponents/News/News';
 
 // Rutas para la barra lateral
 export const sidebarRoutes = [
@@ -39,13 +36,12 @@ const routes = [
     element: <SocialLayout />,
     children: [
       { path: 'profile', element: <Profile /> },
-      { path: 'cardsview', element: <cardsview /> },
+      { path: 'cardsview', element: <CardsView /> },
       { path: 'chats', element: <Chat /> },
       { path: 'saved', element: <SavedPosts /> },
       { path: 'settings', element: <Configuration /> },
       { path: 'userprofile', element: <UserView /> },
       { path: 'cardsview', element: <CardsView /> },
-      { path: 'nftgrid', element: <NFTGrid /> }
     ],
   },
   {
@@ -57,11 +53,10 @@ const routes = [
     element: < CriptoLayout/>,
     children: [
       { path: 'index', element: <Profile /> },
-      { path: 'news', element: <UserView /> },
       { path: 'exchanges', element: <Chat /> },
       { path: 'ntf', element: <Configuration />},
-      {path: 'saved', element: <SavedPosts />},
-      { path: 'nftgrid', element: <NFTGrid /> }
+      { path: 'saved', element: <SavedPosts />},
+      { path: 'news', element: <News /> }
     ],
   },
 ];

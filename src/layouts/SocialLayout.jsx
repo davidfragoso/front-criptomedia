@@ -16,7 +16,6 @@ import Profile from "../components/Profile/Profile";
 import Chat from "../components/SocialComponents/Chat/Chat";
 import usePosts from "../js/usePosts";
 import Cardsview from "../components/UserProfile/CardsView";
-import NFTGrid from "../components/UserProfile/NFTGrid"; // Importa el componente NFTGrid aquí
 import "../css/SocialLayout.css";
 import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
@@ -65,7 +64,6 @@ const SocialLayout = () => {
             <Route path="/userprofile" element={<UserView />} />
             <Route path="/cardsview" element={<Cardsview />} />
             <Route path="/chats" element={<Chat />} />
-            <Route path="/nftgrid" element={<NFTGrid />} /> {/* Añadir la ruta para NFTGrid */}
           </Routes>
         </div>
       </div>

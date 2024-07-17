@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -47,13 +47,9 @@ const styles = {
 };
 
 const Sidebar = ({ layoutType }) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
-
-  const handleListItemClick = (event, index, path) => {
-    setSelectedIndex(index);
-    navigate(path);
-  };
+  const location = useLocation();
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const socialItems = [
     { text: 'Feed', icon: <RssFeedIcon />, path: '/' },
@@ -66,13 +62,23 @@ const Sidebar = ({ layoutType }) => {
 
   const cryptoItems = [
     { text: 'Inicio', icon: <HomeIcon />, path: '/cripto' },
-    { text: 'Noticias', icon: <NewsIcon />, path: '/nftgrid' },
-    { text: 'Intercambios', icon: <SwapHorizIcon />, path: '/exchanges' },    
-    { text: 'NFT\'s populares', icon: <NftIcon />, path: '/nftgrid' },
-    { text: 'Configuración', icon: <SettingsIcon />, path: '/settings' },
+    { text: 'Noticias', icon: <NewsIcon />, path: '/cripto/news' },
+    { text: 'Intercambios', icon: <SwapHorizIcon />, path: '/cripto/exchanges' },    
+    { text: 'NFT\'s populares', icon: <NftIcon />, path: '/cripto/nftgrid' },
+    { text: 'Configuración', icon: <SettingsIcon />, path: '/cripto/settings' },
   ];
 
   const items = layoutType === 'social' ? socialItems : cryptoItems;
+
+  useEffect(() => {
+    const currentItem = items.findIndex(item => item.path === location.pathname);
+    setSelectedIndex(currentItem !== -1 ? currentItem : 0);
+  }, [location.pathname, items]);
+
+  const handleListItemClick = (event, index, path) => {
+    setSelectedIndex(index);
+    navigate(path);
+  };
 
   return (
     <div style={styles.sidebar}>

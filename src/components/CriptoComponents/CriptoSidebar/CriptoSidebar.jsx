@@ -48,7 +48,7 @@ const CriptoSidebar = () => {
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
 
-    const paths = ['/index', '/nftgrid', '/exchanges', '/nft', '/settings'];
+    const paths = ['/index', '/news', '/exchanges', '/nft', '/settings'];
     navigate(paths[index]);
   };
 
