@@ -15,11 +15,14 @@ import UserView from "../components/UserProfile/UserView";
 import Profile from "../components/Profile/Profile";
 import Chat from "../components/SocialComponents/Chat/Chat";
 import usePosts from "../js/usePosts";
+import CardsView from "../components/UserProfile/CardsView";
 import "../css/SocialLayout.css"; // Importa el archivo CSS aquí
 import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
 import SavedPosts from "../components/SocialComponents/SavedPost/savedpost";
 import CryptoTable from "../components/CriptoComponents/Index/CryptoIndex";
+import { NfcTwoTone } from "@mui/icons-material";
+import NftView from "../components/CriptoComponents/Nft/Nft";
 
 
 const SocialLayout = () => {
@@ -55,12 +58,12 @@ const SocialLayout = () => {
               handleUpdatePost={handleUpdatePost}
               handleRepost={handleRepost}
               handleEdit={handleEdit} />} />
-                          <Route path="/profile" element={<Profile />} />
-
-            <Route path="/userprofile" element={<UserView />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/cardsview" element={<CardsView />} />
             <Route path="/chats" element={<Chat />} />
             <Route path="/settings" element={<Configuration />} />
             <Route path="/saved" element={<SavedPosts />} />
+            <Route path="/userprofile" element={<UserView />} />
 
           </Routes>
         </div>

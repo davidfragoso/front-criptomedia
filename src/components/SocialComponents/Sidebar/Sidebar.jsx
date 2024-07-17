@@ -4,12 +4,14 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Divider from '@mui/material/Divider';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
 import PeopleIcon from '@mui/icons-material/People';
 import ChatIcon from '@mui/icons-material/Chat';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import SettingsIcon from '@mui/icons-material/Settings';
+import PersonIcon from '@mui/icons-material/Person';
 
 const styles = {
   sidebar: {
@@ -48,7 +50,7 @@ const Sidebar = () => {
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
 
-    const paths = ['/', '/userprofile', '/chats', '/saved', '/settings'];
+    const paths = ['/', '/cardsview', '/chats', '/userprofile', '/saved', '/settings'];
     navigate(paths[index]);
   };
 
@@ -91,6 +93,17 @@ const Sidebar = () => {
           style={selectedIndex === 3 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
           onClick={(event) => handleListItemClick(event, 3)}
         >
+
+          <ListItemIcon style={styles.listItemIcon}>
+            <PersonIcon />
+          </ListItemIcon>
+          <ListItemText primary="Vistas de usuario" style={styles.listItemTextPrimary} />
+        </ListItem>
+        <ListItem
+          button
+          style={selectedIndex === 4 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
+          onClick={(event) => handleListItemClick(event, 4)}
+        >
           <ListItemIcon style={styles.listItemIcon}>
             <BookmarkIcon />
           </ListItemIcon>
@@ -98,8 +111,8 @@ const Sidebar = () => {
         </ListItem>
         <ListItem
           button
-          style={selectedIndex === 4 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
-          onClick={(event) => handleListItemClick(event, 4)}
+          style={selectedIndex === 5 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
+          onClick={(event) => handleListItemClick(event, 5)}
         >
           <ListItemIcon style={styles.listItemIcon}>
             <SettingsIcon />
