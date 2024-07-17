@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CryptoTable from "../components/CriptoComponents/Index/CryptoIndex";
 import NftView from "../components/CriptoComponents/Nft/Nft";
+import NFTGrid from "../components/UserProfile/NFTGrid";
 import "../css/SocialLayout.css"; 
 import "../App.css";
 
@@ -21,6 +22,7 @@ const CriptoLayout = () => {
           <Routes>
             <Route path="/" element={<MainContent />} />
             <Route path="/nfts" element={<NftView />} />
+            <Route path="/nftgrid" element={<NFTGrid />} /> {/* Añadir la ruta para NFTGrid */}
           </Routes>
         </div>
       </div>

@@ -65,10 +65,10 @@ const Sidebar = ({ layoutType }) => {
   ];
 
   const cryptoItems = [
-    { text: 'Inicio', icon: <HomeIcon />, path: '/' },
-    { text: 'Noticias', icon: <NewsIcon />, path: '/news' },
-    { text: 'Intercambios', icon: <SwapHorizIcon />, path: '/exchanges' },
-    { text: 'NFT\'s populares', icon: <NftIcon />, path: '/nfts' },
+    { text: 'Inicio', icon: <HomeIcon />, path: '/cripto' },
+    { text: 'Noticias', icon: <NewsIcon />, path: '/nftgrid' },
+    { text: 'Intercambios', icon: <SwapHorizIcon />, path: '/exchanges' },    
+    { text: 'NFT\'s populares', icon: <NftIcon />, path: '/nftgrid' },
     { text: 'Configuración', icon: <SettingsIcon />, path: '/settings' },
   ];
 

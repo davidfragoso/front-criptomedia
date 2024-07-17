@@ -48,7 +48,7 @@ const CriptoSidebar = () => {
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
 
-    const paths = ['/index', '/news', '/exchanges', '/nft', '/settings'];
+    const paths = ['/index', '/nftgrid', '/exchanges', '/nft', '/settings'];
     navigate(paths[index]);
   };
 
@@ -105,6 +105,16 @@ const CriptoSidebar = () => {
             <SettingsIcon />
           </ListItemIcon>
           <ListItemText primary="Configuración" style={styles.listItemTextPrimary} />
+        </ListItem>
+        <ListItem
+          button
+          style={selectedIndex === 6 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
+          onClick={(event) => handleListItemClick(event, 6)}
+        >
+          <ListItemIcon style={styles.listItemIcon}>
+            <AccountCircleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Ejemplo API" style={styles.listItemTextPrimary} />
         </ListItem>
       </List>
     </div>
