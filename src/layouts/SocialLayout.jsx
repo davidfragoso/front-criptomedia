@@ -15,6 +15,7 @@ import UserView from "../components/UserProfile/UserView";
 import Profile from "../components/Profile/Profile";
 import Chat from "../components/SocialComponents/Chat/Chat";
 import usePosts from "../js/usePosts";
+import CardsView from "../components/UserProfile/CardsView";
 import "../css/SocialLayout.css"; // Importa el archivo CSS aquí
 import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
@@ -55,9 +56,9 @@ const SocialLayout = () => {
               handleUpdatePost={handleUpdatePost}
               handleRepost={handleRepost}
               handleEdit={handleEdit} />} />
-                          <Route path="/profile" element={<Profile />} />
-
+            <Route path="/profile" element={<Profile />} />
             <Route path="/userprofile" element={<UserView />} />
+            <Route path="/cardsview" element={<CardsView />} />
             <Route path="/chats" element={<Chat />} />
             <Route path="/settings" element={<Configuration />} />
             <Route path="/saved" element={<SavedPosts />} />

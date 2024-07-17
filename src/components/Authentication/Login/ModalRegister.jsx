@@ -136,6 +136,7 @@ export default function BasicModal() {
               variant="outlined"
               margin="normal"
               fullWidth
+              type='password'
               label="Contraseña"
               name="password-registro"
               autoComplete="password-registro"

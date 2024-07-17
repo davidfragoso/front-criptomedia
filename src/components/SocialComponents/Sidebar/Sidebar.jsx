@@ -4,6 +4,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Divider from '@mui/material/Divider';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
 import PeopleIcon from '@mui/icons-material/People';
@@ -48,7 +49,7 @@ const Sidebar = () => {
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
 
-    const paths = ['/', '/userprofile', '/chats', '/saved', '/settings'];
+    const paths = ['/','/cardsview', '/chats','/userprofile', '/saved', '/settings'];
     navigate(paths[index]);
   };
 
@@ -91,15 +92,27 @@ const Sidebar = () => {
           style={selectedIndex === 3 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
           onClick={(event) => handleListItemClick(event, 3)}
         >
-          <ListItemIcon style={styles.listItemIcon}>
+
+<ListItemIcon style={styles.listItemIcon}>
             <BookmarkIcon />
           </ListItemIcon>
-          <ListItemText primary="Elementos guardados" style={styles.listItemTextPrimary} />
+          <ListItemText primary="Vistas de usaurio" style={styles.listItemTextPrimary} />
         </ListItem>
         <ListItem
           button
           style={selectedIndex === 4 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
           onClick={(event) => handleListItemClick(event, 4)}
+        >
+          <ListItemIcon style={styles.listItemIcon}>
+            <BookmarkIcon />
+          </ListItemIcon>
+          <ListItemText primary="Elementos guardados" style={styles.listItemTextPrimary} />
+        </ListItem>
+
+        <ListItem
+          button
+          style={selectedIndex === 5 ? { ...styles.listItem, ...styles.listItemSelected } : styles.listItem}
+          onClick={(event) => handleListItemClick(event, 5)}
         >
           <ListItemIcon style={styles.listItemIcon}>
             <SettingsIcon />
