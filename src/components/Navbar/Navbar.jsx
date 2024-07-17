@@ -15,7 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import SearchIcon from "@mui/icons-material/Search";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import { useNavigate } from "react-router-dom";
 import Avatar from './Avatar';
 import Sidebar from '../Sidebar/Sidebar';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
@@ -66,7 +66,7 @@ const LogoContainer = styled(Box)(({ theme }) => ({
 
 const Logo = styled('img')(({ theme }) => ({
   width: '120px',
-  cursor: 'pointer', // Agregar cursor pointer
+  cursor: 'pointer',
 }));
 
 const Spacer = styled(Box)(({ theme }) => ({
@@ -146,28 +146,26 @@ const DesktopOnly = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Navbar = ({ toggleSidebar, onShowProfile }) => {
-  const [isCryptoSelected, setIsCryptoSelected] = useState(false);
+const Navbar = ({ layoutType, toggleSidebar, onShowProfile }) => {
+  const [isCryptoSelected, setIsCryptoSelected] = useState(layoutType === 'crypto');
   const isTabletOrMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const navigate = useNavigate(); // Usar useNavigate para redirección
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     setIsCryptoSelected(!isCryptoSelected);
+    navigate(isCryptoSelected ? '/' : '/cripto');
   };
 
   const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
     setDrawerOpen(open);
   };
 
   const handleLogoClick = () => {
-    navigate('/'); // Redirigir a la ruta "/"
+    navigate('/');
   };
 
   return (
@@ -182,10 +180,12 @@ const Navbar = ({ toggleSidebar, onShowProfile }) => {
           <LogoContainer>
             <Logo src="../images/coinverse2-logo.png" alt="Logo" onClick={handleLogoClick} />
           </LogoContainer>
-          <SearchContainer>
-            <SearchIcon />
-            <SearchInput placeholder="Buscar..." />
-          </SearchContainer>
+          {layoutType !== 'crypto' && (
+            <SearchContainer>
+              <SearchIcon />
+              <SearchInput placeholder="Buscar..." />
+            </SearchContainer>
+          )}
           <SearchIconContainer>
             <IconButton color="inherit">
               <SearchIcon />
@@ -228,7 +228,7 @@ const Navbar = ({ toggleSidebar, onShowProfile }) => {
           <Avatar onShowProfile={onShowProfile} />
         </CustomToolbar>
         <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>
-          <Sidebar />
+          <Sidebar layoutType={layoutType} />
         </Drawer>
       </CustomAppBar>
     </ThemeProvider>

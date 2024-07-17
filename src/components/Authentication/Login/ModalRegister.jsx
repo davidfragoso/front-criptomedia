@@ -13,12 +13,13 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: { xs: 210, sm: 300, md: 400 }, // Ajustar el tamaño según la pantalla
   bgcolor: '#1F262D',
   border: '#1F262D',
   boxShadow: 24,
-  p: 4,
+  p: { xs: 3, sm: 4 }, // Ajustar el padding según la pantalla
   color: 'black',
+  borderRadius: 3,
 };
 
 export default function BasicModal() {
@@ -74,7 +75,7 @@ export default function BasicModal() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} borderRadius={3} position="relative">
+        <Box sx={style} position="relative">
           <IconButton
             aria-label="close"
             onClick={handleClose}
@@ -176,7 +177,7 @@ export default function BasicModal() {
               variant="outlined"
               margin="normal"
               fullWidth
-              type="password"
+              type='password'
               label="Contraseña"
               name="password-registro"
               autoComplete="password-registro"
@@ -207,7 +208,7 @@ export default function BasicModal() {
               Crear cuenta
             </Button>
             <Typography id="modal-modal-description" sx={{ mt: 2, color: 'white' }}>
-              ¿YA TIENES CUENTA? <Button variant="text" sx={{ color: '#FF8A00' }}>INICIA SESION</Button>
+              ¿YA TIENES CUENTA? <Button variant="text" sx={{ color: '#FF8A00' }}>INICIA SESIÓN</Button>
             </Typography>
           </Box>
         </Box>

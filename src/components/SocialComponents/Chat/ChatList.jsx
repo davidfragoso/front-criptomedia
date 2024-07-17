@@ -10,6 +10,7 @@ import {
   Paper,
   InputBase,
   Box,
+  Typography
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { formatTimestamp } from "../../../utils/utils";
@@ -77,8 +78,9 @@ const ChatList = ({ chats, selectedChat, selectChat, searchTerm, setSearchTerm }
                 <ListItemText
                   primary={chat.name}
                   secondary={
-                    <div className="listItemTextSecondaryContainer">
-                      <span
+                    <Box component="span" className="listItemTextSecondaryContainer">
+                      <Typography
+                        component="span"
                         className="listItemTextSecondary"
                         style={{
                           fontWeight:
@@ -91,13 +93,13 @@ const ChatList = ({ chats, selectedChat, selectChat, searchTerm, setSearchTerm }
                         {lastMessage
                           ? truncateMessage(lastMessage.text, 30)
                           : ""}
-                      </span>
-                      <span className={timestampColor}>
+                      </Typography>
+                      <Typography component="span" className={timestampColor}>
                         {lastMessage
                           ? formatTimestamp(lastMessage.timestamp)
                           : ""}
-                      </span>
-                    </div>
+                      </Typography>
+                    </Box>
                   }
                   primaryTypographyProps={{ className: "listItemTextPrimary" }}
                 />

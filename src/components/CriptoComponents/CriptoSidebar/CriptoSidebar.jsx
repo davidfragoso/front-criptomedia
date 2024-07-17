@@ -41,14 +41,14 @@ const styles = {
   },
 };
 
-const Sidebar = () => {
+const CriptoSidebar = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
 
-    const paths = ['/', '/userprofile', '/chats', '/saved', '/settings'];
+    const paths = ['/index', '/news', '/exchanges', '/nft', '/settings'];
     navigate(paths[index]);
   };
 
@@ -63,7 +63,7 @@ const Sidebar = () => {
           <ListItemIcon style={styles.listItemIcon}>
             <RssFeedIcon />
           </ListItemIcon>
-          <ListItemText primary="Feed" style={styles.listItemTextPrimary} />
+          <ListItemText primary="Inicio" style={styles.listItemTextPrimary} />
         </ListItem>
         <ListItem
           button
@@ -73,7 +73,7 @@ const Sidebar = () => {
           <ListItemIcon style={styles.listItemIcon}>
             <PeopleIcon />
           </ListItemIcon>
-          <ListItemText primary="Seguidores" style={styles.listItemTextPrimary} />
+          <ListItemText primary="Noticias" style={styles.listItemTextPrimary} />
         </ListItem>
         <ListItem
           button
@@ -83,7 +83,7 @@ const Sidebar = () => {
           <ListItemIcon style={styles.listItemIcon}>
             <ChatIcon />
           </ListItemIcon>
-          <ListItemText primary="Chats" style={styles.listItemTextPrimary} />
+          <ListItemText primary="Intercambios" style={styles.listItemTextPrimary} />
         </ListItem>
         <Divider style={styles.divider} />
         <ListItem
@@ -94,7 +94,7 @@ const Sidebar = () => {
           <ListItemIcon style={styles.listItemIcon}>
             <BookmarkIcon />
           </ListItemIcon>
-          <ListItemText primary="Elementos guardados" style={styles.listItemTextPrimary} />
+          <ListItemText primary="NFT´s Populares" style={styles.listItemTextPrimary} />
         </ListItem>
         <ListItem
           button
@@ -111,4 +111,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default CriptoSidebar;

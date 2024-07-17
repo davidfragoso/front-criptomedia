@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AvatarImage from '../Navbar/AvatarImage';
+import AvatarImage from '../../Navbar/AvatarImage';
 import ImageIcon from '@mui/icons-material/Image';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 

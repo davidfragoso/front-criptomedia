@@ -31,7 +31,6 @@ const ProfileTabs = ({ value, onChange }) => {
         <CustomTab label="Publicaciones" />
         <CustomTab label="Comentarios" />
         <CustomTab label="Multimedia" />
-        <CustomTab label="Me gusta" />
       </CustomTabs>
     </Box>
   );

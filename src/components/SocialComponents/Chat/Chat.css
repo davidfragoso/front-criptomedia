@@ -1,0 +1,28 @@
+.messageBubbleSent {
+  background-color: #ff8a00;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 5px 0;
+  right: 0;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.messageBubbleReceived {
+  background-color: #333;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.messageBubbleSent.mobile {
+  margin-right: -15px;
+}
+
+.messageBubbleReceived.mobile {
+  margin-left: -15px;
+}
