@@ -65,7 +65,7 @@ const Sidebar = ({ layoutType }) => {
   ];
 
   const cryptoItems = [
-    { text: 'Inicio', icon: <HomeIcon />, path: '/' },
+    { text: 'Inicio', icon: <HomeIcon />, path: '/cripto' },
     { text: 'Noticias', icon: <NewsIcon />, path: '/news' },
     { text: 'Intercambios', icon: <SwapHorizIcon />, path: '/exchanges' },
     { text: 'NFT\'s populares', icon: <NftIcon />, path: '/nfts' },

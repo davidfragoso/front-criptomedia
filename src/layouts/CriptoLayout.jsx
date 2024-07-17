@@ -5,8 +5,8 @@ import { Box } from "@mui/material";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CryptoTable from "../components/CriptoComponents/Index/CryptoIndex";
-import NftView from "../components/CriptoComponents/Nft/Nft";
-import "../css/SocialLayout.css"; 
+import NftCollections from "../components/CriptoComponents/Nft/Nft";
+import "../css/SocialLayout.css";
 import "../App.css";
 
 const CriptoLayout = () => {
@@ -20,7 +20,10 @@ const CriptoLayout = () => {
         <div className="mainContent">
           <Routes>
             <Route path="/" element={<MainContent />} />
-            <Route path="/nfts" element={<NftView />} />
+            <Route path="/news" element={<NftCollections />} />
+            <Route path="/exchanges" element={<NftCollections />} />
+            <Route path="/nfts" element={<NftCollections />} />
+            <Route path="/settings" element={<NftCollections />} />
           </Routes>
         </div>
       </div>
@@ -30,12 +33,11 @@ const CriptoLayout = () => {
 
 const MainContent = () => {
   const isMobile = useMediaQuery("(max-width: 400px)");
-
   return (
     <>
       <div className="content">
         <div className="centerColumn">
-          <CryptoTable />
+          <NftCollections />
         </div>
       </div>
     </>

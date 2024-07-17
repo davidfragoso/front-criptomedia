@@ -19,6 +19,7 @@ import "../css/SocialLayout.css"; // Importa el archivo CSS aquí
 import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
 import SavedPosts from "../components/SocialComponents/SavedPost/savedpost";
+import MediaCardGrid from "../components/UserProfile/CardsView";
 
 const SocialLayout = () => {
   const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
@@ -60,6 +61,7 @@ const SocialLayout = () => {
               }
             />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/cardsview" element={<MediaCardGrid />} />
             <Route path="/userprofile" element={<UserView />} />
             <Route path="/chats" element={<Chat />} />
             <Route path="/settings" element={<Configuration />} />

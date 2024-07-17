@@ -1,68 +1,91 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Container, Grid, Card, CardMedia, CardContent, Typography, CircularProgress } from '@mui/material';
+import React from 'react';
+import { FaFire } from 'react-icons/fa';
+import ProofMoonbirds from './moonbirds';
+import LilPudgys from './Lilpudgys';
+import MutantApeYachtClubDetails from './apes';
+import PersonaDetails from './persona';
 
-const NftCollectionsView = () => {
-  const [collections, setCollections] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchNftCollections = async () => {
-    const address = '0x1234567890abcdef1234567890abcdef12345678'; // Reemplaza con la dirección deseada
-    const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImExODZjODE0LWEzNzAtNDExYS1hMjUyLTQ4OGEwNjdiZWE5ZCIsIm9yZ0lkIjoiNDAwMzczIiwidXNlcklkIjoiNDExMzk1IiwidHlwZUlkIjoiNGI4YmU3ZDYtYjRjMC00ZTVhLTg1OTgtY2M2MDk5Zjc2YzU3IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MjExNzg5MTQsImV4cCI6NDg3NjkzODkxNH0.D8YG5Awyznsln6HTXW_hp_35mrO0C-XDRDqQco6SSkg';
-
-    try {
-      const response = await axios.get(`https://deep-index.moralis.io/api/v2.2/${address}/nft/collections`, {
-        params: { chain: 'eth' },
-        headers: {
-          'X-API-Key': apiKey
-        }
-      });
-      setCollections(response.data.result);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching NFT collections:', error);
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchNftCollections();
-  }, []);
-
-  if (loading) {
-    return (
-      <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <CircularProgress />
-      </Container>
-    );
-  }
-
+const NftCollections = () => {
   return (
-    <Container>
-      <Grid container spacing={4}>
-        {collections.map((collection) => (
-          <Grid item xs={12} sm={6} md={4} key={collection.token_address}>
-            <Card>
-              <CardMedia
-                component="img"
-                height="140"
-                image={collection.collection_logo || 'https://via.placeholder.com/140'}
-                alt={collection.name || 'NFT Collection Image'}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {collection.name || 'Unnamed Collection'}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {collection.description || 'No description available'}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <div className="popular-collections-container">
+      <h1 className="title">
+        <FaFire className="fire-icon" /> Colecciones Populares
+      </h1>
+      <ProofMoonbirds/>
+      <LilPudgys/>
+      <MutantApeYachtClubDetails/>
+      <PersonaDetails/>
+      <style jsx>{`
+        .popular-collections-container {
+          padding: 20px;
+        }
+        .title {
+          display: flex;
+          align-items: center;
+          font-size: 2em;
+          color: #ffffff;
+        }
+        .fire-icon {
+          margin-right: 10px;
+          color: #ff4500;
+        }
+        .collection-container {
+          margin-top: 30px;
+        }
+        .nft-card-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          gap: 2px;
+        }
+        .nft-card {
+          background-color: #1d252d;
+          color: #ffffff;
+          padding: 20px;
+          border-radius: 8px;
+          width: 200px;
+          text-align: center;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .nft-image {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+        }
+        .nft-details {
+          margin-top: 10px;
+        }
+        .nft-details h3 {
+          margin: 0;
+          font-size: 1.2em;
+        }
+        .nft-details p {
+          margin: 5px 0 0;
+          color: #aaaaaa;
+        }
+        .pagination {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+        }
+        .pagination button {
+          background-color: #1c242d;
+          color: #ffffff;
+          border: none;
+          padding: 10px 20px;
+          margin: 0 5px;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+        .pagination button.active {
+          background-color: #ff4500;
+        }
+        .pagination button:hover {
+          background-color: #ff4500;
+        }
+      `}</style>
+    </div>
   );
 };
 
-export default NftCollectionsView;
+export default NftCollections;

@@ -15,11 +15,11 @@ import Login from '../components/Authentication/Login/Login';
 import Configuration from '../components/SocialComponents/Configuration/configuration';
 import SavedPosts from '../components/SocialComponents/SavedPost/savedpost';
 import UserView from '../components/UserProfile/UserView';
-import cardsview from '../components/UserProfile/CardsView';
+import MediaCardGrid from '../components/UserProfile/CardsView';
 
 import CriptoLayout from '../layouts/CriptoLayout';
 import CryptoTable from '../components/CriptoComponents/Index/CryptoIndex';
-import NftView from '../components/CriptoComponents/Nft/Nft';
+import NftCollections from '../components/CriptoComponents/Nft/Nft';
 
 // Rutas para la barra lateral
 export const sidebarRoutes = [
@@ -38,7 +38,7 @@ const routes = [
     element: <SocialLayout />,
     children: [
       { path: 'profile', element: <Profile /> },
-      { path: 'cardsview', element: <cardsview /> },
+      { path: 'cardsview', element: <MediaCardGrid /> },
       { path: 'chats', element: <Chat /> },
       { path: 'userprofile', element: <UserView /> },
       { path: 'saved', element: <SavedPosts /> },
@@ -53,11 +53,11 @@ const routes = [
     path: '/cripto',
     element: < CriptoLayout/>,
     children: [
-      { path: 'index', element: <Profile /> },
-      { path: 'news', element: <UserView /> },
-      { path: 'exchanges', element: <Chat /> },
-      { path: 'ntf', element: <Configuration />},
-      {path: 'saved', element: <SavedPosts />}
+      { path: 'index', element: <CryptoTable /> },
+      { path: 'news', element: <CryptoTable /> },
+      { path: 'exchanges', element: <CryptoTable /> },
+      { path: 'nfts', element: <NftCollections />},
+      {path: 'settings', element: <Configuration />}
     ],
   },
 ];
