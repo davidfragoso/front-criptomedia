@@ -64,9 +64,9 @@ const SocialLayout = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/cardsview" element={<MediaCardGrid />} />
             <Route path="/userprofile" element={<UserView />} />
-            <Route path="/cardsview" element={<Cardsview />} />
+            {/* <Route path="/cardsview" element={<Cardsview />} /> */}
             <Route path="/chats" element={<Chat />} />
-            <Route path="/saved" element={<SavedPosts />} />
+            {/* <Route path="/saved" element={<SavedPosts />} /> */}
             <Route path="/settings" element={<Configuration />} />
 
           </Routes>
@@ -169,7 +169,7 @@ const MainContent = ({
 
   return (
     <>
-      {!isMobile && <SubNavbar />}
+      {/* {!isMobile && <SubNavbar />} */}
       <div className="content">
         <div className="leftColumn">
           <DirectAccess />
@@ -190,7 +190,7 @@ const MainContent = ({
         </div>
         <div className="rightColumn">
           <AdsSection />
-          <ChatBox />
+          {/* <ChatBox /> */}
         </div>
       </div>
     </>
