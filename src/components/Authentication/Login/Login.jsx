@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Box, Typography, TextField, Button, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import BasicModal from './ModalRegister';
@@ -6,11 +6,45 @@ import images from '../../../imageRoutes';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [errors, setErrors] = useState({});
 
-  const handleLogin = () => {
-    // Aquí puedes agregar la lógica de autenticación
-    // Si la autenticación es exitosa, redirige a SocialLayout
+  const validateEmail = (email) => {
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      return "El correo electrónico debe ser válido.";
+    }
+    return '';
+  };
+
+  const validatePassword = (password) => {
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)) {
+      return "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula y un número.";
+    }
+    return '';
+  };
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const emailError = validateEmail(formData.email);
+    const passwordError = validatePassword(formData.password);
+
+    if (emailError || passwordError) {
+      setErrors({ email: emailError, password: passwordError });
+      return;
+    }
+
     navigate('/');
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (
@@ -81,7 +115,7 @@ const Login = () => {
         <Box
           sx={{
             width: '100%',
-            maxWidth: { xs: 270, sm: 300 },
+            maxWidth: { xs: 270, sm: 300, lg: 400 },
             backgroundColor: '#1F262D',
             borderRadius: 2,
             padding: { xs: 3, sm: 8 },
@@ -106,6 +140,9 @@ const Login = () => {
             autoComplete="email"
             autoFocus
             color="warning"
+            onChange={handleChange}
+            error={!!errors.email}
+            helperText={errors.email}
             sx={{
               '& fieldset': {
                 borderColor: '#8A8888',
@@ -129,6 +166,9 @@ const Login = () => {
             type="password"
             autoComplete="current-password"
             color="warning"
+            onChange={handleChange}
+            error={!!errors.password}
+            helperText={errors.password}
             sx={{
               '& fieldset': {
                 borderColor: '#8A8888',
