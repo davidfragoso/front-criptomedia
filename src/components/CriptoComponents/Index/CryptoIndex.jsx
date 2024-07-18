@@ -24,24 +24,26 @@ const useStyles = makeStyles({
     color: '#aaaaaa',
   },
   cryptoTable: {
-    backgroundColor: '#2b2b2b',
+    backgroundColor: '#0d1316',
+
   },
   tableHeadCell: {
-    backgroundColor: '#333333',
+    backgroundColor: '#12161c',
     color: '#ffffff',
   },
   tableCell: {
     color: '#ffffff',
+    borderColor: '#212c3a ', // Aplica color naranja a los bordes de las celdas
   },
-  tableRowOdd: {
-    backgroundColor: '#2b2b2b',
-  },
-  tableRowEven: {
-    backgroundColor: '#1f1f1f',
+  tableRow: {
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+
   },
   pagination: {
     color: '#ffffff',
-    backgroundColor: '#2b2b2b',
+
   },
   selectIcon: {
     color: '#ffffff',
@@ -50,6 +52,7 @@ const useStyles = makeStyles({
     marginBottom: '20px',
     backgroundColor: '#333333',
     borderRadius: '4px',
+    color: '#ffffff'
   },
   searchInput: {
     color: '#ffffff',
@@ -107,12 +110,11 @@ const CryptoTable = () => {
         placeholder="Buscar por nombre o símbolo"
         value={searchTerm}
         onChange={handleSearchChange}
-        style={{ backgroundColor: '#1c242d', color: '#ffffff' }}
       />
       <TableContainer component={Paper} className={classes.cryptoTable}>
         <Table>
           <TableHead>
-            <TableRow>
+            <TableRow className={classes.tableRow}>
               <TableCell className={classes.tableHeadCell}>Moneda</TableCell>
               <TableCell className={classes.tableHeadCell} align="right">Precio</TableCell>
               <TableCell className={classes.tableHeadCell} align="right">1h</TableCell>
@@ -124,14 +126,14 @@ const CryptoTable = () => {
           </TableHead>
           <TableBody>
             {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((crypto, index) => (
-              <TableRow key={crypto.id} className={index % 2 === 0 ? classes.tableRowEven : classes.tableRowOdd}>
+              <TableRow key={crypto.id} className={classes.tableRow}>
                 <TableCell className={classes.tableCell}>{crypto.name} ({crypto.symbol})</TableCell>
-                <TableCell className={classes.tableCell} align="right">{crypto.quotes.USD.price.toFixed(2)} US$</TableCell>
+                <TableCell className={classes.tableCell} align="right">${crypto.quotes.USD.price.toFixed(2)}</TableCell>
                 <TableCell className={classes.tableCell} align="right">{crypto.quotes.USD.percent_change_1h.toFixed(2)}%</TableCell>
                 <TableCell className={classes.tableCell} align="right">{crypto.quotes.USD.percent_change_24h.toFixed(2)}%</TableCell>
                 <TableCell className={classes.tableCell} align="right">{crypto.quotes.USD.percent_change_7d.toFixed(2)}%</TableCell>
-                <TableCell className={classes.tableCell} align="right">{crypto.quotes.USD.volume_24h.toFixed(2)} US$</TableCell>
-                <TableCell className={classes.tableCell} align="right">{crypto.quotes.USD.market_cap.toFixed(2)} US$</TableCell>
+                <TableCell className={classes.tableCell} align="right">${crypto.quotes.USD.volume_24h.toLocaleString()}</TableCell>
+                <TableCell className={classes.tableCell} align="right">${crypto.quotes.USD.market_cap.toLocaleString()}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -146,7 +148,6 @@ const CryptoTable = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         className={classes.pagination}
-        classes={{ selectIcon: classes.selectIcon }}
       />
     </Box>
   );

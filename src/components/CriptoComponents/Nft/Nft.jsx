@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { FaFire } from 'react-icons/fa';
-import ProofMoonbirds from './moonbirds';
-import LilPudgys from './Lilpudgys';
-import MutantApeYachtClubDetails from './apes';
-import PersonaDetails from './persona';
+import { CircularProgress } from '@mui/material';
+
+// Importaciones dinámicas con delay simulado
+const ProofMoonbirds = React.lazy(() => new Promise(resolve => {
+  setTimeout(() => resolve(import('./moonbirds')), 2000);
+}));
+const LilPudgys = React.lazy(() => new Promise(resolve => {
+  setTimeout(() => resolve(import('./Lilpudgys')), 2000);
+}));
+const TheSkellies = React.lazy(() => new Promise(resolve => {
+  setTimeout(() => resolve(import('./Skellies')), 2000);
+}));
+
 
 const NftCollections = () => {
   return (
@@ -11,10 +20,18 @@ const NftCollections = () => {
       <h1 className="title">
         <FaFire className="fire-icon" /> Colecciones Populares
       </h1>
-      <ProofMoonbirds/>
-      <LilPudgys/>
-      <MutantApeYachtClubDetails/>
-      <PersonaDetails/>
+      <Suspense fallback={
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <CircularProgress style={{ color: '#FFA500' }} /> {/* Spinner de carga naranja */}
+        </div>
+      }>
+        <div className="nft-section-container"> {/* Contenedor adicional para las tarjetas */}
+          <ProofMoonbirds/>
+          <LilPudgys/>
+          <TheSkellies/>
+        </div>
+      </Suspense>
+
       <style jsx>{`
         .popular-collections-container {
           padding: 20px;
@@ -29,21 +46,24 @@ const NftCollections = () => {
           margin-right: 10px;
           color: #ff4500;
         }
-        .collection-container {
-          margin-top: 30px;
+        .nft-section-container {
+          background-color: #0d1316;
+          padding: 20px;
+          border-radius: 8px;
+          margin-top: 50px;
         }
         .nft-card-container {
           display: flex;
           flex-wrap: wrap;
           justify-content: space-around;
-          gap: 2px;
+          gap: 10px;
         }
         .nft-card {
           background-color: #1d252d;
           color: #ffffff;
-          padding: 20px;
+          padding: 10px;
           border-radius: 8px;
-          width: 200px;
+          width: 150px;
           text-align: center;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -53,35 +73,16 @@ const NftCollections = () => {
           border-radius: 8px;
         }
         .nft-details {
-          margin-top: 10px;
+          margin-top: 5px;
         }
         .nft-details h3 {
           margin: 0;
-          font-size: 1.2em;
+          font-size: 1em;
         }
         .nft-details p {
-          margin: 5px 0 0;
+          margin: 2px 0 0;
           color: #aaaaaa;
-        }
-        .pagination {
-          display: flex;
-          justify-content: center;
-          margin-top: 20px;
-        }
-        .pagination button {
-          background-color: #1c242d;
-          color: #ffffff;
-          border: none;
-          padding: 10px 20px;
-          margin: 0 5px;
-          cursor: pointer;
-          border-radius: 5px;
-        }
-        .pagination button.active {
-          background-color: #ff4500;
-        }
-        .pagination button:hover {
-          background-color: #ff4500;
+          font-size: 0.8em;
         }
       `}</style>
     </div>

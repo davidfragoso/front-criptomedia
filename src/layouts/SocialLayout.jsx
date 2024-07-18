@@ -66,6 +66,9 @@ const SocialLayout = () => {
             <Route path="/userprofile" element={<UserView />} />
             <Route path="/cardsview" element={<Cardsview />} />
             <Route path="/chats" element={<Chat />} />
+            <Route path="/saved" element={<SavedPosts />} />
+            <Route path="/settings" element={<Configuration />} />
+
           </Routes>
         </div>
       </div>

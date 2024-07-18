@@ -54,11 +54,11 @@ const routes = [
     path: '/cripto',
     element: < CriptoLayout/>,
     children: [
-      { path: 'index', element: <Profile /> },
+      { path: 'index', element: <CryptoTable /> },
       { path: 'news', element: <News /> },
       { path: 'exchanges', element: <Chat /> },
       { path: 'nft', element: <NftCollections />},
-      {path: 'settings', element: <SavedPosts />}
+      {path: 'settings', element: <Configuration />}
     ],
   },
 ];

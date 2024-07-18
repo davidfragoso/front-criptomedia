@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Slider from 'react-slick'; // Importar Slider
+import { Button } from '@mui/material'; // Importar Button
+import "slick-carousel/slick/slick.css"; // Importar estilos de slick
+import "slick-carousel/slick/slick-theme.css";
 
 const ProofMoonbirds = () => {
   const [nftData, setNftData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(0);
-  const itemsPerPage = 5;
+  const collectionSlug = 'proof-moonbirds'; // Asegúrate de tener el slug correcto
 
   useEffect(() => {
-    const fetchNFTs = async () => {
-      const collectionSlug = 'proof-moonbirds';
-      const limit = 50;
-      const options = {
-        headers: {
-          accept: 'application/json',
-          'x-api-key': process.env.REACT_APP_OPENSEA_API_KEY
-        }
-      };
-      const url = `${process.env.REACT_APP_OPENSEA_API_URL}/${collectionSlug}/nfts?limit=${limit}`;
+    const limit = 50;
+    const options = {
+      headers: {
+        accept: 'application/json',
+        'x-api-key': process.env.REACT_APP_OPENSEA_API_KEY
+      }
+    };
+    const url = `${process.env.REACT_APP_OPENSEA_API_URL}/${collectionSlug}/nfts?limit=${limit}`;
 
+    const fetchNFTs = async () => {
       try {
         const response = await axios.get(url, options);
-        console.log(`Data for ${collectionSlug}:`, response.data);
         setNftData(response.data.nfts);
         setLoading(false);
       } catch (error) {
@@ -33,46 +34,55 @@ const ProofMoonbirds = () => {
     fetchNFTs();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  const renderNFTs = () => {
-    return nftData.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage).map(nft => (
-      <div key={nft.id} className="nft-card">
-        <img src={nft.image_url} alt={nft.name} className="nft-image" />
-        <div className="nft-details">
-          <h3>{nft.name}</h3>
-          <p>{nft.collection.name}</p>
-        </div>
-      </div>
-    ));
-  };
-
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    autoplay: true,
+    autoplaySpeed: 5000
   };
 
   return (
     <div className="collection-container">
-      <h2 className="collection-title">Proof Moonbirds</h2>
-      <div className="nft-card-container">
-        {renderNFTs()}
-      </div>
-      <div className="pagination">
-        {Array.from({ length: Math.ceil(nftData.length / itemsPerPage) }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageChange(index)}
-            className={page === index ? 'active' : ''}
-          >
-            {index + 1}
-          </button>
+      <h2 className="collection-title" color='#ed6c02'>Proof Moonbirds</h2>
+      <Button
+        variant="contained"
+        color="secondary"
+        href={`https://opensea.io/collection/${collectionSlug}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ backgroundColor: '#FFA500', color: '#ffffff', marginBottom: '20px' }}
+      >
+        Visita la colección en OpenSea
+      </Button>
+      <Slider {...settings}>
+        {nftData.map(nft => (
+          <div key={nft.id} className="nft-card">
+            <img src={nft.image_url} alt={nft.name} className="nft-image" />
+            <div className="nft-details">
+              <h3>{nft.name}</h3>
+              <p>{nft.collection.name}</p>
+            </div>
+          </div>
         ))}
-      </div>
+      </Slider>
       <style jsx>{`
         .collection-title {
-          color: #ffffff;
+          color: #ed6c02;
+          text-align: center; // Centra el título si es necesario
+        }
+        .nft-card {
+          padding: 10px;
+          text-align: center;
+          background-color: #1d252d;
+          border-radius: 10px;
+          margin: 10px;
+        }
+        .nft-image {
+          width: 100%;
+          border-radius: 10px;
         }
       `}</style>
     </div>

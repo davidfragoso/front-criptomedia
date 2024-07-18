@@ -5,10 +5,10 @@ import { Button } from '@mui/material'; // Importar Button
 import "slick-carousel/slick/slick.css"; // Importar estilos de slick
 import "slick-carousel/slick/slick-theme.css";
 
-const Lilpudgys = () => {
+const TheSkellies = () => {
   const [nftData, setNftData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const collectionSlug = 'lilpudgys'; // Asegúrate de tener el slug correcto
+  const collectionSlug = 'the-skellies'; // Asegúrate de tener el slug correcto
 
   useEffect(() => {
     const limit = 50;
@@ -46,7 +46,7 @@ const Lilpudgys = () => {
 
   return (
     <div className="collection-container">
-      <h2 className="collection-title">Lil pudgys</h2>
+      <h2 className="collection-title">The Skellies</h2>
       <Button
         variant="contained"
         color="secondary"
@@ -89,4 +89,4 @@ const Lilpudgys = () => {
   );
 };
 
-export default Lilpudgys;
+export default TheSkellies;
