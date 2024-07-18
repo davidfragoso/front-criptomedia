@@ -3,6 +3,7 @@ import { Box, Avatar, Typography, IconButton, Tooltip, Modal, Backdrop, Button, 
 import { styled } from '@mui/system';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import EditIcon from '@mui/icons-material/Edit';
+import axios from 'axios';
 
 const ProfileContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#12161C',
@@ -82,6 +83,7 @@ const EditProfileIconButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const InfoProfileSection = () => {
+  const [user, setUser] = useState(null);
   const [avatarSrc, setAvatarSrc] = useState('../images/yop.jfif');
   const [headerImageSrc, setHeaderImageSrc] = useState('https://blog.bitso.com/wp-content/uploads/2023/03/o-que-e-bitcoin-scaled.jpg');
   const [tempHeaderImageSrc, setTempHeaderImageSrc] = useState(headerImageSrc);
@@ -93,9 +95,9 @@ const InfoProfileSection = () => {
   const [tempPosX, setTempPosX] = useState(posX);
   const [tempPosY, setTempPosY] = useState(posY);
   const [tempScale, setTempScale] = useState(scale);
-  const [name, setName] = useState('Plipps');
-  const [bio, setBio] = useState('Les mentí, soy un gato con acceso a internet y me gusta el mundo de criptomonedas.');
-  const [website, setWebsite] = useState('www.criptocats.com');
+  const [name, setName] = useState('');
+  const [bio, setBio] = useState('');
+  const [website, setWebsite] = useState('');
   const [tempName, setTempName] = useState(name);
   const [tempBio, setTempBio] = useState(bio);
   const [tempWebsite, setTempWebsite] = useState(website);
@@ -107,6 +109,35 @@ const InfoProfileSection = () => {
   const startY = useRef(0);
 
   useEffect(() => {
+    let isMounted = true;
+
+    const fetchUserData = async () => {
+      const userId = localStorage.getItem('LoggedUser');
+      console.log('userId:', userId);
+      if (userId) {
+        try {
+          const response = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Users/${userId}`);
+          if(isMounted) {
+            setUser(response.data);
+            setName(response.data.fullName);
+            setBio(response.data.biography);
+            setWebsite(response.data.website);
+            console.log(response.data);         
+          }
+        } catch (error) {
+          console.error('Error al obtener el perfil del usuario:', error);
+        }
+      }
+    };
+  
+    fetchUserData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
     const handleMouseUp = () => {
       isDragging.current = false;
     };
@@ -116,6 +147,34 @@ const InfoProfileSection = () => {
       document.removeEventListener('mouseup', handleMouseUp);
     };
   }, []);
+
+  const handleUpdateProfile = async () => {
+    const userId = localStorage.getItem('LoggedUser'); // Asegúrate de tener el ID del usuario para la actualización
+    const updateUrl = `https://coinversesocialapi.azurewebsites.net/api/Users/${userId}`; // URL de tu endpoint de actualización
+  
+    const updatedData = {
+      fullName: tempName,
+      biography: tempBio,
+      website: tempWebsite,
+    };
+  
+    try {
+      const response = await axios.patch(updateUrl, updatedData);
+      if (response.status === 200) {
+        // Actualización exitosa, actualiza el estado local
+        setName(tempName);
+        setBio(tempBio);
+        setWebsite(tempWebsite);
+        alert('Perfil actualizado con éxito'); // O maneja la respuesta exitosa como prefieras
+      } else {
+        // Maneja una respuesta no exitosa según sea necesario
+        alert('Hubo un problema al actualizar el perfil');
+      }
+    } catch (error) {
+      console.error('Error al actualizar el perfil:', error);
+      alert('Error al actualizar el perfil'); // O maneja el error como prefieras
+    }
+  };
 
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
@@ -200,6 +259,7 @@ const InfoProfileSection = () => {
     setBio(tempBio);
     setWebsite(tempWebsite);
     setIsEditModalOpen(false);
+    handleUpdateProfile();
   };
 
   const handleEditCancel = () => {
@@ -244,7 +304,7 @@ const InfoProfileSection = () => {
       </Tooltip>
       <Box mt={10}>
         <Typography variant="h5" gutterBottom>{name}</Typography>
-        <Typography variant="body2" color="#27333E">@Plopps45</Typography>
+        <Typography variant="body2" color="#27333E">@{user?.userName}</Typography>
         <Box mt={2}>
           <Typography variant="body1">{bio}</Typography>
         </Box>
@@ -325,7 +385,7 @@ const InfoProfileSection = () => {
             color: '#FFF',
           }}
         >
-          <Typography variant="h6" gutterBottom>Editar perfil</Typography>
+          <Typography variant="h6" gutterBottom>Editar perfil básico</Typography>
           <TextField
             label="Nombre"
             fullWidth

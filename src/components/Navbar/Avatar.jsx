@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -15,6 +15,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from "axios";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -46,10 +47,37 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 export default function Avatar() {
+  const [user, setUser] = useState(null);
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const isTablet = useMediaQuery("(max-width: 900px)");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchUserData = async () => {
+      const userId = localStorage.getItem('LoggedUser');
+      console.log('userId:', userId);
+      if (userId) {
+        try {
+          const response = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Users/${userId}`);
+          if(isMounted) {
+            setUser(response.data);
+            console.log(response.data);         
+          }
+        } catch (error) {
+          console.error('Error al obtener el perfil del usuario:', error);
+        }
+      }
+    };
+  
+    fetchUserData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -92,7 +120,7 @@ export default function Avatar() {
         {!isTablet && (
           <Stack direction="column" alignItems="flex-start" spacing={0}>
             <Typography variant="body2" color="white">
-              David Fragoso
+              {user?.fullName}
             </Typography>
             <Stack direction="row" alignItems="center" spacing={1}>
               <StyledBadge
