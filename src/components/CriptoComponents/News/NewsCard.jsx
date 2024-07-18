@@ -48,18 +48,18 @@ const NFTNews = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ width: '100%', minHeight: '100vh', bgcolor: '#0d1316', padding: 3, overflow: 'hidden' }}>
+      <Box sx={{ width: '97%', minHeight: '100vh', bgcolor: '#0d1316', padding: 3, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         {loading ? (
-          <CircularProgress color="primary" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+          <CircularProgress color="primary" sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
         ) : (
-          <Grid container justifyContent="center" spacing={4}>
-            {error && <Typography variant="h6" color="error">{error.message}</Typography>}
+          <Grid container justifyContent="center" spacing={{ xs: 2, sm: 3, md: 4 }} sx={{ maxWidth: '100%', overflow: 'hidden' }}>
+            {error && <Typography variant="h6" color="error" sx={{ width: '100%', textAlign: 'center' }}>{error.message}</Typography>}
             {!error && news.length === 0 && (
-              <Typography variant="h6" color="text.primary">No NFT news found.</Typography>
+              <Typography variant="h6" color="text.primary" sx={{ width: '100%', textAlign: 'center' }}>No NFT news found.</Typography>
             )}
             {news.map((article, index) => (
-              <Grid item xs={12} sm={6} md={3} key={index}>
-                <Card sx={{ maxWidth: 345, backgroundColor: '#1B242C', color: 'text.primary', margin: '16px', cursor: 'pointer' }}>
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Card sx={{ width: 345, bgcolor: '#1B242C', color: 'text.primary', m: 1, display: 'flex', flexDirection: 'column' }}>
                   {article.urlToImage && (
                     <CardMedia
                       component="img"
@@ -68,7 +68,7 @@ const NFTNews = () => {
                       alt={article.title}
                     />
                   )}
-                  <CardContent>
+                  <CardContent sx={{ flexGrow: 1 }}>
                     <Typography variant="h6" sx={{ color: 'white' }}>
                       {article.title}
                     </Typography>
