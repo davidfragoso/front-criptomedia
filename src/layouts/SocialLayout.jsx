@@ -15,7 +15,8 @@ import UserView from "../components/UserProfile/UserView";
 import Profile from "../components/Profile/Profile";
 import Chat from "../components/SocialComponents/Chat/Chat";
 import usePosts from "../js/usePosts";
-import "../css/SocialLayout.css"; // Importa el archivo CSS aquí
+import Cardsview from "../components/UserProfile/CardsView";
+import "../css/SocialLayout.css";
 import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
 import SavedPosts from "../components/SocialComponents/SavedPost/savedpost";
@@ -63,9 +64,8 @@ const SocialLayout = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/cardsview" element={<MediaCardGrid />} />
             <Route path="/userprofile" element={<UserView />} />
+            <Route path="/cardsview" element={<Cardsview />} />
             <Route path="/chats" element={<Chat />} />
-            <Route path="/settings" element={<Configuration />} />
-            <Route path="/saved" element={<SavedPosts />} />
           </Routes>
         </div>
       </div>

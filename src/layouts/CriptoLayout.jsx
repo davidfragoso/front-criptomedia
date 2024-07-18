@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CryptoTable from "../components/CriptoComponents/Index/CryptoIndex";
 import NftCollections from "../components/CriptoComponents/Nft/Nft";
+import News from "../components/UserProfile/News";
 import "../css/SocialLayout.css";
 import "../App.css";
 
@@ -20,10 +21,8 @@ const CriptoLayout = () => {
         <div className="mainContent">
           <Routes>
             <Route path="/" element={<MainContent />} />
-            <Route path="/news" element={<NftCollections />} />
-            <Route path="/exchanges" element={<NftCollections />} />
-            <Route path="/nfts" element={<NftCollections />} />
-            <Route path="/settings" element={<NftCollections />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/nft" element={<NftCollections />} />
           </Routes>
         </div>
       </div>
@@ -37,7 +36,7 @@ const MainContent = () => {
     <>
       <div className="content">
         <div className="centerColumn">
-          <NftCollections />
+          <CryptoTable />
         </div>
       </div>
     </>
