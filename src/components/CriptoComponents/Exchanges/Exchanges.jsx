@@ -37,6 +37,11 @@ const useStyles = makeStyles({
   tableCell: {
     color: '#ffffff',
   },
+  tableCellName: {
+    color: '#ffffff',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+  },
   tableRowOdd: {
     backgroundColor: '#2b2b2b',
   },
@@ -80,7 +85,7 @@ const ExchangesTable = () => {
   const [exchangesData, setExchangesData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(20);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     axios.get('https://api.coinpaprika.com/v1/exchanges')
@@ -204,7 +209,7 @@ const ExchangesTable = () => {
           <TableBody>
             {displayedData.map((exchange, index) => (
               <TableRow key={exchange.id} className={index % 2 === 0 ? classes.tableRowEven : classes.tableRowOdd}>
-                <TableCell className={classes.tableCell}>{exchange.name}</TableCell>
+                <TableCell className={classes.tableCellName}>{exchange.name}</TableCell>
                 <TableCell className={classes.tableCell} align="right">
                   <a href={exchange.links.website[0]} target="_blank" rel="noopener noreferrer" className={classes.link}>
                     {exchange.links.website[0]}
@@ -225,8 +230,7 @@ const ExchangesTable = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[20]}
-        component="div"
+        rowsPerPageOptions={[10, 20, 30]}
         count={validData.length}
         rowsPerPage={rowsPerPage}
         page={page}
