@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   Table, TableBody, TableCell, TableContainer,
@@ -6,6 +6,7 @@ import {
   TablePagination, TextField
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+
 
 const useStyles = makeStyles({
   cryptoTableContainer: {
@@ -25,25 +26,25 @@ const useStyles = makeStyles({
   },
   cryptoTable: {
     backgroundColor: '#0d1316',
-
   },
   tableHeadCell: {
     backgroundColor: '#12161c',
     color: '#ffffff',
+    borderColor: '#2e2e2e'
   },
   tableCell: {
     color: '#ffffff',
-    borderColor: '#212c3a ', // Aplica color naranja a los bordes de las celdas
+    borderColor: '#2e2e2e'
   },
-  tableRow: {
-    '&:last-child td, &:last-child th': {
-      border: 0,
-    },
-
+  tableRowOdd: {
+    backgroundColor: '#12161c',
+  },
+  tableRowEven: {
+    backgroundColor: '#0d1316',
   },
   pagination: {
     color: '#ffffff',
-
+    backgroundColor: '#12161c',
   },
   selectIcon: {
     color: '#ffffff',
@@ -114,7 +115,7 @@ const CryptoTable = () => {
       <TableContainer component={Paper} className={classes.cryptoTable}>
         <Table>
           <TableHead>
-            <TableRow className={classes.tableRow}>
+            <TableRow>
               <TableCell className={classes.tableHeadCell}>Moneda</TableCell>
               <TableCell className={classes.tableHeadCell} align="right">Precio</TableCell>
               <TableCell className={classes.tableHeadCell} align="right">1h</TableCell>
@@ -126,7 +127,7 @@ const CryptoTable = () => {
           </TableHead>
           <TableBody>
             {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((crypto, index) => (
-              <TableRow key={crypto.id} className={classes.tableRow}>
+              <TableRow key={crypto.id} className={index % 2 === 0 ? classes.tableRowEven : classes.tableRowOdd}>
                 <TableCell className={classes.tableCell}>{crypto.name} ({crypto.symbol})</TableCell>
                 <TableCell className={classes.tableCell} align="right">${crypto.quotes.USD.price.toFixed(2)}</TableCell>
                 <TableCell className={classes.tableCell} align="right">{crypto.quotes.USD.percent_change_1h.toFixed(2)}%</TableCell>

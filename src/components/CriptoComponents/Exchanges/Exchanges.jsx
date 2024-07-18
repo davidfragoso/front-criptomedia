@@ -14,57 +14,63 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 const useStyles = makeStyles({
   cryptoTableContainer: {
     margin: '20px',
-    backgroundColor: '#0d1316',
-    color: '#ffffff',
+    backgroundColor: '#0d1316', // Light grey background
+    color: '#FFFFFF', // Darker text for better contrast on light background
     padding: '20px',
     borderRadius: '8px',
   },
   cryptoTableTitle: {
     marginBottom: '10px',
-    color: '#ffffff',
+    color: '#FFFFFF', // Dark grey for text
   },
   cryptoTableSubtitle: {
     marginBottom: '20px',
-    color: '#aaaaaa',
+    color: '#aaaaaa', // Lighter grey for less emphasis
   },
   cryptoTable: {
-    backgroundColor: '#2b2b2b',
+    backgroundColor: '#0d1316',
+     // Consistent light grey background
   },
   tableHeadCell: {
-    backgroundColor: '#333333',
+    backgroundColor: '#12161c', // Blue for header cells
     color: '#ffffff',
+    borderColor: '#2e2e2e' // White text for contrast
   },
   tableCell: {
     color: '#ffffff',
+    borderColor: '#2e2e2e' // Dark grey text for regular cells
   },
   tableCellName: {
     color: '#ffffff',
     fontSize: '1.2rem',
     fontWeight: 'bold',
+    borderColor: '#2e2e2e'
   },
   tableRowOdd: {
-    backgroundColor: '#2b2b2b',
+    backgroundColor: '#12161c', // Very light grey for odd rows
   },
   tableRowEven: {
-    backgroundColor: '#1f1f1f',
+    backgroundColor: '#0d1316', // Slightly darker grey for even rows
   },
   pagination: {
     color: '#ffffff',
-    backgroundColor: '#2b2b2b',
+    backgroundColor: '#12161c', // Blue like the header cells
   },
   selectIcon: {
     color: '#ffffff',
   },
   searchField: {
     marginBottom: '20px',
-    backgroundColor: '#333333',
+    backgroundColor: '#333333', // Match even row color for consistency
     borderRadius: '4px',
+    color: '#ffffff',
+    borderColor: '#2e2e2e'
   },
   searchInput: {
-    color: '#ffffff',
+    color: '#ffffff', // Dark grey text for input
   },
   link: {
-    color: '#FFA500',
+    color: '#ed6c02', // Darker blue for links
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline',
@@ -74,12 +80,11 @@ const useStyles = makeStyles({
     marginTop: '40px',
   },
   chartTitle: {
-    color: '#ffffff',
+color: '#ffffff',
     textAlign: 'center',
     marginBottom: '20px',
   },
 });
-
 const ExchangesTable = () => {
   const classes = useStyles();
   const [exchangesData, setExchangesData] = useState([]);
