@@ -180,12 +180,12 @@ const Navbar = ({ layoutType, toggleSidebar, onShowProfile }) => {
           <LogoContainer>
             <Logo src="../images/coinverse2-logo.png" alt="Logo" onClick={handleLogoClick} />
           </LogoContainer>
-          {layoutType !== 'crypto' && (
+          {/* {layoutType !== 'crypto' && (
             <SearchContainer>
               <SearchIcon />
               <SearchInput placeholder="Buscar..." />
             </SearchContainer>
-          )}
+          )} */}
           <SearchIconContainer>
             <IconButton color="inherit">
               <SearchIcon />
@@ -203,13 +203,13 @@ const Navbar = ({ layoutType, toggleSidebar, onShowProfile }) => {
             <span style={{ marginLeft: '0.5rem', color: isCryptoSelected ? '#FF8A00' : 'white' }}>Criptomonedas</span>
           </SliderContainer>
           <DesktopOnly>
-            <MenuItemStyled>
+            {/* <MenuItemStyled>
               <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
                 <Badge badgeContent={17} color="error">
                   <InboxIcon />
                 </Badge>
               </IconButton>
-            </MenuItemStyled>
+            </MenuItemStyled> */}
           </DesktopOnly>
           <MobileOnly>
             <MenuItemStyled>
