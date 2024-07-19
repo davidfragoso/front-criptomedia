@@ -13,22 +13,22 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#FFA500', 
+      main: '#FFA500',
     },
     secondary: {
-      main: '#005484', 
+      main: '#005484',
     },
     text: {
-      primary: '#FFFFFF', 
-      secondary: '#B0BEC5' 
+      primary: '#FFFFFF',
+      secondary: '#B0BEC5',
     },
     background: {
-      paper: '#3B4D5D', 
+      paper: '#3B4D5D',
     },
   },
   typography: {
     button: {
-      color: '#FFA500', 
+      color: '#FFA500',
     },
   },
 });
@@ -38,8 +38,8 @@ const modalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '80%',
-  maxHeight: '80%',
+  width: '60%',
+  maxHeight: '60%',
   bgcolor: '#1B242C',
   boxShadow: 24,
   p: 4,
@@ -81,7 +81,7 @@ const NewsModal = ({ open, handleClose, news }) => (
       {news.urlToImage && (
         <CardMedia
           component="img"
-          height="400"
+          height="200"
           image={news.urlToImage}
           alt={news.title}
         />
@@ -134,7 +134,11 @@ const NFTNewsSection = () => {
   };
 
   if (loading) {
-    return <CircularProgress color="secondary" />;
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <CircularProgress color="warning" />
+      </Box>
+    );
   }
 
   if (error) {
