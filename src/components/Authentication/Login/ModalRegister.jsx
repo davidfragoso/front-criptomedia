@@ -81,10 +81,50 @@ export default function BasicModal() {
             REGISTRO
           </Typography>
           <Box display="flex" flexDirection="column" gap={2} mt={2}>
-            <TextField variant="outlined" margin="normal" fullWidth label="Nombre completo" name="nombre" autoComplete="nombre-completo" autoFocus color="warning" onChange={handleChange} />
-            <TextField variant="outlined" margin="normal" fullWidth label="Nombre de usuario" name="username" autoComplete="username" autoFocus color="warning" onChange={handleChange} error={!!formErrors.username} helperText={formErrors.username} />
-            <TextField variant="outlined" margin="normal" fullWidth label="Correo electrónico" name="email" autoComplete="email" autoFocus color="warning" onChange={handleChange} error={!!formErrors.email} helperText={formErrors.email} />
-            <TextField variant="outlined" margin="normal" fullWidth type='password' label="Contraseña" name="password" autoComplete="new-password" autoFocus color="warning" onChange={handleChange} error={!!formErrors.password} helperText={formErrors.password} />
+            <TextField variant="outlined" margin="normal" fullWidth label="Nombre completo" name="nombre" autoComplete="nombre-completo" autoFocus color="warning" onChange={handleChange} sx={{
+              '& fieldset': {
+                borderColor: '#8A8888',
+              },
+              '& .MuiInputBase-input': {
+                color: 'white',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#8A8888',
+              },
+            }} />
+            <TextField variant="outlined" margin="normal" fullWidth label="Nombre de usuario" name="username" autoComplete="username" autoFocus color="warning" onChange={handleChange} error={!!formErrors.username} helperText={formErrors.username} sx={{
+              '& fieldset': {
+                borderColor: '#8A8888',
+              },
+              '& .MuiInputBase-input': {
+                color: 'white',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#8A8888',
+              },
+            }}/>
+            <TextField variant="outlined" margin="normal" fullWidth label="Correo electrónico" name="email" autoComplete="email" autoFocus color="warning" onChange={handleChange} error={!!formErrors.email} helperText={formErrors.email} sx={{
+              '& fieldset': {
+                borderColor: '#8A8888',
+              },
+              '& .MuiInputBase-input': {
+                color: 'white',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#8A8888',
+              },
+            }}/>
+            <TextField variant="outlined" margin="normal" fullWidth type='password' label="Contraseña" name="password" autoComplete="new-password" autoFocus color="warning" onChange={handleChange} error={!!formErrors.password} helperText={formErrors.password} sx={{
+              '& fieldset': {
+                borderColor: '#8A8888',
+              },
+              '& .MuiInputBase-input': {
+                color: 'white',
+              },
+              '& .MuiInputLabel-root': {
+                color: '#8A8888',
+              },
+            }}/>
             <Button sx={{ backgroundColor: '#FF8A00', '&:hover': { backgroundColor: '#FF8A00' } }} variant="contained" onClick={handleSubmit}>
               Crear cuenta
             </Button>

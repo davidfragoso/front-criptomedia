@@ -213,7 +213,7 @@ const Navbar = ({ layoutType, toggleSidebar, onShowProfile }) => {
           </DesktopOnly>
           <MobileOnly>
             <MenuItemStyled>
-              <IconButton size="large" aria-label="show 17 new notifications" color="inherit" sx={{ marginRight: '0.5rem' }}>
+              {/* <IconButton size="large" aria-label="show 17 new notifications" color="inherit" sx={{ marginRight: '0.5rem' }}>
                 <Badge badgeContent={17} color="error">
                   <InboxIcon />
                 </Badge>
@@ -221,8 +221,8 @@ const Navbar = ({ layoutType, toggleSidebar, onShowProfile }) => {
               <IconButton size="large" aria-label="show 12 new messages" color="inherit">
                 <Badge badgeContent={12} color="error">
                   <ChatBubbleIcon />
-                </Badge>
-              </IconButton>
+                </Badge> 
+              </IconButton>*/}
             </MenuItemStyled>
           </MobileOnly>
           <Avatar onShowProfile={onShowProfile} />

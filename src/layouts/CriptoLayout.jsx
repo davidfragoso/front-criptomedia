@@ -10,7 +10,7 @@ import NFTNewsSection from "../components/CriptoComponents/News/News";
 import "../css/SocialLayout.css";
 import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
-import ExchangesTable from "../components/CriptoComponents/Exchanges/Exchanges";
+import ExchangesComponent from "../components/CriptoComponents/Exchanges/Exchanges";
 
 const CriptoLayout = () => {
   const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
@@ -25,7 +25,7 @@ const CriptoLayout = () => {
             <Route path="/" element={<MainContent />} />
             <Route path="/news" element={<NFTNewsSection />} />
             <Route path="/nft" element={<NftCollections />} />
-            <Route path="/exchanges" element={<ExchangesTable />} />
+            <Route path="/exchanges" element={<ExchangesComponent />} />
             <Route path="/settings" element={<Configuration />} />
           </Routes>
         </div>

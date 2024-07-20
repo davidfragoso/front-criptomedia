@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  Paper, Box, Typography, TablePagination, TextField
+  Table, TableBody, TableCell, TableContainer,
+  TableHead, TableRow, Paper, Box, Typography,
+  TablePagination, TextField
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
@@ -10,13 +11,13 @@ const useStyles = makeStyles({
   cryptoTableContainer: {
     margin: '20px',
     backgroundColor: '#0d1316',
-    color: '#ffffff',
+    color: '#FFFFFF',
     padding: '20px',
     borderRadius: '8px',
   },
   cryptoTableTitle: {
     marginBottom: '10px',
-    color: '#ffffff',
+    color: '#FFFFFF',
   },
   cryptoTableSubtitle: {
     marginBottom: '20px',
@@ -32,6 +33,12 @@ const useStyles = makeStyles({
   },
   tableCell: {
     color: '#ffffff',
+    borderColor: '#2e2e2e'
+  },
+  tableCellName: {
+    color: '#ffffff',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
     borderColor: '#2e2e2e'
   },
   tableRowOdd: {
@@ -51,26 +58,27 @@ const useStyles = makeStyles({
     marginBottom: '20px',
     backgroundColor: '#333333',
     borderRadius: '4px',
-    color: '#ffffff'
+    color: '#ffffff',
+    borderColor: '#2e2e2e'
   },
   searchInput: {
     color: '#ffffff',
   }
 });
 
-const CryptoTable = () => {
+const ExchangesMovil = () => {
   const classes = useStyles();
-  const [cryptoData, setCryptoData] = useState([]);
+  const [exchangesData, setExchangesData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
-    axios.get('https://api.coinpaprika.com/v1/tickers')
+    axios.get('https://api.coinpaprika.com/v1/exchanges')
       .then(response => {
-        setCryptoData(response.data);
+        setExchangesData(response.data);
       })
-      .catch(error => console.error('Error fetching crypto data:', error));
+      .catch(error => console.error('Error fetching exchanges data:', error));
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -86,18 +94,28 @@ const CryptoTable = () => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredData = cryptoData.filter(crypto =>
-    crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredData = exchangesData.filter(exchange =>
+    exchange.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    exchange.id.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const validData = filteredData.filter(exchange =>
+    exchange.links && exchange.links.website && exchange.links.website[0] &&
+    exchange.quotes && exchange.quotes.USD &&
+    exchange.quotes.USD.reported_volume_24h &&
+    exchange.quotes.USD.reported_volume_7d &&
+    exchange.quotes.USD.reported_volume_30d
+  );
+
+  const displayedData = validData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <Box className={classes.cryptoTableContainer}>
       <Typography variant="h4" component="h2" className={classes.cryptoTableTitle}>
-        Todas las criptomonedas
+        Todos los exchanges
       </Typography>
       <Typography variant="subtitle1" className={classes.cryptoTableSubtitle}>
-        Ver una lista completa de las criptomonedas activas
+        Ver una lista completa de los exchanges activos
       </Typography>
       <TextField
         className={classes.searchField}
@@ -106,34 +124,35 @@ const CryptoTable = () => {
         }}
         variant="outlined"
         fullWidth
-        placeholder="Buscar por nombre o símbolo"
+        placeholder="Buscar por nombre o ID"
         value={searchTerm}
         onChange={handleSearchChange}
+        style={{ backgroundColor: '#1c242d', color: '#ffffff' }}
       />
       <TableContainer component={Paper} className={classes.cryptoTable}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell className={classes.tableHeadCell}>Moneda</TableCell>
-              <TableCell className={classes.tableHeadCell} align="right">Precio</TableCell>
-              <TableCell className={classes.tableHeadCell} align="right">Volumen en 24h</TableCell>
+              <TableCell className={classes.tableHeadCell}>Nombre</TableCell>
+              <TableCell className={classes.tableHeadCell} align="right">Volumen 24h (USD)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((crypto, index) => (
-              <TableRow key={crypto.id} className={index % 2 === 0 ? classes.tableRowEven : classes.tableRowOdd}>
-                <TableCell className={classes.tableCell}>{crypto.name} ({crypto.symbol})</TableCell>
-                <TableCell className={classes.tableCell} align="right">${crypto.quotes.USD.price.toFixed(2)}</TableCell>
-                <TableCell className={classes.tableCell} align="right">${crypto.quotes.USD.volume_24h.toLocaleString()}</TableCell>
+            {displayedData.map((exchange, index) => (
+              <TableRow key={exchange.id} className={index % 2 === 0 ? classes.tableRowEven : classes.tableRowOdd}>
+                <TableCell className={classes.tableCellName}>{exchange.name}</TableCell>
+                <TableCell className={classes.tableCell} align="right">
+                  {exchange.quotes.USD.reported_volume_24h.toFixed(2)}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[25]}
+        rowsPerPageOptions={[10, 20, 30]}
         component="div"
-        count={filteredData.length}
+        count={validData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
@@ -144,4 +163,4 @@ const CryptoTable = () => {
   );
 };
 
-export default CryptoTable;
+export default ExchangesMovil;
