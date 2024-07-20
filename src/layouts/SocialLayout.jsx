@@ -12,6 +12,7 @@ import NewsSection from "../components/SocialComponents/Feed/NewsSection";
 import AdsSection from "../components/SocialComponents/Feed/AdsSection";
 import ChatBox from "../components/SocialComponents/ChatBox/ChatBox";
 import UserView from "../components/UserProfile/UserView";
+import CardsView from "../components/UserProfile/CardsView";
 import Profile from "../components/Profile/Profile";
 import Chat from "../components/SocialComponents/Chat/Chat";
 import usePosts from "../js/usePosts";
@@ -64,6 +65,7 @@ const SocialLayout = () => {
               }
             />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/cardsview" element={<CardsView />} />
             <Route path="/userprofile" element={<UserView />} />
             <Route path="/chats" element={<Chat />} />
             <Route path="/settings" element={<Configuration />} />
