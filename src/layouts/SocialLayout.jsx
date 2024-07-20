@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Box, Modal, Backdrop, Button, TextField } from "@mui/material";
 import Navbar from "../components/Navbar/Navbar";
@@ -15,15 +15,14 @@ import UserView from "../components/UserProfile/UserView";
 import Profile from "../components/Profile/Profile";
 import Chat from "../components/SocialComponents/Chat/Chat";
 import usePosts from "../js/usePosts";
-import Cardsview from "../components/UserProfile/CardsView";
 import "../css/SocialLayout.css";
 import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
 import SavedPosts from "../components/SocialComponents/SavedPost/savedpost";
-import MediaCardGrid from "../components/UserProfile/CardsView";
 
 const SocialLayout = () => {
   const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
+  const location = useLocation();
   const {
     posts,
     editModalOpen,
@@ -41,12 +40,15 @@ const SocialLayout = () => {
     setTempContent,
   } = usePosts();
 
+  const showNavbar = !(isTabletOrMobile && location.pathname === "/chats");
+  const noSidebar = isTabletOrMobile;
+
   return (
     <div className="appContainer">
-      <Navbar layoutType="social" />
-      <div className={`mainContainer ${isTabletOrMobile ? "tabletOrMobile" : ""}`}>
+      {showNavbar && <Navbar layoutType="social" />}
+      <div className={`mainContainer ${isTabletOrMobile ? "tabletOrMobile" : ""} ${!showNavbar ? "noNavbar" : ""}`}>
         {!isTabletOrMobile && <Sidebar layoutType="social" />}
-        <div className="mainContent">
+        <div className={`mainContent ${noSidebar ? "noSidebar" : ""}`}>
           <Routes>
             <Route
               path="/"
@@ -62,13 +64,10 @@ const SocialLayout = () => {
               }
             />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/cardsview" element={<MediaCardGrid />} />
             <Route path="/userprofile" element={<UserView />} />
-            {/* <Route path="/cardsview" element={<Cardsview />} /> */}
             <Route path="/chats" element={<Chat />} />
-            {/* <Route path="/saved" element={<SavedPosts />} /> */}
             <Route path="/settings" element={<Configuration />} />
-
+            <Route path="/saved" element={<SavedPosts />} />
           </Routes>
         </div>
       </div>
@@ -169,7 +168,7 @@ const MainContent = ({
 
   return (
     <>
-      {/* {!isMobile && <SubNavbar />} */}
+      {!isMobile && <SubNavbar />}
       <div className="content">
         <div className="leftColumn">
           <DirectAccess />
@@ -190,7 +189,7 @@ const MainContent = ({
         </div>
         <div className="rightColumn">
           <AdsSection />
-          {/* <ChatBox /> */}
+          <ChatBox />
         </div>
       </div>
     </>

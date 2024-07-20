@@ -28,7 +28,6 @@ export const sidebarRoutes = [
   { path: '/userprofile', name: 'Vista usuario', icon: <PersonIcon   /> },
   { path: '/saved', name: 'Elementos guardados', icon: <BookmarkIcon /> },
   { path: '/settings', name: 'Configuración', icon: <SettingsIcon /> },
-  { path: '/nftgrid', name: 'Ejemplo de NFTs', icon: <SettingsIcon /> }, // Añadido
 ];
 
 // Rutas principales
@@ -38,7 +37,6 @@ const routes = [
     element: <SocialLayout />,
     children: [
       { path: 'profile', element: <Profile /> },
-      { path: 'cardsview', element: <cardsview /> },
       { path: 'chats', element: <Chat /> },
       { path: 'saved', element: <SavedPosts /> },
       { path: 'settings', element: <Configuration /> },
@@ -52,7 +50,7 @@ const routes = [
   },
   {
     path: '/cripto',
-    element: < CriptoLayout/>,
+    element: <CriptoLayout/>,
     children: [
       { path: 'index', element: <CryptoTable /> },
       { path: 'news', element: <News /> },

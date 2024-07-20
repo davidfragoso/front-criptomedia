@@ -3,8 +3,6 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Badge,
-  MenuItem,
   Drawer,
   useMediaQuery,
   Box,
@@ -12,13 +10,12 @@ import {
   Switch,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import Avatar from './Avatar';
 import Sidebar from '../Sidebar/Sidebar';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import images from '../../imageRoutes';
 
 const theme = createTheme({
   breakpoints: {
@@ -107,7 +104,7 @@ const SearchInput = styled(InputBase)(({ theme }) => ({
   marginLeft: '0.5rem',
 }));
 
-const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
+const MenuItemStyled = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   marginRight: '1rem',
@@ -178,14 +175,8 @@ const Navbar = ({ layoutType, toggleSidebar, onShowProfile }) => {
             </IconButton>
           )}
           <LogoContainer>
-            <Logo src="../images/coinverse2-logo.png" alt="Logo" onClick={handleLogoClick} />
+            <Logo src={images.coinverseLogo} alt="Coinverse Logo" onClick={handleLogoClick} />
           </LogoContainer>
-          {/* {layoutType !== 'crypto' && (
-            <SearchContainer>
-              <SearchIcon />
-              <SearchInput placeholder="Buscar..." />
-            </SearchContainer>
-          )} */}
           <SearchIconContainer>
             <IconButton color="inherit">
               <SearchIcon />
@@ -203,32 +194,15 @@ const Navbar = ({ layoutType, toggleSidebar, onShowProfile }) => {
             <span style={{ marginLeft: '0.5rem', color: isCryptoSelected ? '#FF8A00' : 'white' }}>Criptomonedas</span>
           </SliderContainer>
           <DesktopOnly>
-            {/* <MenuItemStyled>
-              <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
-                <Badge badgeContent={17} color="error">
-                  <InboxIcon />
-                </Badge>
-              </IconButton>
-            </MenuItemStyled> */}
           </DesktopOnly>
           <MobileOnly>
             <MenuItemStyled>
-              {/* <IconButton size="large" aria-label="show 17 new notifications" color="inherit" sx={{ marginRight: '0.5rem' }}>
-                <Badge badgeContent={17} color="error">
-                  <InboxIcon />
-                </Badge>
-              </IconButton>
-              <IconButton size="large" aria-label="show 12 new messages" color="inherit">
-                <Badge badgeContent={12} color="error">
-                  <ChatBubbleIcon />
-                </Badge> 
-              </IconButton>*/}
             </MenuItemStyled>
           </MobileOnly>
           <Avatar onShowProfile={onShowProfile} />
         </CustomToolbar>
         <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>
-          <Sidebar layoutType={layoutType} />
+          <Sidebar layoutType={isCryptoSelected ? "crypto" : "social"} onToggleLayoutType={handleToggle} />
         </Drawer>
       </CustomAppBar>
     </ThemeProvider>
