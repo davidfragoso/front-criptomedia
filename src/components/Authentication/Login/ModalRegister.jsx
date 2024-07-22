@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { TextField, IconButton, Link, Snackbar } from '@mui/material';
+import { TextField, IconButton, Link, Snackbar, Alert } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
@@ -29,12 +29,12 @@ export default function BasicModal() {
     password: ''
   });
   const [formErrors, setFormErrors] = useState({});
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [toastOpen, setToastOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setOpenSnackbar(false);
+    setToastOpen(false);
   };
 
   const handleChange = (event) => {
@@ -61,10 +61,17 @@ export default function BasicModal() {
   const handleSubmit = () => {
     if (validateForm()) {
       setOpen(false);
-      setOpenSnackbar(true);
+      setToastOpen(true);
     } else {
       console.log('Formulario inválido, mostrar errores');
     }
+  };
+
+  const handleCloseToast = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setToastOpen(false);
   };
 
   return (
@@ -131,13 +138,11 @@ export default function BasicModal() {
           </Box>
         </Box>
       </Modal>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message="Registro Exitoso"
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-      />
+      <Snackbar open={toastOpen} autoHideDuration={2000} onClose={handleCloseToast} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleCloseToast} severity="success">
+          Registro Exitoso
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

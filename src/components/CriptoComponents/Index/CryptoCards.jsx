@@ -61,16 +61,34 @@ const useStyles = makeStyles({
 const CryptoTable = () => {
   const classes = useStyles();
   const [cryptoData, setCryptoData] = useState([]);
+  const [logos, setLogos] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
 
   useEffect(() => {
-    axios.get('https://api.coinpaprika.com/v1/tickers')
-      .then(response => {
-        setCryptoData(response.data);
-      })
-      .catch(error => console.error('Error fetching crypto data:', error));
+    const fetchCryptoData = async () => {
+      try {
+        const [tickersResponse, coinsResponse] = await Promise.all([
+          axios.get('https://api.coinpaprika.com/v1/tickers'),
+          axios.get('https://api.coinpaprika.com/v1/coins')
+        ]);
+
+        setCryptoData(tickersResponse.data);
+
+        const logos = coinsResponse.data.reduce((acc, coin) => {
+          if (coin.id) {
+            acc[coin.id] = `https://static.coinpaprika.com/coin/${coin.id}/logo.png`;
+          }
+          return acc;
+        }, {});
+        setLogos(logos);
+      } catch (error) {
+        console.error('Error fetching crypto data:', error);
+      }
+    };
+
+    fetchCryptoData();
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -114,17 +132,19 @@ const CryptoTable = () => {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell className={classes.tableHeadCell}>Logo</TableCell>
               <TableCell className={classes.tableHeadCell}>Moneda</TableCell>
               <TableCell className={classes.tableHeadCell} align="right">Precio</TableCell>
-              <TableCell className={classes.tableHeadCell} align="right">Volumen en 24h</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((crypto, index) => (
               <TableRow key={crypto.id} className={index % 2 === 0 ? classes.tableRowEven : classes.tableRowOdd}>
+                <TableCell className={classes.tableCell}>
+                  {logos[crypto.id] ? <img src={logos[crypto.id]} alt={crypto.name} style={{ width: 24, height: 24 }} /> : 'N/A'}
+                </TableCell>
                 <TableCell className={classes.tableCell}>{crypto.name} ({crypto.symbol})</TableCell>
                 <TableCell className={classes.tableCell} align="right">${crypto.quotes.USD.price.toFixed(2)}</TableCell>
-                <TableCell className={classes.tableCell} align="right">${crypto.quotes.USD.volume_24h.toLocaleString()}</TableCell>
               </TableRow>
             ))}
           </TableBody>

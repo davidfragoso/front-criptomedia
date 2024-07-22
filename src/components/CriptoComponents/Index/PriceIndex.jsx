@@ -4,16 +4,24 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
-const PriceChart = ({ data, color = 'rgba(255, 165, 0, 1)', height = 45, width = 100 }) => {
+const PriceChart = ({ data, height = 30, width = 60 }) => {
+  if (!data || data.length === 0) {
+    return <div>No data</div>;
+  }
+
+  // Determinar el color de la gráfica basado en el cambio de los últimos 7 días
+  const color = data[data.length - 1].price >= data[0].price ? 'rgba(0, 128, 0, 1)' : 'rgba(255, 0, 0, 1)';
+
   const chartData = {
-    labels: ['7d', '24h', '1h'],
+    labels: data.map(point => new Date(point.timestamp).toLocaleString()),
     datasets: [
       {
-        data: [data.percent_change_7d, data.percent_change_24h, data.percent_change_1h],
+        data: data.map(point => point.price),
         borderColor: color,
-        borderWidth: 2,
-        pointRadius: 0,
-        tension: 0.4
+        borderWidth: 1,
+        pointRadius: 3,
+        tension: 0, // Trazos rectos y punteagudos
+        fill: false
       }
     ]
   };
@@ -35,6 +43,11 @@ const PriceChart = ({ data, color = 'rgba(255, 165, 0, 1)', height = 45, width =
       },
       y: {
         display: false
+      }
+    },
+    elements: {
+      point: {
+        radius: 3
       }
     }
   };
