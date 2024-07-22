@@ -23,6 +23,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const InfoSection = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
+  const [errorToastOpen, setErrorToastOpen] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = (event) => {
@@ -31,7 +32,14 @@ const InfoSection = () => {
 
   const handleSave = () => {
     // Aquí puedes agregar la lógica para guardar la información
-    setToastOpen(true);
+    // Simulamos un error al guardar la información
+    const hasError = true;
+
+    if (hasError) {
+      setErrorToastOpen(true);
+    } else {
+      setToastOpen(true);
+    }
   };
 
   const handleCloseToast = (event, reason) => {
@@ -39,6 +47,13 @@ const InfoSection = () => {
       return;
     }
     setToastOpen(false);
+  };
+
+  const handleCloseErrorToast = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setErrorToastOpen(false);
   };
 
   return (
@@ -209,9 +224,26 @@ const InfoSection = () => {
       </Grid>
       <br />
       <Divider sx={{ borderColor: '#7C9EBD' }} />
-      <Snackbar open={toastOpen} autoHideDuration={2000} onClose={handleCloseToast}>
-        <Alert onClose={handleCloseToast} severity="warning">
+      <Snackbar
+        open={toastOpen}
+        autoHideDuration={2000}
+        onClose={handleCloseToast}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        sx={{ mt: 8 }} // Mueve el toast hacia abajo
+      >
+        <Alert onClose={handleCloseToast} severity="success">
           Configuración Guardada
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={errorToastOpen}
+        autoHideDuration={2000}
+        onClose={handleCloseErrorToast}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        sx={{ mt: 8 }} // Mueve el toast hacia abajo
+      >
+        <Alert onClose={handleCloseErrorToast} severity="error">
+          Ocurrió un error al guardar la información
         </Alert>
       </Snackbar>
     </SectionBox>
