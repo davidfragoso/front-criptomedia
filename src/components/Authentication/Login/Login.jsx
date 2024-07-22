@@ -7,23 +7,45 @@ import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [errors, setErrors] = useState({});
 
-  const handleLogin = async () => {
-    try {
-      const response = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Users/`);
-      const user = response.data.find(user => user.email === email && user.password === password);
-      if (user) {
-        console.log('Login exitoso:', user);
-        localStorage.setItem('LoggedUser', user.pkUser);
-        navigate('/');
-      } else {
-        console.log('Credenciales incorrectas');
-      }
-    } catch (error) {
-      console.error('Error, el usuario no existe:', error);
+  const validateEmail = (email) => {
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      return "El correo electrónico debe ser válido.";
     }
+    return '';
+  };
+
+  const validatePassword = (password) => {
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)) {
+      return "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula y un número.";
+    }
+    return '';
+  };
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const emailError = validateEmail(formData.email);
+    const passwordError = validatePassword(formData.password);
+
+    if (emailError || passwordError) {
+      setErrors({ email: emailError, password: passwordError });
+      return;
+    }
+
+    navigate('/');
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (
@@ -94,7 +116,7 @@ const Login = () => {
         <Box
           sx={{
             width: '100%',
-            maxWidth: { xs: 270, sm: 300 },
+            maxWidth: { xs: 270, sm: 300, lg: 400 },
             backgroundColor: '#1F262D',
             borderRadius: 2,
             padding: { xs: 3, sm: 8 },
@@ -121,6 +143,9 @@ const Login = () => {
             autoComplete="email"
             autoFocus
             color="warning"
+            onChange={handleChange}
+            error={!!errors.email}
+            helperText={errors.email}
             sx={{
               '& fieldset': {
                 borderColor: '#8A8888',
@@ -146,6 +171,9 @@ const Login = () => {
             type="password"
             autoComplete="current-password"
             color="warning"
+            onChange={handleChange}
+            error={!!errors.password}
+            helperText={errors.password}
             sx={{
               '& fieldset': {
                 borderColor: '#8A8888',

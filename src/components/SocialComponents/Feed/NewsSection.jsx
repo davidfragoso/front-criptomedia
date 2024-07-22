@@ -36,15 +36,15 @@ const NewsSection = () => {
       <div style={styles.title}>Posts populares</div>
       <div style={styles.post}>
         <img src="https://cdn.pixabay.com/photo/2017/01/25/12/31/bitcoin-2007769_1280.jpg" alt="News 1" style={styles.image} />
-        <p style={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p>
+        {/* <p style={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p> */}
       </div>
       <div style={styles.post}>
         <img src="https://cdn.pixabay.com/photo/2017/09/08/21/20/bitcoin-2730220_1280.jpg" alt="News 2" style={styles.image} />
-        <p style={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p>
+        {/* <p style={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p> */}
       </div>
       <div style={styles.post}>
         <img src="https://cdn.pixabay.com/photo/2018/05/04/12/50/woman-3373913_1280.jpg" alt="News 3" style={styles.image} />
-        <p style={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p>
+        {/* <p style={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod...</p> */}
       </div>
     </div>
   );

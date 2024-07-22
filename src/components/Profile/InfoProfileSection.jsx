@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Box, Avatar, Typography, IconButton, Tooltip, Modal, Backdrop, Button, TextField } from '@mui/material';
+import { Box, Avatar, Typography, IconButton, Tooltip, Modal, Backdrop, Button, TextField, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/system';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import EditIcon from '@mui/icons-material/Edit';
@@ -84,6 +84,7 @@ const EditProfileIconButton = styled(IconButton)(({ theme }) => ({
 
 const InfoProfileSection = () => {
   const [user, setUser] = useState(null);
+  const isMobile = useMediaQuery('(max-width:600px)');
   const [avatarSrc, setAvatarSrc] = useState('../images/yop.jfif');
   const [headerImageSrc, setHeaderImageSrc] = useState('https://blog.bitso.com/wp-content/uploads/2023/03/o-que-e-bitcoin-scaled.jpg');
   const [tempHeaderImageSrc, setTempHeaderImageSrc] = useState(headerImageSrc);
@@ -291,9 +292,9 @@ const InfoProfileSection = () => {
           <PhotoCameraIcon />
           <input
             type="file"
-            accept="image/*"
-            hidden
-            onChange={handleAvatarChange}
+              accept="image/*"
+              hidden
+              onChange={handleAvatarChange}
           />
         </CameraIconButton>
       </Tooltip>
@@ -338,7 +339,7 @@ const InfoProfileSection = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '80%',
+            width: isMobile ? '90%' : '80%',
             bgcolor: '#12161C',
             boxShadow: 24,
             p: 4,
@@ -376,7 +377,7 @@ const InfoProfileSection = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '400px',
+            width: isMobile ? '90%' : '400px',
             bgcolor: '#12161C',
             boxShadow: 24,
             p: 4,

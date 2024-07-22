@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CryptoTable from "../components/CriptoComponents/Index/CryptoIndex";
 import NftView from "../components/CriptoComponents/Nft/Nft";
-import "../css/SocialLayout.css"; 
+import "../css/SocialLayout.css";
 import "../App.css";
 
 const CriptoLayout = () => {
@@ -17,7 +17,7 @@ const CriptoLayout = () => {
       <Navbar layoutType="crypto" />
       <div className={`mainContainer ${isTabletOrMobile ? "tabletOrMobile" : ""}`}>
         {!isTabletOrMobile && <Sidebar layoutType="crypto" />}
-        <div className="mainContent">
+        <div className="mainContent noSidebar">
           <Routes>
             <Route path="/" element={<MainContent />} />
             <Route path="/nfts" element={<NftView />} />

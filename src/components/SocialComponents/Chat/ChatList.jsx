@@ -30,19 +30,23 @@ const countNewMessages = (messages) => {
   return messages.filter((message) => message.sender === "other" && message.status !== "read").length;
 };
 
-const ChatList = ({ chats, selectedChat, selectChat, searchTerm, setSearchTerm }) => {
+const ChatList = ({ chats, selectedChat, selectChat, searchTerm, setSearchTerm, isMobile }) => {
   const filteredChats = chats.filter((chat) =>
     chat.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <Box
-      width="30%"
+      width={{ xs: "100%", md: "30%" }}
       bgcolor="#1E2024"
       borderLeft="2px solid #27333E"
       color="#fff"
       p={2}
       className="chatListContainer"
+      display={{ xs: "block", md: "block" }}
+      height="auto"
+      overflow="auto"
+      order={{ xs: 1, md: 2 }}
     >
       <Paper className="searchContainer">
         <SearchIcon className="searchIcon" />
