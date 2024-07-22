@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { TextField, IconButton, Link, Snackbar } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from '@mui/material';
 import axios from 'axios';
 
 const style = {
@@ -69,26 +68,13 @@ export default function BasicModal() {
     }
   };
 
-  const handleNombreChange = (event) => {
-    setNombreValue(event.target.value);
-  };
-  const handleUsuarioChange = (event) => {
-    setUsuarioValue(event.target.value);
-  };
-  const handleCorreoChange = (event) => {
-    setCorreoValue(event.target.value);
-  };
-  const handleClaveChange = (event) => {
-    setClaveValue(event.target.value);
-  };
-
   const handleRegister = async () => {
     try {
       const response = await axios.post('https://coinversesocialapi.azurewebsites.net/api/Users', {
-          "fullName": nombre,
-          "userName": usuario,
-          "email": correo,
-          "password": clave,
+          "fullName": formData.nombre,
+          "userName": formData.username,
+          "email": formData.email,
+          "password": formData.password,
           "date": "2024-07-16T23:27:07.173Z"
       });
       console.log('Respuesta del servidor:', response.data);

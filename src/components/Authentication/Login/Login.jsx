@@ -27,7 +27,7 @@ const Login = () => {
     return '';
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
     const emailError = validateEmail(formData.email);
     const passwordError = validatePassword(formData.password);
@@ -35,17 +35,26 @@ const Login = () => {
     if (emailError || passwordError) {
       setErrors({ email: emailError, password: passwordError });
       return;
+    }else {
+      try {
+        const response = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Users/`);
+        const user = response.data.find(user => user.email === formData.email && user.password === formData.password);
+        if (user) {
+          console.log('Login exitoso:', user);
+          localStorage.setItem('LoggedUser', user.pkUser);
+          navigate('/');
+        } else {
+          console.log('Credenciales incorrectas');
+        }
+      } catch (error) {
+        console.error('Error, el usuario no existe:', error);
+      }
     }
-
-    navigate('/');
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -132,8 +141,6 @@ const Login = () => {
           <br />
 
           <TextField
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             variant="outlined"
             margin="normal"
             required
@@ -160,8 +167,6 @@ const Login = () => {
           />
 
           <TextField
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             variant="outlined"
             margin="normal"
             required
