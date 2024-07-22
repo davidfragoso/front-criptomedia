@@ -141,7 +141,7 @@ export default function BasicModal() {
                 color: '#8A8888',
               },
             }}/>
-            <Button sx={{ backgroundColor: '#FF8A00', '&:hover': { backgroundColor: '#FF8A00' } }} variant="contained" onClick={handleSubmit}>
+            <Button sx={{ backgroundColor: '#FF8A00', '&:hover': { backgroundColor: '#FF8A00' } }} variant="contained" onClick={handleRegister}>
               Crear cuenta
             </Button>
           </Box>
