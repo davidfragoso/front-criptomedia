@@ -210,7 +210,7 @@ const InfoSection = () => {
       <br />
       <Divider sx={{ borderColor: '#7C9EBD' }} />
       <Snackbar open={toastOpen} autoHideDuration={2000} onClose={handleCloseToast}>
-        <Alert onClose={handleCloseToast} severity="success">
+        <Alert onClose={handleCloseToast} severity="warning">
           Configuración Guardada
         </Alert>
       </Snackbar>
