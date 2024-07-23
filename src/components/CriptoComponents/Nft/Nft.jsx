@@ -48,22 +48,18 @@ const NftCollections = () => {
         }
         .nft-section-container {
           background-color: #0d1316;
-          padding: 20px;
           border-radius: 8px;
           margin-top: 50px;
         }
         .nft-card-container {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-around;
-          gap: 10px;
+
         }
         .nft-card {
           background-color: #1d252d;
           color: #ffffff;
           padding: 10px;
           border-radius: 8px;
-          width: 150px;
+          width: 100px;
           text-align: center;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
