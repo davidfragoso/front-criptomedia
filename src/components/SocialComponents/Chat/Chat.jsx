@@ -17,7 +17,7 @@ const initialChats = [
   {
     id: 1,
     name: "David Fragoso",
-    avatar: "../images/yop.jfif",
+    avatar: "../images/DPP.png",
     messages: [
       {
         text: "Hola, ¿cómo estás?",
@@ -36,7 +36,7 @@ const initialChats = [
   {
     id: 2,
     name: "Gael López",
-    avatar: "../images/yop.jfif",
+    avatar: "../images/DPP.png",
     messages: [
       {
         text: "Nuevo proyecto en camino",
@@ -55,7 +55,7 @@ const initialChats = [
   {
     id: 3,
     name: "Marinela",
-    avatar: "../images/yop.jfif",
+    avatar: "../images/DPP.png",
     unread: 1,
     messages: [
       {

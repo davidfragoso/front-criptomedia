@@ -113,7 +113,7 @@ export default function Avatar() {
         style={{ display: 'flex', alignItems: 'center' }}
       >
         <img
-          src="../images/yop.jfif"
+          src="../images/DPP.png"
           alt="David Fragoso"
           style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: isTablet ? '0' : '8px' }}
         />

@@ -85,7 +85,7 @@ const EditProfileIconButton = styled(IconButton)(({ theme }) => ({
 const InfoProfileSection = () => {
   const [user, setUser] = useState(null);
   const isMobile = useMediaQuery('(max-width:600px)');
-  const [avatarSrc, setAvatarSrc] = useState('../images/yop.jfif');
+  const [avatarSrc, setAvatarSrc] = useState('../images/DPP.png');
   const [headerImageSrc, setHeaderImageSrc] = useState('https://blog.bitso.com/wp-content/uploads/2023/03/o-que-e-bitcoin-scaled.jpg');
   const [tempHeaderImageSrc, setTempHeaderImageSrc] = useState(headerImageSrc);
   const [posX, setPosX] = useState(50); // X position in percentage
