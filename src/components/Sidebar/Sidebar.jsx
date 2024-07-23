@@ -6,7 +6,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
-import PeopleIcon from '@mui/icons-material/People';
 import ChatIcon from '@mui/icons-material/Chat';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -63,7 +62,7 @@ const Sidebar = ({ layoutType }) => {
   const cryptoItems = [
     { text: 'Inicio', icon: <HomeIcon />, path: '/cripto' },
     { text: 'Noticias', icon: <NewsIcon />, path: '/cripto/news' },
-    { text: 'Intercambios', icon: <SwapHorizIcon />, path: '/cripto/exchanges' },    
+    { text: 'Intercambios', icon: <SwapHorizIcon />, path: '/cripto/exchanges' },
     { text: 'NFT\'s populares', icon: <NftIcon />, path: '/cripto/nft' },
     { text: 'Configuración', icon: <SettingsIcon />, path: '/cripto/settings' },
   ];
