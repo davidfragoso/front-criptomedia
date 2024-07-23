@@ -158,7 +158,7 @@
 /* Adjustments for mobile view */
 @media (max-width: 600px) {
   .container {
-    height: auto; /* Adjust for no Navbar height */
+    height: calc(100vh - 70px); /* Adjust for no Navbar height */
   }
 
   .messageList {
