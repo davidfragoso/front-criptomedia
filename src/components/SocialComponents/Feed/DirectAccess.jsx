@@ -40,19 +40,20 @@ const styles = {
   },
 };
 
-const DirectAccess = () => {
+const DirectAccess = ({ onOpenCreatePostModal, onOpenFollowersModal }) => {
   return (
     <div style={styles.container}>
       <div style={styles.title}>Crear</div>
-      <div style={styles.item}>
+      <div style={styles.item} onClick={onOpenCreatePostModal}>
         <CreateIcon style={styles.icon} />
         <span>Publicación</span>
       </div>
       <div style={styles.divider}></div>
-           <div style={styles.item}>
+      <div style={styles.item} onClick={onOpenFollowersModal}>
         <ChatIcon style={styles.icon} />
         <span>Chat</span>
       </div>
+      <div style={styles.divider}></div>
     </div>
   );
 };

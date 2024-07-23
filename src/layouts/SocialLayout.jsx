@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Box, Modal, Backdrop, Button, TextField } from "@mui/material";
@@ -20,6 +20,8 @@ import "../css/SocialLayout.css";
 import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
 import SavedPosts from "../components/SocialComponents/SavedPost/savedpost";
+import FollowersModal from "../components/SocialComponents/Feed/FollowersModal/FollowersModal";
+import CreatePostModal from "../components/SocialComponents/Feed/CreatePostModal/CreatePostModal";
 
 const SocialLayout = () => {
   const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
@@ -41,6 +43,20 @@ const SocialLayout = () => {
     setTempContent,
   } = usePosts();
 
+  const [isFollowersModalOpen, setFollowersModalOpen] = useState(false);
+  const [isCreatePostModalOpen, setCreatePostModalOpen] = useState(false);
+  const [followers, setFollowers] = useState([
+    { id: 1, name: 'David Fragoso', avatar: '../images/yop.jfif' },
+    { id: 2, name: 'Gael López', avatar: '../images/yop.jfif' },
+    { id: 3, name: 'Marinela', avatar: '../images/yop.jfif' },
+  ]);
+
+  const handleOpenFollowersModal = () => setFollowersModalOpen(true);
+  const handleCloseFollowersModal = () => setFollowersModalOpen(false);
+
+  const handleOpenCreatePostModal = () => setCreatePostModalOpen(true);
+  const handleCloseCreatePostModal = () => setCreatePostModalOpen(false);
+
   const showNavbar = !(isTabletOrMobile && location.pathname === "/chats");
   const noSidebar = isTabletOrMobile;
 
@@ -61,6 +77,8 @@ const SocialLayout = () => {
                   handleUpdatePost={handleUpdatePost}
                   handleRepost={handleRepost}
                   handleEdit={handleEdit}
+                  onOpenCreatePostModal={handleOpenCreatePostModal}
+                  onOpenFollowersModal={handleOpenFollowersModal}
                 />
               }
             />
@@ -154,6 +172,8 @@ const SocialLayout = () => {
           </Box>
         </Box>
       </Modal>
+      <FollowersModal open={isFollowersModalOpen} onClose={handleCloseFollowersModal} followers={followers} />
+      <CreatePostModal open={isCreatePostModalOpen} onClose={handleCloseCreatePostModal} onCreatePost={handleCreatePost} />
     </div>
   );
 };
@@ -165,6 +185,8 @@ const MainContent = ({
   handleUpdatePost,
   handleRepost,
   handleEdit,
+  onOpenCreatePostModal,
+  onOpenFollowersModal,
 }) => {
   const isMobile = useMediaQuery("(max-width: 400px)");
 
@@ -173,7 +195,7 @@ const MainContent = ({
       {!isMobile && <SubNavbar />}
       <div className="content">
         <div className="leftColumn">
-          <DirectAccess />
+          <DirectAccess onOpenCreatePostModal={onOpenCreatePostModal} onOpenFollowersModal={onOpenFollowersModal} />
           <NewsSection />
         </div>
         <div className="centerColumn">

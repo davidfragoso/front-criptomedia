@@ -170,7 +170,7 @@ const Chat = () => {
           p={2}
           className={`container ${isMobile && selectedChat === null ? "fullHeight" : ""}`}
         >
-          <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Box display="flex" justifyContent="start" alignItems="center">
             {isMobile && (
               <IconButton onClick={() => setSelectedChat(null)} color="inherit">
                 <ArrowBackIcon />
@@ -179,9 +179,9 @@ const Chat = () => {
             <Typography variant="h6" style={{ color: "white" }}>
               {selectedChatDetails?.name || "Selecciona un chat"}
             </Typography>
-            <IconButton onClick={handleOpenSettings} color="inherit">
+            {/* <IconButton onClick={handleOpenSettings} color="inherit">
               <SettingsIcon />
-            </IconButton>
+            </IconButton> */}
           </Box>
           <div className="messageList" ref={messageListRef}>
             {selectedChat ? (

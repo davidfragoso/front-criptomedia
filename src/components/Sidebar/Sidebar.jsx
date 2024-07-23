@@ -9,11 +9,12 @@ import RssFeedIcon from '@mui/icons-material/RssFeed';
 import ChatIcon from '@mui/icons-material/Chat';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import SettingsIcon from '@mui/icons-material/Settings';
-import PersonIcon from '@mui/icons-material/Person';
+import PeopleIcon from '@mui/icons-material/People';
 import HomeIcon from '@mui/icons-material/Home';
 import NewsIcon from '@mui/icons-material/Announcement';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import NftIcon from '@mui/icons-material/Collections';
+import PersonIcon from '@mui/icons-material/Person'; // Agrega esta línea
 import { Box, useMediaQuery, Switch, Typography } from '@mui/material';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import images from '../../imageRoutes';
