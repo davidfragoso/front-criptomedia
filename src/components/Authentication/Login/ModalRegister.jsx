@@ -59,14 +59,14 @@ export default function BasicModal() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = () => {
-    if (validateForm()) {
-      setOpen(false);
-      setToastOpen(true);
-    } else {
-      console.log('Formulario inválido, mostrar errores');
-    }
-  };
+  // const handleSubmit = () => {
+  //   if (validateForm()) {
+  //     setOpen(false);
+  //     setToastOpen(true);
+  //   } else {
+  //     console.log('Formulario inválido, mostrar errores');
+  //   }
+  // };
 
   const handleCloseToast = (event, reason) => {
     if (reason === 'clickaway') {
@@ -76,17 +76,23 @@ export default function BasicModal() {
   };
 
   const handleRegister = async () => {
-    try {
-      const response = await axios.post('https://coinversesocialapi.azurewebsites.net/api/Users', {
-          "fullName": formData.nombre,
-          "userName": formData.username,
-          "email": formData.email,
-          "password": formData.password,
-          "date": "2024-07-16T23:27:07.173Z"
-      });
-      console.log('Respuesta del servidor:', response.data);
-    } catch (error) {
-      console.error('Error al enviar los datos:', error);
+    if (validateForm()) {
+      try {
+        const response = await axios.post('https://coinversesocialapi.azurewebsites.net/api/Users', {
+            "fullName": formData.nombre,
+            "userName": formData.username,
+            "email": formData.email,
+            "password": formData.password,
+            "date": "2024-07-16T23:27:07.173Z"
+        });
+        console.log('Respuesta del servidor:', response.data);
+        setOpen(false);
+        setToastOpen(true);
+      } catch (error) {
+        console.error('Error al enviar los datos:', error);
+      }
+    } else {
+      console.log('Formulario inválido, mostrar errores');
     }
   };
 

@@ -28,6 +28,7 @@ export const sidebarRoutes = [
   { path: '/userprofile', name: 'Vista usuario', icon: <PersonIcon   /> },
   { path: '/saved', name: 'Elementos guardados', icon: <BookmarkIcon /> },
   { path: '/settings', name: 'Configuración', icon: <SettingsIcon /> },
+  { path: '/nftgrid', name: 'Ejemplo de NFTs', icon: <SettingsIcon /> }, // Añadido
 ];
 
 // Rutas principales
