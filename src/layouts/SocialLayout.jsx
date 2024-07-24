@@ -170,7 +170,7 @@ const MainContent = ({
 
   return (
     <>
-      {!isMobile && <SubNavbar />}
+      {/* {!isMobile && <SubNavbar />} */}
       <div className="content">
         <div className="leftColumn">
           <DirectAccess />
