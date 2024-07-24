@@ -95,8 +95,8 @@ const Sidebar = ({ layoutType, onToggleLayoutType }) => {
     { text: 'Feed', icon: <RssFeedIcon />, path: '/' },
     { text: 'Seguidores', icon: <PeopleIcon />, path: '/cardsview' },
     { text: 'Chats', icon: <ChatIcon />, path: '/chats' },
-    { text: 'Vistas de usuario', icon: <PersonIcon />, path: '/userprofile' },
-    { text: 'Elementos guardados', icon: <BookmarkIcon />, path: '/saved' },
+    // { text: 'Vistas de usuario', icon: <PersonIcon />, path: '/userprofile' },
+    // { text: 'Elementos guardados', icon: <BookmarkIcon />, path: '/saved' },
     { text: 'Configuración', icon: <SettingsIcon />, path: '/settings' },
   ];
 
