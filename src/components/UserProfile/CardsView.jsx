@@ -99,16 +99,16 @@ function MediaCard({ user }) {
           aria-controls="long-menu"
           aria-haspopup="true"
           onClick={handleClick}
-          sx={{ 
-            margin: 'auto', 
-            display: 'block', 
-            backgroundColor: '#3B4D5D', 
-            borderRadius: '8px', 
-            width: '48px', 
+          sx={{
+            margin: 'auto',
+            display: 'block',
+            backgroundColor: '#3B4D5D',
+            borderRadius: '8px',
+            width: '48px',
             height: '36px',
             color: 'white',
-            justifyContent: 'center', 
-            alignItems: 'center', 
+            justifyContent: 'center',
+            alignItems: 'center',
             '&:hover': {
               backgroundColor: '#3B4D5D',
             },
