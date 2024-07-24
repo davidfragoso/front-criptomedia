@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container } from '@mui/material';
 import { styled } from '@mui/system';
 import InfoProfileSection from './InfoProfileSection';
-import ProfileContent from './ProfileContent';
+// import ProfileContent from './ProfileContent';
 import ProfileTabs from './ProfileTabs';
 import ProfileTabContent from './ProfileTabContent';
 
@@ -29,7 +29,7 @@ const Profile = () => {
       <InfoProfileSection />
       <ProfileTabs value={tabIndex} onChange={handleTabChange} />
       <ProfileTabContent value={tabIndex} index={0}>
-        <ProfileContent />
+        {/* <ProfileContent /> */}
       </ProfileTabContent>
       <ProfileTabContent value={tabIndex} index={1}>
         Comentarios
