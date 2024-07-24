@@ -35,13 +35,13 @@ const TheSkellies = () => {
   }, []);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
     autoplay: true,
-    autoplaySpeed: 5000
+    autoplaySpeed: 4000
   };
 
   return (
@@ -72,17 +72,6 @@ const TheSkellies = () => {
         .collection-title {
           color: #ed6c02;
           text-align: center; // Centra el título si es necesario
-        }
-        .nft-card {
-          padding: 10px;
-          text-align: center;
-          background-color: #1d252d;
-          border-radius: 10px;
-          margin: 10px;
-        }
-        .nft-image {
-          width: 100%;
-          border-radius: 10px;
         }
       `}</style>
     </div>
