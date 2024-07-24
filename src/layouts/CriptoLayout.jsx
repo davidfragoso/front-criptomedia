@@ -5,9 +5,12 @@ import { Box } from "@mui/material";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CryptoTable from "../components/CriptoComponents/Index/CryptoIndex";
-import NftView from "../components/CriptoComponents/Nft/Nft";
+import NftCollections from "../components/CriptoComponents/Nft/Nft";
+import NFTNewsSection from "../components/CriptoComponents/News/News";
 import "../css/SocialLayout.css";
 import "../App.css";
+import Configuration from "../components/SocialComponents/Configuration/configuration";
+import ExchangesComponent from "../components/CriptoComponents/Exchanges/Exchanges";
 
 const CriptoLayout = () => {
   const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
@@ -17,10 +20,13 @@ const CriptoLayout = () => {
       <Navbar layoutType="crypto" />
       <div className={`mainContainer ${isTabletOrMobile ? "tabletOrMobile" : ""}`}>
         {!isTabletOrMobile && <Sidebar layoutType="crypto" />}
-        <div className="mainContent noSidebar">
+        <div className="mainContent">
           <Routes>
             <Route path="/" element={<MainContent />} />
-            <Route path="/nfts" element={<NftView />} />
+            <Route path="/news" element={<NFTNewsSection />} />
+            <Route path="/nft" element={<NftCollections />} />
+            <Route path="/exchanges" element={<ExchangesComponent />} />
+            <Route path="/settings" element={<Configuration />} />
           </Routes>
         </div>
       </div>
@@ -30,7 +36,6 @@ const CriptoLayout = () => {
 
 const MainContent = () => {
   const isMobile = useMediaQuery("(max-width: 400px)");
-
   return (
     <>
       <div className="content">
