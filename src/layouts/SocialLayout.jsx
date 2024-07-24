@@ -20,6 +20,7 @@ import "../css/SocialLayout.css";
 import "../App.css";
 import Configuration from "../components/SocialComponents/Configuration/configuration";
 import SavedPosts from "../components/SocialComponents/SavedPost/savedpost";
+import FollowersView from '../components/UserProfile/FollowersView';
 
 const SocialLayout = () => {
   const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
@@ -65,7 +66,7 @@ const SocialLayout = () => {
               }
             />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/cardsview" element={<CardsView />} />
+            <Route path="/cardsview" element={<FollowersView />} />
             <Route path="/userprofile" element={<UserView />} />
             <Route path="/chats" element={<Chat />} />
             <Route path="/settings" element={<Configuration />} />
