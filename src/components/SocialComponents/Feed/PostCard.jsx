@@ -158,8 +158,8 @@ const PostCard = ({
   const handleAddComment = (text) => {
     const newComment = {
       id: commentList.length + 1,
-      username: "Nuevo Usuario",
-      avatar: "../images/yop.jfif",
+      username: "Nuevo Usuariosss",
+      avatar: "../images/DPP.png",
       text,
       likes: 0,
       liked: false,

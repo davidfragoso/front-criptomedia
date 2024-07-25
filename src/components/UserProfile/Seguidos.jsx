@@ -14,6 +14,7 @@ import Badge from '@mui/material/Badge';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ReportIcon from '@mui/icons-material/Report';
 import BlockIcon from '@mui/icons-material/Block';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
 const theme = createTheme({
   palette: {
@@ -41,11 +42,12 @@ const theme = createTheme({
 const options = [
   { icon: <ReportIcon />, text: 'Reportar' },
   { icon: <BlockIcon />, text: 'Bloquear' },
+  { icon: <PersonRemoveIcon />, text: 'Dejar de seguir' },
 ];
 
 const ITEM_HEIGHT = 48;
 
-function MediaCard({ user }) {
+function Following({ user }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -77,25 +79,20 @@ function MediaCard({ user }) {
           </Grid>
           <Grid item xs={12} textAlign="center">
             <Typography variant="h6">
-              {user.userName}
+              {user.username}
             </Typography>
             <Typography variant="body2" color={user.online ? "success" : "error"}>
               {user.online ? 'En línea' : 'Desconectado'}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {user.followers && user.followers.length > 0 ? `Seguido por ${user.followers.length} personas` : ''}
+              Seguido desde {user.following_since}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
       <CardActions>
-        <Button
-          size="small"
-          variant="contained"
-          sx={{ backgroundColor: '#005484', color: 'white', margin: 'auto', display: 'block' }}
-          disabled={user.following && user.following.some(f => f.id === user.id)}
-        >
-          {user.following && user.following.some(f => f.id === user.id) ? 'Siguiendo' : 'Seguir'}
+        <Button size="small" variant="contained" sx={{ backgroundColor: '#005484', color: 'white', margin: 'auto', display: 'block' }}>
+          Seguir
         </Button>
         <IconButton
           aria-label="more"
@@ -145,36 +142,22 @@ function MediaCard({ user }) {
   );
 }
 
-export default function MediaCardGrid() {
-  const [users, setUsers] = useState([]);
+export default function FollowingCardGrid() {
   const [following, setFollowing] = useState([]);
-  const currentUserId = 1; // Asume que esta es la ID del usuario actual
 
   useEffect(() => {
-    fetch('https://coinversesocialapi.azurewebsites.net/api/Users')
-      .then(response => response.json())
-      .then(data => setUsers(data))
-      .catch(error => console.error('Error fetching users:', error));
-
     fetch('https://coinversesocialapi.azurewebsites.net/api/Users/1/following')
       .then(response => response.json())
       .then(data => setFollowing(data))
       .catch(error => console.error('Error fetching following:', error));
   }, []);
 
-  const usersWithFollowStatus = users
-    .filter(user => user.pkUser !== currentUserId) // Filtrar para excluir al usuario actual
-    .map(user => ({
-      ...user,
-      following: following.some(followedUser => followedUser.id === user.pkUser)
-    }));
-
   return (
     <ThemeProvider theme={theme}>
       <Grid container spacing={2} sx={{ backgroundColor: '#12161C', padding: 2 }}>
-        {usersWithFollowStatus.map((user, index) => (
+        {following.map((user, index) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-            <MediaCard user={user} />
+            <Following user={user} />
           </Grid>
         ))}
       </Grid>

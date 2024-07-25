@@ -31,7 +31,7 @@ const PostHeader = ({ username, time }) => {
   return (
     <div style={styles.header}>
       <img
-        src="../images/yop.jfif"
+        src="../images/DPP.png"
         alt="User avatar"
         style={styles.avatar}
       />

@@ -33,7 +33,7 @@ const InfoSection = () => {
   const handleSave = () => {
     // Aquí puedes agregar la lógica para guardar la información
     // Simulamos un error al guardar la información
-    const hasError = true;
+    const hasError = false;
 
     if (hasError) {
       setErrorToastOpen(true);
@@ -116,7 +116,7 @@ const InfoSection = () => {
               }}
             />
           </InfoField>
-          <InfoField>
+          {/* <InfoField>
             <TextField
               label="Fecha de nacimiento"
               defaultValue="27/01/2002"
@@ -135,7 +135,7 @@ const InfoSection = () => {
               }}
               InputLabelProps={{ shrink: true }}
             />
-          </InfoField>
+          </InfoField> */}
         </Grid>
         <Grid item xs={12} md={6}>
           <InfoField>

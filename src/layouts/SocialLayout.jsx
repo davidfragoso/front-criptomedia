@@ -83,7 +83,7 @@ const SocialLayout = () => {
               }
             />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/cardsview" element={<CardsView />} />
+            <Route path="/cardsview" element={<FollowersView />} />
             <Route path="/userprofile" element={<UserView />} />
             <Route path="/chats" element={<Chat />} />
             <Route path="/settings" element={<Configuration />} />
@@ -192,7 +192,7 @@ const MainContent = ({
 
   return (
     <>
-      {!isMobile && <SubNavbar />}
+      {/* {!isMobile && <SubNavbar />} */}
       <div className="content">
         <div className="leftColumn">
           <DirectAccess onOpenCreatePostModal={onOpenCreatePostModal} onOpenFollowersModal={onOpenFollowersModal} />

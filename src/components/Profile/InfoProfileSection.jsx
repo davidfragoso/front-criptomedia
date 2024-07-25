@@ -84,13 +84,15 @@ const EditProfileIconButton = styled(IconButton)(({ theme }) => ({
 
 const InfoProfileSection = () => {
   const [user, setUser] = useState(null);
+  const [followersCount, setFollowersCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0);
   const isMobile = useMediaQuery('(max-width:600px)');
   const [avatarSrc, setAvatarSrc] = useState('../images/DPP.png');
   const [headerImageSrc, setHeaderImageSrc] = useState('https://blog.bitso.com/wp-content/uploads/2023/03/o-que-e-bitcoin-scaled.jpg');
   const [tempHeaderImageSrc, setTempHeaderImageSrc] = useState(headerImageSrc);
-  const [posX, setPosX] = useState(50); // X position in percentage
-  const [posY, setPosY] = useState(50); // Y position in percentage
-  const [scale, setScale] = useState(100); // Scale in percentage
+  const [posX, setPosX] = useState(50);
+  const [posY, setPosY] = useState(50);
+  const [scale, setScale] = useState(100);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [tempPosX, setTempPosX] = useState(posX);
@@ -117,20 +119,25 @@ const InfoProfileSection = () => {
       console.log('userId:', userId);
       if (userId) {
         try {
-          const response = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Users/${userId}`);
-          if(isMounted) {
-            setUser(response.data);
-            setName(response.data.fullName);
-            setBio(response.data.biography);
-            setWebsite(response.data.website);
-            console.log(response.data);         
+          const userResponse = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Users/${userId}`);
+          const followersResponse = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Users/${userId}/followers`);
+          const followingResponse = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Users/${userId}/following`);
+
+          if (isMounted) {
+            setUser(userResponse.data);
+            setName(userResponse.data.fullName);
+            setBio(userResponse.data.biography);
+            setWebsite(userResponse.data.website);
+            setFollowersCount(followersResponse.data.length);
+            setFollowingCount(followingResponse.data.length);
+            console.log(userResponse.data);
           }
         } catch (error) {
           console.error('Error al obtener el perfil del usuario:', error);
         }
       }
     };
-  
+
     fetchUserData();
 
     return () => {
@@ -150,30 +157,28 @@ const InfoProfileSection = () => {
   }, []);
 
   const handleUpdateProfile = async () => {
-    const userId = localStorage.getItem('LoggedUser'); // Asegúrate de tener el ID del usuario para la actualización
-    const updateUrl = `https://coinversesocialapi.azurewebsites.net/api/Users/${userId}`; // URL de tu endpoint de actualización
-  
+    const userId = localStorage.getItem('LoggedUser');
+    const updateUrl = `https://coinversesocialapi.azurewebsites.net/api/Users/${userId}`;
+
     const updatedData = {
       fullName: tempName,
       biography: tempBio,
       website: tempWebsite,
     };
-  
+
     try {
       const response = await axios.patch(updateUrl, updatedData);
       if (response.status === 200) {
-        // Actualización exitosa, actualiza el estado local
         setName(tempName);
         setBio(tempBio);
         setWebsite(tempWebsite);
-        alert('Perfil actualizado con éxito'); // O maneja la respuesta exitosa como prefieras
+        alert('Perfil actualizado con éxito');
       } else {
-        // Maneja una respuesta no exitosa según sea necesario
         alert('Hubo un problema al actualizar el perfil');
       }
     } catch (error) {
       console.error('Error al actualizar el perfil:', error);
-      alert('Error al actualizar el perfil'); // O maneja el error como prefieras
+      alert('Error al actualizar el perfil');
     }
   };
 
@@ -292,9 +297,9 @@ const InfoProfileSection = () => {
           <PhotoCameraIcon />
           <input
             type="file"
-              accept="image/*"
-              hidden
-              onChange={handleAvatarChange}
+            accept="image/*"
+            hidden
+            onChange={handleAvatarChange}
           />
         </CameraIconButton>
       </Tooltip>
@@ -314,11 +319,11 @@ const InfoProfileSection = () => {
         </Box>
         <Box display="flex" justifyContent="start" mt={2}>
           <Box mx={2}>
-            <Typography variant="body1">23</Typography>
+            <Typography variant="body1">{followingCount}</Typography>
             <Typography variant="body2" color="#27333E">Siguiendo</Typography>
           </Box>
           <Box mx={2}>
-            <Typography variant="body1">450</Typography>
+            <Typography variant="body1">{followersCount}</Typography>
             <Typography variant="body2" color="#27333E">Seguidores</Typography>
           </Box>
         </Box>

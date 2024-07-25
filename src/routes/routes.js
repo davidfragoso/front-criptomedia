@@ -19,6 +19,7 @@ import CriptoLayout from '../layouts/CriptoLayout';
 import CryptoTable from '../components/CriptoComponents/Index/CryptoIndex';
 import News from '../components/CriptoComponents/News/News';
 import NftCollections from '../components/CriptoComponents/Nft/Nft';
+import FollowersView from '../components/UserProfile/FollowersView';
 
 // Rutas para la barra lateral
 export const sidebarRoutes = [
@@ -42,7 +43,7 @@ const routes = [
       { path: 'saved', element: <SavedPosts /> },
       { path: 'settings', element: <Configuration /> },
       { path: 'userprofile', element: <UserView /> },
-      { path: 'cardsview', element: <CardsView /> },
+      { path: 'cardsview', element: <FollowersView /> },
     ],
   },
   {
