@@ -22,6 +22,7 @@ import Configuration from "../components/SocialComponents/Configuration/configur
 import SavedPosts from "../components/SocialComponents/SavedPost/savedpost";
 import FollowersModal from "../components/SocialComponents/Feed/FollowersModal/FollowersModal";
 import CreatePostModal from "../components/SocialComponents/Feed/CreatePostModal/CreatePostModal";
+import FollowersView from '../components/UserProfile/FollowersView';
 
 const SocialLayout = () => {
   const isTabletOrMobile = useMediaQuery("(max-width: 900px)");
@@ -68,7 +69,7 @@ const SocialLayout = () => {
         <div className={`mainContent ${noSidebar ? "noSidebar" : ""}`}>
           <Routes>
             <Route
-              path="/"
+              path="/social"
               element={
                 <MainContent
                   posts={posts}
