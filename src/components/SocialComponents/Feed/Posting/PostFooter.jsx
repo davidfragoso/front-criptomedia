@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import ShareIcon from '@mui/icons-material/Share';
@@ -31,10 +32,57 @@ const formatNumber = (num) => {
   return num.toString();
 };
 
-const PostFooter = ({ likes, liked, handleLikeClick, comments, handleOpen, handleShare }) => {
+const PostFooter = ({ postId, liked, handleLikeClick, comments, handleOpen, handleShare }) => {
+  const [likes, setLikes] = useState(0);
+
+  useEffect(() => {
+    if (postId) {
+      const fetchLikes = async () => {
+        try {
+          const response = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Posts/${postId}/likes/count`);
+          setLikes(response.data);
+        } catch (error) {
+          console.error('Error fetching likes:', error);
+        }
+      };
+
+      fetchLikes();
+    }
+  }, [postId]);
+
+  const handleLike = async () => {
+    const userId = localStorage.getItem('LoggedUser');
+    try {
+      if (liked) {
+        await axios.delete(`https://coinversesocialapi.azurewebsites.net/api/Posts/${postId}/like`, {
+          data: {
+            fkUser: userId,
+          },
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        setLikes((prevLikes) => prevLikes - 1);
+      } else {
+        await axios.post(`https://coinversesocialapi.azurewebsites.net/api/Posts/${postId}/like`, {
+          fkUser: userId,
+          fkTypeLike: 1,
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        setLikes((prevLikes) => prevLikes + 1);
+      }
+      handleLikeClick();
+    } catch (error) {
+      console.error('Error updating like:', error);
+    }
+  };
+
   return (
     <div style={styles.footer}>
-      <div style={styles.iconButton} onClick={handleLikeClick}>
+      <div style={styles.iconButton} onClick={handleLike}>
         <FavoriteIcon style={{ color: liked ? 'red' : 'white' }} />
         <span style={styles.iconText}>{formatNumber(likes)}</span>
       </div>

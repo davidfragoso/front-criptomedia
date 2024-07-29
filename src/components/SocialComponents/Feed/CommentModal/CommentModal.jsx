@@ -1,6 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import { Modal, Box, Typography, TextField, Button } from '@mui/material';
+import PropTypes from 'prop-types';
 import CommentItem from './CommentItem';
+
+/**
+ * @typedef {Object} Comment
+ * @property {number} id - El ID del comentario.
+ * @property {string} username - El nombre de usuario del autor del comentario.
+ * @property {string} avatar - La URL del avatar del autor del comentario.
+ * @property {string} text - El texto del comentario.
+ * @property {number} likes - La cantidad de likes que tiene el comentario.
+ * @property {boolean} liked - Si el comentario ha sido likeado por el usuario actual.
+ * @property {number} timestamp - La marca de tiempo del comentario.
+ */
 
 const baseStyles = {
   commentDivider: {
@@ -11,14 +23,23 @@ const baseStyles = {
   },
 };
 
-const CommentModal = ({
+/**
+ * @param {Object} props
+ * @param {boolean} props.open
+ * @param {() => void} props.handleClose
+ * @param {Comment[]} props.commentList
+ * @param {(commentId: number) => void} props.handleCommentLike
+ * @param {(text: string) => void} props.handleAddComment
+ * @param {number} [props.newCommentId]
+ */
+const CommentModal = forwardRef(({
   open,
   handleClose,
-  commentList = [],  // Ensure commentList defaults to an empty array
+  commentList = [],
   handleCommentLike,
   handleAddComment,
   newCommentId,
-}) => {
+}, ref) => {
   const [newComment, setNewComment] = useState('');
   const newCommentRef = useRef(null);
 
@@ -26,7 +47,7 @@ const CommentModal = ({
     if (newCommentRef.current) {
       newCommentRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [commentList]);
+  }, [newCommentId]);
 
   const handleCommentSubmit = () => {
     if (newComment.trim()) {
@@ -92,6 +113,25 @@ const CommentModal = ({
       </Box>
     </Modal>
   );
+});
+
+CommentModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  commentList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      username: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      likes: PropTypes.number.isRequired,
+      liked: PropTypes.bool.isRequired,
+      timestamp: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  handleCommentLike: PropTypes.func.isRequired,
+  handleAddComment: PropTypes.func.isRequired,
+  newCommentId: PropTypes.number,
 };
 
 export default CommentModal;

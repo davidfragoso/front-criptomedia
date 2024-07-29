@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Backdrop,
   Menu,
@@ -97,7 +98,6 @@ const baseStyles = {
 
 const PostCard = ({
   id,
-  username,
   time,
   content = "",
   images = [],
@@ -110,13 +110,12 @@ const PostCard = ({
   onDeletePost,
   onUpdatePost,
   onRepost,
+  username,
 }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(initialLikes);
   const [open, setOpen] = useState(false);
-  const [commentList, setCommentList] = useState(
-    Array.isArray(comments) ? comments : []
-  );
+  const [commentList, setCommentList] = useState(comments);
   const [newCommentId, setNewCommentId] = useState(null);
   const [openImage, setOpenImage] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -127,21 +126,20 @@ const PostCard = ({
   const [isVisible, setIsVisible] = useState(true);
   const [shareModalOpen, setShareModalOpen] = useState(false);
 
-  useEffect(() => {
-    setCommentList(Array.isArray(comments) ? comments : []);
-  }, [comments]);
-
   const handleLikeClick = () => {
-    setLiked(!liked);
-    setLikes((prevLikes) => (liked ? prevLikes - 1 : prevLikes + 1));
+    setLiked((prevLiked) => {
+      const newLiked = !prevLiked;
+      setLikes((prevLikes) => (newLiked ? prevLikes + 1 : prevLikes - 1));
+      return newLiked;
+    });
   };
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleCommentLike = (commentId) => {
-    const updateLikes = (comments) => {
-      return comments.map((comment) => {
+    setCommentList((prevComments) =>
+      prevComments.map((comment) => {
         if (comment.id === commentId) {
           return {
             ...comment,
@@ -150,23 +148,22 @@ const PostCard = ({
           };
         }
         return comment;
-      });
-    };
-    setCommentList((prevComments) => updateLikes(prevComments));
+      })
+    );
   };
 
   const handleAddComment = (text) => {
     const newComment = {
       id: commentList.length + 1,
-      username: "Nuevo Usuariosss",
-      avatar: "../images/DPP.png",
+      username: "Nuevo Usuario",
+      avatar: "../images/yop.jfif",
       text,
       likes: 0,
       liked: false,
       parentId: null,
       timestamp: Date.now(),
     };
-    setCommentList([...commentList, newComment]);
+    setCommentList((prevComments) => [...prevComments, newComment]);
     setNewCommentId(newComment.id);
   };
 
@@ -237,6 +234,22 @@ const PostCard = ({
     setShareModalOpen(false);
   };
 
+  const repostMenuItems = [
+    <MenuItem key="hide" onClick={() => alert("Opción de ocultar repost")}>
+      Ocultar repost
+    </MenuItem>,
+    <MenuItem key="repost-repost" onClick={() => alert("Opción de repostear repost")}>
+      Repostear repost
+    </MenuItem>,
+    <MenuItem key="share" onClick={handleShare}>Compartir</MenuItem>,
+  ];
+
+  const regularMenuItems = [
+    <MenuItem key="edit" onClick={handleEdit}>Editar</MenuItem>,
+    <MenuItem key="delete" onClick={handleDelete}>Eliminar</MenuItem>,
+    <MenuItem key="share" onClick={handleShare}>Compartir</MenuItem>,
+  ];
+
   return (
     <div
       style={{
@@ -247,7 +260,7 @@ const PostCard = ({
       <div style={{ position: "relative" }}>
         <PostHeader
           username={username}
-          time={formatTimeAgo(repostedBy ? repostTime : time)}
+          time={time} // Pasar el timestamp directamente
         />
         <IconButton
           aria-label="more"
@@ -270,23 +283,7 @@ const PostCard = ({
           open={Boolean(menuAnchorEl)}
           onClose={handleMenuClose}
         >
-          {repostedBy ? (
-            <>
-              <MenuItem onClick={() => alert("Opción de ocultar repost")}>
-                Ocultar repost
-              </MenuItem>
-              <MenuItem onClick={() => alert("Opción de repostear repost")}>
-                Repostear repost
-              </MenuItem>
-              <MenuItem onClick={handleShare}>Compartir</MenuItem>
-            </>
-          ) : (
-            <>
-              <MenuItem onClick={handleEdit}>Editar</MenuItem>
-              <MenuItem onClick={handleDelete}>Eliminar</MenuItem>
-              <MenuItem onClick={handleShare}>Compartir</MenuItem>
-            </>
-          )}
+          {repostedBy ? repostMenuItems : regularMenuItems}
         </Menu>
       </div>
       {repostedBy && (
@@ -312,7 +309,7 @@ const PostCard = ({
         </>
       )}
       <PostFooter
-        likes={formatNumber(likes)}
+        postId={id}
         liked={liked}
         handleLikeClick={handleLikeClick}
         comments={commentList.length}

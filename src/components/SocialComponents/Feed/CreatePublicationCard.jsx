@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AvatarImage from '../../Navbar/AvatarImage';
 import ImageIcon from '@mui/icons-material/Image';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import axios from 'axios';
 
 const styles = {
   cardContainer: {
@@ -68,11 +69,18 @@ const styles = {
     borderRadius: '10px',
     objectFit: 'cover',
   },
+  previewFile: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    color: '#ffffff',
+  },
 };
 
 const CreatePublicationCard = ({ onCreatePost }) => {
   const [text, setText] = useState('');
   const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleInputChange = (e) => {
     setText(e.target.value);
@@ -82,17 +90,50 @@ const CreatePublicationCard = ({ onCreatePost }) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files).map(file => URL.createObjectURL(file));
       setSelectedImages(prevImages => prevImages.concat(filesArray));
-      Array.from(e.target.files).map(file => URL.revokeObjectURL(file)); // free memory
+      Array.from(e.target.files).forEach(file => URL.revokeObjectURL(file));
     }
-    console.log('Imágenes seleccionadas:', selectedImages);
   };
 
-  const handleSubmit = () => {
+  const handleFileUpload = (e) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      const pdfFiles = filesArray.filter(file => file.type === 'application/pdf');
+      setSelectedFiles(prevFiles => prevFiles.concat(pdfFiles));
+    }
+  };
+
+  const handleSubmit = async () => {
     console.log('Creando post con texto:', text);
     console.log('Creando post con imágenes:', selectedImages);
-    onCreatePost(text, selectedImages);
-    setText('');
-    setSelectedImages([]);
+    console.log('Creando post con archivos:', selectedFiles);
+    const userId = localStorage.getItem('LoggedUser');
+
+    try {
+      const response = await axios.post('https://coinversesocialapi.azurewebsites.net/api/Posts', {
+        pkPost: 0,
+        fkUser: userId,
+        fkTypePost: 1,
+        text: text,
+        idPostShared: null,
+        date: new Date().toISOString()
+      });
+      console.log('Post creado:', response.data);
+
+      onCreatePost({
+        id: response.data.pkPost,
+        text,
+        images: selectedImages,
+        files: selectedFiles,
+        userId,
+        date: new Date().toISOString()
+      });
+
+      setText('');
+      setSelectedImages([]);
+      setSelectedFiles([]);
+    } catch (error) {
+      console.error('Error creando el post:', error);
+    }
   };
 
   return (
@@ -108,6 +149,8 @@ const CreatePublicationCard = ({ onCreatePost }) => {
             value={text}
             onChange={handleInputChange}
             style={styles.input}
+            id="post-text-input"
+            name="post-text"
           />
           <button style={styles.sendButton} onClick={handleSubmit}>
             <svg
@@ -131,17 +174,28 @@ const CreatePublicationCard = ({ onCreatePost }) => {
         <label style={styles.iconWrapper}>
           <ImageIcon style={styles.icon} />
           <span>Imagen</span>
-          <input type="file" multiple onChange={handleImageUpload} style={{ display: 'none' }} />
+          <input type="file" multiple accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} id="image-upload" name="image-upload" />
         </label>
-        <div style={styles.iconWrapper}>
+        <label style={styles.iconWrapper}>
           <AttachFileIcon style={styles.icon} />
           <span>Adjuntar</span>
-        </div>
+          <input type="file" multiple accept="application/pdf" onChange={handleFileUpload} style={{ display: 'none' }} id="file-upload" name="file-upload" />
+        </label>
       </div>
       {selectedImages.length > 0 && (
         <div style={styles.previewContainer}>
           {selectedImages.map((image, index) => (
             <img key={index} src={image} alt={`preview ${index}`} style={styles.previewImage} />
+          ))}
+        </div>
+      )}
+      {selectedFiles.length > 0 && (
+        <div style={styles.previewContainer}>
+          {selectedFiles.map((file, index) => (
+            <div key={index} style={styles.previewFile}>
+              <AttachFileIcon />
+              <span>{file.name}</span>
+            </div>
           ))}
         </div>
       )}
