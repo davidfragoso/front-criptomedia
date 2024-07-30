@@ -48,7 +48,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 export default function Avatar() {
   const [user, setUser] = useState(null);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const anchorRef = React.useRef(null);
   const isTablet = useMediaQuery("(max-width: 900px)");
   const navigate = useNavigate();
@@ -62,16 +62,16 @@ export default function Avatar() {
       if (userId) {
         try {
           const response = await axios.get(`https://coinversesocialapi.azurewebsites.net/api/Users/${userId}`);
-          if(isMounted) {
+          if (isMounted) {
             setUser(response.data);
-            console.log(response.data);         
+            console.log('User data:', response.data);
           }
         } catch (error) {
           console.error('Error al obtener el perfil del usuario:', error);
         }
       }
     };
-  
+
     fetchUserData();
 
     return () => {
@@ -91,12 +91,13 @@ export default function Avatar() {
   };
 
   const handleProfileClick = () => {
-    navigate('/profile'); // Navegar a la vista de perfil
+    navigate('/profile');
     setOpen(false);
   };
 
   const handleLogout = () => {
-    navigate('/login'); // Navegar a la vista de login
+    localStorage.removeItem('LoggedUser');
+    navigate('/login', { replace: true });
     setOpen(false);
   };
 
@@ -114,13 +115,13 @@ export default function Avatar() {
       >
         <img
           src="../images/DPP.png"
-          alt="David Fragoso"
+          alt="Avatar"
           style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: isTablet ? '0' : '8px' }}
         />
         {!isTablet && (
           <Stack direction="column" alignItems="flex-start" spacing={0}>
             <Typography variant="body2" color="white">
-              {user?.fullName}
+              {user?.fullName || "Cargando..."}
             </Typography>
             <Stack direction="row" alignItems="center" spacing={1}>
               <StyledBadge

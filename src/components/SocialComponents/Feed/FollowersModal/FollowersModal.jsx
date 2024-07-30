@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Box, Typography, TextField, List, ListItem, ListItemAvatar, Avatar, ListItemText, Divider } from '@mui/material';
+import { Modal, Box, Typography, TextField, List, ListItem, ListItemAvatar, Avatar, ListItemText, Divider, IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,25 +9,45 @@ const styles = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '80%',
+    width: '60%',
     bgcolor: '#1E2730',
     color: 'white',
-    borderRadius: '10px',
-    boxShadow: 24,
+    borderRadius: '12px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
     p: 4,
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    mb: 2,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: '1.5rem',
   },
   searchBox: {
     display: 'flex',
     alignItems: 'center',
     backgroundColor: '#27333E',
-    borderRadius: '4px',
-    p: '10px',
-    mb: '20px',
+    borderRadius: '8px',
+    p: 1,
+    mb: 3,
   },
   searchInput: {
-    ml: '10px',
+    ml: 1,
+    flex: 1,
     color: 'white',
-    flexGrow: 1,
+  },
+  listItem: {
+    borderRadius: '8px',
+    transition: 'background-color 0.3s ease',
+    '&:hover': {
+      backgroundColor: '#2A3B47',
+    },
+  },
+  listItemText: {
+    color: 'white',
   },
 };
 
@@ -47,13 +67,16 @@ const FollowersModal = ({ open, onClose, followers }) => {
   return (
     <Modal open={open} onClose={onClose}>
       <Box sx={styles.modalContainer}>
-        <Typography variant="h6">Seguidores ({followers.length})</Typography>
+        <Box sx={styles.header}>
+          <Typography sx={styles.title}>Seguidores ({followers.length})</Typography>
+          <IconButton onClick={onClose} sx={{ color: 'white' }}>
+            <SearchIcon />
+          </IconButton>
+        </Box>
         <Box sx={styles.searchBox}>
           <SearchIcon />
-          <TextField
+          <InputBase
             placeholder="Buscar seguidores..."
-            variant="outlined"
-            size="small"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
             sx={styles.searchInput}
@@ -62,13 +85,13 @@ const FollowersModal = ({ open, onClose, followers }) => {
         <List>
           {filteredFollowers.map(follower => (
             <div key={follower.id}>
-              <ListItem button onClick={() => handleFollowerClick(follower.id)}>
+              <ListItem button onClick={() => handleFollowerClick(follower.id)} sx={styles.listItem}>
                 <ListItemAvatar>
                   <Avatar src={follower.avatar} />
                 </ListItemAvatar>
-                <ListItemText primary={follower.name} />
+                <ListItemText primary={follower.name} sx={styles.listItemText} />
               </ListItem>
-              <Divider light />
+              <Divider light sx={{ backgroundColor: '#444' }} />
             </div>
           ))}
         </List>

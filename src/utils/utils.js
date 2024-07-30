@@ -1,7 +1,8 @@
 // se formatea la diferencia de tiempo en una cadena legible
 export const formatTimeAgo = (timestamp) => {
     const now = Date.now();
-    const secondsAgo = Math.floor((now - timestamp) / 1000);
+    const postDate = new Date(timestamp).getTime();
+    const secondsAgo = Math.floor((now - postDate) / 1000);
 
     if (secondsAgo < 60) {
         return 'hace un momento';
@@ -25,6 +26,7 @@ export const formatTimeAgo = (timestamp) => {
         return `hace ${years} año${years > 1 ? 's' : ''}`;
     }
 };
+
 
 export const formatNumber = (num) => {
     if (num === undefined || num === null) return '0'; 

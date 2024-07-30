@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatTimeAgo } from '../../../../utils/utils';
 
 const styles = {
   header: {
@@ -37,7 +38,7 @@ const PostHeader = ({ username, time }) => {
       />
       <div style={styles.userInfo}>
         <span style={styles.username}>{username}</span>
-        <span style={styles.time}>{time}</span>
+        <span style={styles.time}>{formatTimeAgo(time)}</span>
       </div>
     </div>
   );
